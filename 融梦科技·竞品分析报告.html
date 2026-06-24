@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>融梦科技 · 竞品分析报告</title>
+<style>
+  :root {
+    --primary: #1a73e8;
+    --secondary: #0d47a1;
+    --accent1: #e74c3c;
+    --accent2: #f39c12;
+    --accent3: #27ae60;
+    --accent4: #8e44ad;
+    --accent5: #00acc1;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+    background: var(--bg); color: var(--text); line-height:1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width:1200px; margin:0 auto; padding:0 24px; }
+
+  .hero {
+    background: linear-gradient(135deg, #0d47a1 0%, #1a73e8 40%, #2196f3 100%);
+    color: #fff; padding:72px 0 48px; position:relative; overflow:hidden;
+  }
+  .hero::after {
+    content:''; position:absolute; top:-50%; right:-20%; width:600px; height:600px;
+    background:radial-gradient(circle, rgba(255,255,255,.08) 0%, transparent 70%);
+    border-radius:50%;
+  }
+  .hero h1 { font-size:2.8rem; font-weight:800; letter-spacing:-0.5px; position:relative; z-index:1; }
+  .hero .subtitle { font-size:1.15rem; opacity:.85; margin-top:12px; max-width:700px; position:relative; z-index:1; }
+  .hero .meta { display:flex; gap:24px; margin-top:20px; font-size:.9rem; opacity:.7; position:relative; z-index:1; }
+
+  .nav { background:#fff; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
+  .nav-inner { display:flex; gap:0; overflow-x:auto; max-width:1200px; margin:0 auto; padding:0 24px; }
+  .nav a { padding:14px 18px; color:var(--text-light); text-decoration:none; font-size:.85rem;
+    font-weight:500; white-space:nowrap; border-bottom:2px solid transparent; transition:.2s; }
+  .nav a:hover, .nav a.active { color:var(--primary); border-bottom-color:var(--primary); }
+
+  section { padding:56px 0; }
+  section:nth-child(even) { background:#fff; }
+  .section-title { font-size:1.7rem; font-weight:700; margin-bottom:8px; color:var(--secondary); }
+  .section-desc { color:var(--text-light); margin-bottom:28px; font-size:1rem; }
+
+  .card-grid { display:grid; gap:16px; }
+  .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .card-grid.cols-6 { grid-template-columns: repeat(6, 1fr); }
+  .card {
+    background:var(--card); border-radius:12px; padding:24px; box-shadow:var(--shadow);
+    border:1px solid var(--border); transition:.2s;
+  }
+  .card:hover { box-shadow:var(--shadow-lg); transform:translateY(-2px); }
+  .card .icon { width:48px; height:48px; border-radius:12px; display:flex; align-items:center;
+    justify-content:center; font-size:1.5rem; margin-bottom:16px; }
+  .card h3 { font-size:1.15rem; margin-bottom:8px; }
+  .card p { color:var(--text-light); font-size:.92rem; line-height:1.6; }
+  .card.compact { padding:14px; }
+  .card.compact .icon { width:32px; height:32px; border-radius:8px; font-size:1rem; margin-bottom:8px; }
+  .card.compact h3 { font-size:.85rem; margin-bottom:3px; }
+  .card.compact p { font-size:.75rem; line-height:1.4; }
+
+  .matrix-wrap { overflow-x:auto; border-radius:12px; box-shadow:var(--shadow); border:1px solid var(--border); }
+  .matrix { width:100%; border-collapse:collapse; font-size:.88rem; min-width:800px; }
+  .matrix thead th {
+    background:var(--secondary); color:#fff; padding:14px 16px; text-align:center; font-weight:600;
+    position:sticky; top:0;
+  }
+  .matrix thead th:first-child { text-align:left; border-radius:12px 0 0 0; }
+  .matrix thead th:last-child { border-radius:0 12px 0 0; }
+  .matrix tbody td { padding:12px 16px; border-bottom:1px solid var(--border); }
+  .matrix tbody tr:last-child td:first-child { border-radius:0 0 0 12px; }
+  .matrix tbody tr:last-child td:last-child { border-radius:0 0 12px 0; }
+  .matrix tbody tr:hover { background:#f1f5f9; }
+  .matrix .cat { background:#f8fafc; font-weight:700; color:var(--secondary); }
+  .matrix .yes { color:var(--accent3); font-weight:600; }
+  .matrix .partial { color:var(--accent2); font-weight:600; }
+  .matrix .no { color:#cbd5e1; }
+
+  .tag { display:inline-block; padding:2px 10px; border-radius:20px; font-size:.78rem;
+    font-weight:600; margin:2px; }
+  .tag-primary { background:#e3f2fd; color:#1565c0; }
+  .tag-green { background:#e8f5e9; color:#2e7d32; }
+  .tag-orange { background:#fff3e0; color:#e65100; }
+  .tag-red { background:#fce4ec; color:#c62828; }
+  .tag-purple { background:#f3e5f5; color:#7b1fa2; }
+
+  .flow-container { background:#fff; border-radius:12px; padding:32px; box-shadow:var(--shadow);
+    border:1px solid var(--border); overflow-x:auto; }
+  .flow-container svg { max-width:100%; height:auto; }
+
+  .swot-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .swot-item { border-radius:12px; padding:24px; }
+  .swot-item h4 { font-size:1.1rem; margin-bottom:12px; }
+  .swot-item ul { padding-left:20px; }
+  .swot-item li { margin-bottom:6px; font-size:.92rem; line-height:1.6; }
+  .swot-s { background:#e8f5e9; border:1px solid #c8e6c9; }
+  .swot-s h4 { color:#2e7d32; }
+  .swot-w { background:#fff3e0; border:1px solid #ffe0b2; }
+  .swot-w h4 { color:#e65100; }
+  .swot-o { background:#e3f2fd; border:1px solid #bbdefb; }
+  .swot-o h4 { color:#1565c0; }
+  .swot-t { background:#fce4ec; border:1px solid #f8bbd0; }
+  .swot-t h4 { color:#c62828; }
+
+  .strategy-card {
+    background:linear-gradient(135deg, #f8faff, #e8eaf6);
+    border-radius:12px; padding:28px; border:1px solid #c5cae9; margin-bottom:20px;
+  }
+  .strategy-card h4 { color:#1a237e; margin-bottom:6px; font-size:1.05rem; }
+  .strategy-card p { color:var(--text-light); font-size:.88rem; line-height:1.6; }
+
+  .insight-box {
+    background:linear-gradient(135deg, #e3f2fd, #e8eaf6);
+    border-radius:12px; padding:24px; border-left:4px solid var(--primary);
+    margin:16px 0;
+  }
+  .insight-box strong { color:var(--secondary); }
+
+  .health-item {
+    background:#f8fafc; border-radius:10px; padding:18px; border:1px solid var(--border);
+  }
+  .health-item h4 { font-size:.95rem; margin-bottom:6px; }
+  .health-item p { font-size:.84rem; color:var(--text-light); line-height:1.7; }
+
+  .mindmap-link { display:block; text-align:center; padding:1.25rem; background:#f8fafc; border:2px dashed var(--border); border-radius:12px; text-decoration:none; color:var(--primary); transition:all .2s; margin-bottom:24px; }
+  .mindmap-link:hover { background:#eff6ff; border-color:var(--primary); }
+  .mindmap-link .title { font-size:1rem; font-weight:600; margin-bottom:.25rem; }
+  .mindmap-link .desc { font-size:.8rem; color:var(--text-light); }
+
+  footer { background:var(--secondary); color:rgba(255,255,255,.7); text-align:center;
+    padding:32px 0; font-size:.85rem; }
+
+  @media (max-width: 1100px) {
+    .card-grid.cols-6 { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .card-grid.cols-4, .card-grid.cols-2, .card-grid.cols-3 { grid-template-columns:1fr; }
+    .card-grid.cols-6 { grid-template-columns: repeat(2, 1fr); }
+    .swot-grid { grid-template-columns:1fr; }
+    .hero h1 { font-size:2rem; }
+    section { padding:40px 0; }
+  }
+  @media (max-width: 768px) {
+    .nav-inner { padding:0 12px; }
+    .nav a { padding:12px 10px; font-size:.78rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <h1>融梦科技 · 竞品分析报告</h1>
+    <p class="subtitle">聚焦产品定位、技术方向与全场景覆盖能力，提炼对自身软件设计的战略启示</p>
+    <div class="meta">
+      <span>2026年6月</span>
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#overview" class="active">产品定位</a>
+    <a href="#matrix">产品矩阵</a>
+    <a href="#capability">能力地图</a>
+    <a href="#scenario">场景方案</a>
+    <a href="#teaching">教学屏</a>
+    <a href="#teststation">测试/测训</a>
+    <a href="#webplatform">Web平台</a>
+    <a href="#miniprogram">小程序</a>
+    <a href="#swot">SWOT</a>
+    <a href="#strategy">战略启示</a>
+  </div>
+</nav>
+
+<!-- ====== 1. 产品定位与方向 ====== -->
+<section id="overview">
+  <div class="container">
+    <h2 class="section-title">一、产品定位与方向</h2>
+    <p class="section-desc">融梦科技以“AI 智慧校园体育全场景解决方案”为方向，核心目标是覆盖学校体育的“教、学、练、测、评、赛”全链路，构建软硬件一体的校园体育数字化底座。</p>
+
+    <div class="card-grid cols-4">
+      <div class="card">
+        <div class="icon" style="background:#e3f2fd;">🎓</div>
+        <h3>学校端</h3>
+        <p>体育教学、体测、锻炼、比赛、数据管理的统一入口。</p>
+        <div style="margin-top:12px;">
+          <span class="tag tag-primary">管理中枢</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="icon" style="background:#e8f5e9;">📱</div>
+        <h3>小程序 / App</h3>
+        <p>学生运动、教师作业、班级管理的移动端延伸。</p>
+        <div style="margin-top:12px;">
+          <span class="tag tag-green">家校互通</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="icon" style="background:#fff3e0;">🖥️</div>
+        <h3>AI 终端</h3>
+        <p>教学机、测试/测训屏、体锻机等智能硬件，承担线下动作识别与数据采集。</p>
+        <div style="margin-top:12px;">
+          <span class="tag tag-orange">数据采集入口</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="icon" style="background:#f3e5f5;">🔧</div>
+        <h3>运维端</h3>
+        <p>学校、设备、资源、版本、运营的渠道管理后台。</p>
+        <div style="margin-top:12px;">
+          <span class="tag tag-purple">渠道运营</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-box" style="margin-top:32px;">
+      <strong>💡 方向判断：</strong>融梦走的是“垂直行业 + 软硬一体 + 学校付费”的路线，而非单纯 SaaS 或纯 C 端运动工具。其产品设计以<strong>终端采集数据、平台汇聚数据、学校消费数据</strong>为核心逻辑。值得注意的是，宣传折页中提到的“教育局/区域”概念在当前落地产品中并未真正体现，实际产品以学校为边界，尚未形成有效的区域级数据联动。
+    </div>
+
+    <div class="insight-box" style="margin-top:24px; background:linear-gradient(135deg, #fff8e1, #ffecb3); border-left-color:var(--accent2);">
+      <strong style="color:#e65100;">🔍 新发现：学生字段出现“手机号”与“手环 ID”</strong><br>
+      <p style="margin-top:8px; color:var(--text);">当前学生信息中新增了手机号、手环 ID 字段。这一变化可能预示融梦正在向<strong>课堂实时监测</strong>方向延伸——手环采集心率、运动强度等生理数据，与教学机/测试/测训屏的动作识别数据结合，形成更完整的课堂运动画像。若该方向落地，融梦将从“动作识别 + 成绩记录”升级为“动作 + 生理 + 课堂表现”的综合体育监测平台，这也是后续竞品需要关注的演进方向。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 2. 产品矩阵 ====== -->
+<section id="matrix" style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">二、AI 产品矩阵：六类终端</h2>
+    <p class="section-desc">融梦以智能终端作为线下场景的采集入口，六类终端分别对应教学、测试、锻炼、数据展示等不同场景</p>
+
+    <div class="card-grid cols-6">
+      <div class="card compact">
+        <div class="icon" style="background:#e3f2fd;">🎮</div>
+        <h3>AI 体育测训机</h3>
+        <p>多项目、多人同时运动，手势切换。测试机项目基本已被覆盖。</p>
+      </div>
+      <div class="card compact">
+        <div class="icon" style="background:#e8f5e9;">📚</div>
+        <h3>AI 体育教学机</h3>
+        <p>课堂执行、动作识别、实时反馈。对应实体屏 X5 教学机。</p>
+      </div>
+      <div class="card compact">
+        <div class="icon" style="background:#fff3e0;">💪</div>
+        <h3>AI 体育锻炼机</h3>
+        <p>游戏化锻炼、多人 PK、六级进阶。</p>
+      </div>
+      <div class="card compact">
+        <div class="icon" style="background:#fce4ec;">📏</div>
+        <h3>AI 体育测试机</h3>
+        <p>体质健康/中考测试，自主/集中模式。与测训机为包含关系，但独立售卖。</p>
+      </div>
+      <div class="card compact">
+        <div class="icon" style="background:#f3e5f5;">🏃</div>
+        <h3>AI 体育跑步机</h3>
+        <p>无穿戴跑步测试，短杆架设。</p>
+      </div>
+      <div class="card compact">
+        <div class="icon" style="background:#e0f7fa;">📊</div>
+        <h3>AI 体育数据智能机</h3>
+        <p>学校数据大屏、榜单、个人档案。仅作展示，无独立采集/训练能力。</p>
+      </div>
+    </div>
+
+    <div class="insight-box" style="margin-top:32px;">
+      <strong>💡 关键判断：</strong>融梦对外将终端拆分为六类，但实质上<strong>测训机已覆盖测试机项目，二者是包含关系却分开售卖</strong>；数据智能机则更像“再卖一块展示屏”。真正独立的形态主要是教学机、测训机、锻炼机、跑步机四类。与友商相比，融梦的差异化并不在终端数量本身，而在其背后庞大的<strong>动作库与教学/体测内容积累</strong>——这是其研发主要投入方向，也是新进入者最难短期复制的资产。
+    </div>
+  </div>
+</section>
+
+<!-- ====== 3. 能力地图 ====== -->
+<section id="capability">
+  <div class="container">
+    <h2 class="section-title">三、核心能力地图</h2>
+    <p class="section-desc">六大能力领域构成学校体育数字化底座，教学机、体锻屏、测试/测训屏是能力终端，学校端/小程序是数据与管理入口</p>
+
+    <a href="https://www.processon.com/view/link/6a38e4971a890e45fef0194f" target="_blank" class="mindmap-link">
+      <div class="title">🧠 查看完整能力地图脑图</div>
+      <div class="desc">ProcessOn 在线链接：融梦体育数字化平台能力地图</div>
+    </a>
+
+    <div class="card-grid cols-6">
+      <div class="card compact">
+        <div class="icon" style="background:#e3f2fd;">📚</div>
+        <h3>课堂训练</h3>
+        <p>课课练、热身、动作训练、AI 跟练、实时评分。</p>
+      </div>
+      <div class="card compact">
+        <div class="icon" style="background:#e8f5e9;">📏</div>
+        <h3>体质测试</h3>
+        <p>体测计划、测试记录、成绩分析、中考体测适配。</p>
+      </div>
+      <div class="card compact">
+        <div class="icon" style="background:#fff3e0;">💪</div>
+        <h3>课外锻炼</h3>
+        <p>阳光跑、校外体锻、作业计划、游戏化挑战。</p>
+      </div>
+      <div class="card compact">
+        <div class="icon" style="background:#fce4ec;">🏆</div>
+        <h3>体育比赛</h3>
+        <p>比赛列表、报名、排行、记录、荣誉登记。</p>
+      </div>
+      <div class="card compact">
+        <div class="icon" style="background:#f3e5f5;">🎬</div>
+        <h3>教学资源</h3>
+        <p>视频/课件/图片资源、资源审核、教案调用。</p>
+      </div>
+      <div class="card compact">
+        <div class="icon" style="background:#e0f7fa;">📊</div>
+        <h3>数据管理</h3>
+        <p>学校/班级/学生档案、设备/账号/版本管理、校级看板。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 4. 场景方案 ====== -->
+<section id="scenario" style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">四、场景化解决方案</h2>
+    <p class="section-desc">融梦按场景销售方案，每场景推荐特定终端组合，便于渠道报价与交付</p>
+    <div class="matrix-wrap">
+    <table class="matrix">
+      <thead>
+        <tr><th style="width:140px;">场景</th><th>核心能力</th><th>关键卖点</th><th>推荐终端</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>课间锻炼</td><td class="yes">✓ 室内/室外锻炼、无感运动、跨学科锻炼</td><td>无需穿戴、全场景 AI、碎片化锻炼</td><td>AI 体育锻炼机、AI 体育测训机</td></tr>
+        <tr><td>体测体考</td><td class="yes">✓ 跳绳、立定跳远、足篮排、实心球、仰卧起坐等</td><td>国家体质健康标准覆盖、实时纠偏、考务溯源</td><td>AI 体育跑步机、AI 体育测试机、AI 体育测训机</td></tr>
+        <tr><td>体育教学</td><td class="yes">✓ 课前/课中/课后全维教学助手</td><td>AI 动作测评、海量教学资源、精准学情反馈</td><td>室外/室内 AI 体育教学机</td></tr>
+        <tr><td>校园赛事</td><td class="yes">✓ 运动会、班级赛、趣味赛</td><td>云端管控、多维榜单、竞赛模式、实证评估</td><td>教学机、锻炼机、跑步机、测试机组合</td></tr>
+        <tr><td>数据管理</td><td class="yes">✓ 校级数据看板、学生档案、课堂/体测报告</td><td>自动化分析、多维评价</td><td>AI 体育数据智能机 + 大屏/小程序/Web</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="insight-box" style="margin-top:24px;">
+      <strong>💡 关键发现：</strong>融梦在五大场景均有产品布局，形成“<strong>场景闭环 + 终端组合</strong>”的解决方案销售模式。对于新进入者，直接复制其终端矩阵成本过高，应寻找单一场景做深做透。
+    </div>
+  </div>
+</section>
+
+<!-- ====== 5. 教学屏大框架分析 ====== -->
+<section id="teaching">
+  <div class="container">
+    <h2 class="section-title">五、教学屏（AI 室外教学机）大框架分析</h2>
+    <p class="section-desc">融梦在教学机场景已构建“课前热身—课中教学—课后训练”的主流程，核心差异化体现在动作库与教学内容的积累</p>
+
+    <div class="matrix-wrap">
+    <table class="matrix">
+      <thead>
+        <tr><th style="width:160px;">能力域</th><th style="width:120px;">是否实现</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>课堂跟练/课课练</td><td class="yes">已实现</td><td>支持从智慧体测课程设置中读取课课练数据；支持单/多人模式；教学机可生成单人/多人训练报告。</td></tr>
+        <tr><td>热身活动</td><td class="yes">已实现</td><td>支持从智慧体测课程设置中读取热身活动数据；支持低/中/高三种强度选择；支持单/多人跟练。</td></tr>
+        <tr><td>动作训练</td><td class="yes">已实现</td><td>基于 RM 数据库存储的单个动作进行训练；支持单/多人模式；支持 15s/30s/1分钟/2分钟 时长选择。</td></tr>
+        <tr><td>教学资源</td><td class="partial">部分实现</td><td>支持视频、课件、图片三类资源分类展示，但课件打开存在黑屏/白屏问题，平台资源库内容不足，实际可用性受限。</td></tr>
+        <tr><td>体育测训</td><td class="yes">已实现</td><td>与测试/测训屏共用底层能力，支持测试、训练、比赛场景，但测试记录未区分体测项目与体能项目。</td></tr>
+        <tr><td>平台与终端数据联动</td><td class="no">存在不一致</td><td>多人模式训练记录在教学机端可见，但在后台无法查找；能力标签与文案自动生成，生成逻辑不透明。</td></tr>
+        <tr><td>AI 标签可解释性</td><td class="no">不透明</td><td>训练标签、能力图谱均为自动生成，教师无法干预或理解生成规则，容易出现标签与内容不匹配的情况。</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="card" style="border-left:4px solid #f39c12; margin-top:32px;">
+      <h3 style="color:#e65100;">⚠️ 总体判断：教学场景框架完整，但“内容 + 数据”两端均未做扎实</h3>
+      <p style="margin-top:12px;">从教学屏的使用情况来看，融梦在<strong>课前热身、课中跟练、课后课课练、动作训练</strong>等大功能框架上已经具备，但在<strong>教学资源质量、平台数据回查、AI 标签可解释性</strong>等关键体验上存在明显短板。</p>
+      <p style="margin-top:8px;">这些问题共同指向一个结论：融梦的教学屏<strong>能跑通课堂主流程</strong>，但尚未真正解决“教师愿意用、学生用得好、数据能沉淀”的核心问题。教学资源体验差、后台数据查不到、AI 能力标签不透明，会直接影响教师对系统的信任——这正是新进入者可以从“教研内容 + 数据透明”方向切入的机会。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 6. 体测/测试机大框架分析 ====== -->
+<section id="teststation" style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">六、AI 体育测试机 / AI 体育测训机 大框架分析</h2>
+    <p class="section-desc">测试机与测训机为包含关系，实体屏以 X5 测试站为代表；该场景已具备排行榜、比赛、成绩管理等完整框架，但跨端数据一致性与交互语义存在工程缺陷</p>
+
+    <div class="matrix-wrap">
+    <table class="matrix">
+      <thead>
+        <tr><th style="width:160px;">能力域</th><th style="width:120px;">是否实现</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>排行榜体系</td><td class="yes">已实现</td><td>支持普通/性别/年级+性别等多维度排行，训练/测试模式榜单分离。</td></tr>
+        <tr><td>滚动排行</td><td class="yes">已实现</td><td>支持单一运动固定展示或多项目轮播展示。</td></tr>
+        <tr><td>比赛功能</td><td class="yes">已实现</td><td>支持创建比赛、报名、成绩排行、累计成绩看板、倒计时。</td></tr>
+        <tr><td>成绩有效性管理</td><td class="partial">部分实现</td><td>支持单条记录置无效、取消/恢复参赛资格，但资格逻辑与教师预期存在差异。</td></tr>
+        <tr><td>平台与终端数据同步</td><td class="no">存在不一致</td><td>平台端设置的成绩状态在测试/测训屏榜单中未同步更新，导致排名结果不一致。</td></tr>
+        <tr><td>交互语义一致性</td><td class="no">存在误导</td><td>训练/测试榜单标签与实际逻辑不符，容易误导使用者。</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="card" style="border-left:4px solid #e74c3c; margin-top:32px;">
+      <h3 style="color:#c62828;">⚠️ 总体判断：产品框架完整，但工程落地质量薄弱</h3>
+      <p style="margin-top:12px;">从测试/测训屏的使用情况来看，融梦在<strong>大功能框架</strong>（排行榜、比赛、成绩管理）上已经具备，但在<strong>平台与终端数据一致性、状态同步、交互语义</strong>等基础工程能力上存在明显缺陷。</p>
+      <p style="margin-top:8px;">这些不是算法或硬件问题，而是典型的<strong>软件开发能力不足</strong>：多模块数据口径未统一、状态变更未同步、前端标签与后端逻辑不一致。这意味着融梦虽然规模大、场景全，但其软件工程质量并不与其市场份额成正比——这正是新进入者可以重点突破的切口。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 7. Web 平台软件功能 ====== -->
+<section id="webplatform">
+  <div class="container">
+    <h2 class="section-title">七、Web 平台（学校端 + 运维端）软件功能</h2>
+    <p class="section-desc">除教学屏、测试/测训屏等实体终端软件外，融梦还配套了完整的 Web 平台：学校端供校方使用，运维端供渠道与平台运营方使用</p>
+
+    <div class="matrix-wrap">
+    <table class="matrix">
+      <thead>
+        <tr><th style="width:140px;">平台</th><th style="width:160px;">模块</th><th>核心功能</th><th>实现程度</th></tr>
+      </thead>
+      <tbody>
+        <tr class="cat"><td rowspan="6">学校端</td><td>校内体锻</td><td>学校/年级/班级数据概览、运动记录、运动排行、知识竞赛</td><td class="yes">已实现</td></tr>
+        <tr><td>校外体锻</td><td>学校/班级数据概览、运动记录、排行、作业管理</td><td class="yes">已实现</td></tr>
+        <tr><td>智慧体测</td><td>学校/年级/班级/学生概览、体测记录、成绩、排行、测试计划、课堂教学</td><td class="yes">已实现</td></tr>
+        <tr><td>阳光跑</td><td>跑步数据概览、阳光跑任务管理、累计里程、跑步记录</td><td class="yes">已实现</td></tr>
+        <tr><td>教学资源与比赛</td><td>资源列表/平台资源库、体育比赛创建与管理、班级/学生/账号管理</td><td class="partial">部分实现</td></tr>
+        <tr><td>基础管理</td><td>账号管理、基础配置、屏保管理</td><td class="partial">部分实现</td></tr>
+        <tr class="cat"><td rowspan="5">运维端</td><td>学校与渠道</td><td>渠道管理、运营账号、学校列表、学校账号、设备账号、登录日志、统计列表</td><td class="yes">已实现</td></tr>
+        <tr><td>数据大屏</td><td>学校大屏配置、区级大屏（功能未明确）</td><td class="partial">部分实现</td></tr>
+        <tr><td>设备运维</td><td>设备监控、设备管理、设备调试、版本上传/升级、反馈列表</td><td class="partial">部分实现</td></tr>
+        <tr><td>内容运营</td><td>知识问答题库、资源审核、赛事管理、视频管理</td><td class="yes">已实现</td></tr>
+        <tr><td>数据同步</td><td>功能未明确</td><td class="no">未明确</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="card" style="border-left:4px solid #1a73e8; margin-top:32px;">
+      <h3 style="color:#0d47a1;">💡 总体判断：Web 平台功能框架已搭建，但运营与设备运维仍偏粗</h3>
+      <p style="margin-top:12px;">学校端基本覆盖了体锻、体测、阳光跑、作业、比赛等核心场景，是学校日常管理的主入口；运维端也具备学校、账号、设备、版本、内容等管理模块。但设备监控、设备调试、数据同步等模块颗粒度粗、功能边界不清晰，仍然停留在“能查”而不是“能管”的层面，侧面反映出其软件开发能力在 B 端管理侧同样薄弱。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 8. 小程序端功能 ====== -->
+<section id="miniprogram" style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">八、小程序端（学生 / 教师）功能概述</h2>
+    <p class="section-desc">小程序是融梦连接学生、教师与学校场景的移动端延伸，当前没有独立的家长端，家长侧入口尚未明确</p>
+
+    <div class="card-grid cols-2">
+      <div class="card">
+        <div class="icon" style="background:#e3f2fd;">👨‍🎓</div>
+        <h3>学生端</h3>
+        <p style="margin-top:8px;"><strong>运动：</strong>支持使用手机直接进行训练，降低对硬件的依赖。</p>
+        <p style="margin-top:8px;"><strong>计划：</strong>查看并完成老师下发的课后作业。</p>
+        <p style="margin-top:8px;"><strong>我的：</strong>积分排行榜、皮肤兑换等游戏化激励。</p>
+        <p style="margin-top:8px;"><strong>未实现：</strong>运动数据、体育报告、反馈建议等功能尚未上线。</p>
+      </div>
+      <div class="card">
+        <div class="icon" style="background:#e8f5e9;">👩‍🏫</div>
+        <h3>教师端</h3>
+        <p style="margin-top:8px;"><strong>班级：</strong>查看我的班级及班级运动明细。</p>
+        <p style="margin-top:8px;"><strong>计划：</strong>布置课后作业、跟踪作业进度。</p>
+        <p style="margin-top:8px;"><strong>我的：</strong>反馈建议入口。</p>
+      </div>
+    </div>
+
+    <div class="insight-box" style="margin-top:24px;">
+      <strong>💡 关键判断：</strong>小程序目前只覆盖了学生运动和教师作业布置两个核心闭环，功能相对轻量。<strong>家长端尚未独立</strong>，学生运动数据、体育报告也未实现，说明融梦在“家校互通”和“家庭运动延伸”上仍处于早期阶段。这恰恰是新进入者可以从课后场景切入的空白点。
+    </div>
+  </div>
+</section>
+
+<!-- ====== 9. SWOT ====== -->
+<section id="swot" style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">九、SWOT 分析</h2>
+    <p class="section-desc">从产品定位、技术方向和落地能力三个维度综合评估融梦</p>
+
+    <div class="swot-grid">
+      <div class="swot-item swot-s">
+        <h4>💪 优势 (Strengths)</h4>
+        <ul>
+          <li><strong>场景闭环完整：</strong>教、学、练、测、评、赛六大场景均有布局，不是单点工具。</li>
+          <li><strong>教学内容与动作库积累：</strong>相比友商，融梦的核心差异化在于动作库与教学/体测内容资源，研发主要投入方向在 AI 动作识别与内容算法。</li>
+          <li><strong>软硬一体：</strong>六类智能终端形成线下数据采集入口，壁垒高于纯软件。</li>
+          <li><strong>资质背书：</strong>体育垂类大模型通过国家网信办备案，贴合新课标、体质健康标准。</li>
+          <li><strong>战略合作：</strong>与希沃等教育信息化厂商合作，借助渠道进入学校。</li>
+        </ul>
+      </div>
+
+      <div class="swot-item swot-w">
+        <h4>⚠️ 劣势 (Weaknesses)</h4>
+        <ul>
+          <li><strong>软件开发能力薄弱：</strong>终端与平台数据状态不一致、交互语义误导、榜单同步延迟等基础工程问题频发。</li>
+          <li><strong>后台设备管理粗放：</strong>设备台账、状态监控、远程运维等管理功能颗粒度粗，难以支撑大规模终端精细化运营。</li>
+          <li><strong>硬件重资产：</strong>终端采购、安装、维护成本高，规模化复制受学校预算限制。</li>
+          <li><strong>教学资源体验差：</strong>课件打开异常、平台资源库内容不足、AI 标签生成逻辑不透明。</li>
+          <li><strong>数据闭环未打通：</strong>教学屏多人训练记录后台查不到，测试/测训屏榜单状态与平台不同步。</li>
+        </ul>
+      </div>
+
+      <div class="swot-item swot-o">
+        <h4>🚀 机会 (Opportunities)</h4>
+        <ul>
+          <li><strong>轻量化软件切入：</strong>用手机/平板摄像头 + 学校现有大屏替代专用硬件，降低采购门槛。</li>
+          <li><strong>数据一致性作为差异化：</strong>优先解决融梦未解决的跨端状态同步问题，建立信任。</li>
+          <li><strong>教研内容深度：</strong>与地方中考体测标准、课标深度结合，提供“拿来即用”的教案。</li>
+          <li><strong>课后-校外延伸：</strong>强化家庭端体验，把课堂训练延伸到课后作业、家庭运动。</li>
+          <li><strong>课堂生理监测：</strong>若融梦借手环 ID 切入心率/运动强度监测，新进入者可在数据呈现与教学应用层做更优体验。</li>
+        </ul>
+      </div>
+
+      <div class="swot-item swot-t">
+        <h4>🔴 威胁 (Threats)</h4>
+        <ul>
+          <li><strong>大厂入局：</strong>科大讯飞、希沃等在教育信息化领域具备更强渠道和品牌。</li>
+          <li><strong>政策变化：</strong>体育考核标准调整可能影响高度依赖体质测试标准的产品。</li>
+          <li><strong>数据安全合规：</strong>学生体质健康数据涉及未成年人隐私，合规要求越来越高。</li>
+          <li><strong>用户信任损耗：</strong>数据不一致、榜单错误、资源不可用等问题会快速消耗学校信任。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 10. 战略启示 ====== -->
+<section id="strategy">
+  <div class="container">
+    <h2 class="section-title">十、战略启示与竞争策略</h2>
+    <p class="section-desc">基于融梦的产品定位、技术方向与落地短板，提炼自身产品的设计策略</p>
+
+    <!-- 扬长 -->
+    <div class="card" style="border-left:4px solid #27ae60; margin-bottom:20px;">
+      <h3 style="color:#2e7d32;">🌱 扬长 — 融梦做得好的，我们应该借鉴</h3>
+      <div class="card-grid cols-2" style="margin-top:16px;">
+        <div class="strategy-card"><h4>1. 垂直场景闭环</h4><p>融梦“教、学、练、测、评、赛”的完整场景覆盖是其最大价值。我们的产品应在选定场景中<strong>从 Day 1 设计端到端闭环</strong>，而非只做单点工具。</p></div>
+        <div class="strategy-card"><h4>2. 内容与动作库是核心壁垒</h4><p>融梦与友商最大的差异化在于教学内容与动作库积累。我们应在早期就投入<strong>标准化动作库、可配置教案、地方体测适配</strong>，形成长期护城河。</p></div>
+        <div class="strategy-card"><h4>3. 数据驱动决策</h4><p>融梦强调数据看板、学生档案。我们的产品应<strong>建立统一数据模型</strong>，确保课堂数据、体测数据、作业数据能够汇聚到同一份学生运动档案。</p></div>
+        <div class="strategy-card"><h4>4. 资质与渠道</h4><p>国家网信办备案、教育大厂合作是规模化必要条件。我们应在产品设计阶段就考虑<strong>合规与数据隐私</strong>，并积极争取区域标杆案例。</p></div>
+      </div>
+    </div>
+
+    <!-- 避短 -->
+    <div class="card" style="border-left:4px solid #e74c3c; margin-bottom:20px;">
+      <h3 style="color:#c62828;">🛡️ 避短 — 融梦踩过的坑，我们提前规避</h3>
+      <div class="card-grid cols-2" style="margin-top:16px;">
+        <div class="strategy-card" style="background:linear-gradient(135deg, #fff5f5, #fce4ec); border-color:#ef9a9a;"><h4 style="color:#c62828;">1. 优先保证数据一致性</h4><p>融梦测试/测训屏与平台状态不同步、教学屏多人记录后台查不到，说明其数据架构存在硬伤。我们的产品应<strong>把状态同步作为核心架构约束</strong>，任何端上的状态变更都必须实时同步到其它端。</p></div>
+        <div class="strategy-card" style="background:linear-gradient(135deg, #fff5f5, #fce4ec); border-color:#ef9a9a;"><h4 style="color:#c62828;">2. 避免重资产交付</h4><p>不要盲目复制融梦的六类终端。优先走<strong>软件轻量化交付</strong>路线，用学校现有设备 + 低成本采集方案验证市场。</p></div>
+        <div class="strategy-card" style="background:linear-gradient(135deg, #fff5f5, #fce4ec); border-color:#ef9a9a;"><h4 style="color:#c62828;">3. 自动标签必须可解释</h4><p>AI 评分和能力标签不能是黑箱。应把生成逻辑可视化，让教师理解“为什么给出这个评价”。</p></div>
+        <div class="strategy-card" style="background:linear-gradient(135deg, #fff5f5, #fce4ec); border-color:#ef9a9a;"><h4 style="color:#c62828;">4. 教研内容要扎实</h4><p>融梦教学资源体验不佳（课件黑屏、资源库空）。我们应优先保证<strong>核心教学资源可用、可管、可配置</strong>，而非追求终端数量。</p></div>
+        <div class="strategy-card" style="background:linear-gradient(135deg, #fff5f5, #fce4ec); border-color:#ef9a9a;"><h4 style="color:#c62828;">5. 设备管理不能粗放</h4><p>融梦后台设备管理颗粒度粗，难以支撑大规模终端运维。我们的产品应<strong>从 Day 1 设计设备状态、远程运维、故障告警</strong>等能力，避免规模化后的运营黑洞。</p></div>
+      </div>
+    </div>
+
+    <!-- 抓漏 -->
+    <div class="card" style="border-left:4px solid #1a73e8;">
+      <h3 style="color:#0d47a1;">🎯 抓漏 — 融梦的空白地带，正是我们的市场切入点</h3>
+      <div class="card-grid cols-2" style="margin-top:16px;">
+        <div class="strategy-card" style="background:linear-gradient(135deg, #f0f4ff, #e3f2fd); border-color:#90caf9;"><h4 style="color:#0d47a1;">1. 纯软件轻量化方案</h4><p>不依赖专用硬件，通过手机/平板摄像头 + 学校大屏实现 AI 跟练与体测，<strong>降低学校采购门槛</strong>，快速切入中小学校和预算有限的区域。</p></div>
+        <div class="strategy-card" style="background:linear-gradient(135deg, #f0f4ff, #e3f2fd); border-color:#90caf9;"><h4 style="color:#0d47a1;">2. 数据透明与可解释</h4><p>把 AI 评分、能力标签、训练建议的生成逻辑可视化，<strong>用透明建立教师信任</strong>，这是融梦明显缺失的能力。</p></div>
+        <div class="strategy-card" style="background:linear-gradient(135deg, #f0f4ff, #e3f2fd); border-color:#90caf9;"><h4 style="color:#0d47a1;">3. 教研内容深度</h4><p>与地方中考体测标准、课标深度结合，提供可配置的教学计划与教案，<strong>让体育教师“拿来即用”</strong>。</p></div>
+        <div class="strategy-card" style="background:linear-gradient(135deg, #f0f4ff, #e3f2fd); border-color:#90caf9;"><h4 style="color:#0d47a1;">4. 课后校外延伸</h4><p>强化家庭端体验，把课堂训练延伸到课后作业、家庭运动，形成<strong>完整的学生运动档案</strong>。</p></div>
+        <div class="strategy-card" style="background:linear-gradient(135deg, #f0f4ff, #e3f2fd); border-color:#90caf9;"><h4 style="color:#0d47a1;">5. 课堂生理监测体验</h4><p>融梦已通过学生字段预留手环 ID/手机号，可能向心率/运动强度监测延伸。我们可以在<strong>数据可视化、课堂实时反馈、异常预警</strong>等应用层做得更直观。</p></div>
+      </div>
+    </div>
+
+    <div class="insight-box" style="margin-top:32px; background:linear-gradient(135deg, #1a237e, #283593); color:#fff; border-left-color:#fff;">
+      <strong style="color:#fff;">💡 核心竞争策略一句话：</strong>
+      参考融梦的场景闭环与内容算法思路，避开其硬件重资产、软件工程质量与设备管理短板，在“轻量化软件、数据透明、教研内容、课后延伸、课堂监测体验”五个方向建立差异化优势。
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>融梦科技 · 竞品分析报告</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.nav a').forEach(x => x.classList.remove('active'));
+    a.classList.add('active');
+  });
+});
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav a');
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+  });
+  navLinks.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
