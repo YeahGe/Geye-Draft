@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>斯盛体育 · 竞品分析报告</title>
+<style>
+  :root {
+    --primary: #1a73e8;
+    --secondary: #0d47a1;
+    --accent1: #e74c3c;
+    --accent2: #f39c12;
+    --accent3: #27ae60;
+    --accent4: #8e44ad;
+    --accent5: #00acc1;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+    background: var(--bg); color: var(--text); line-height:1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width:1200px; margin:0 auto; padding:0 24px; }
+
+  .hero {
+    background: linear-gradient(135deg, #0d47a1 0%, #1a73e8 40%, #2196f3 100%);
+    color: #fff; padding:72px 0 48px; position:relative; overflow:hidden;
+  }
+  .hero::after {
+    content:''; position:absolute; top:-50%; right:-20%; width:600px; height:600px;
+    background:radial-gradient(circle, rgba(255,255,255,.08) 0%, transparent 70%);
+    border-radius:50%;
+  }
+  .hero h1 { font-size:2.8rem; font-weight:800; letter-spacing:-0.5px; position:relative; z-index:1; }
+  .hero .subtitle { font-size:1.15rem; opacity:.85; margin-top:12px; max-width:700px; position:relative; z-index:1; }
+  .hero .meta { display:flex; gap:24px; margin-top:20px; font-size:.9rem; opacity:.7; position:relative; z-index:1; }
+
+  .nav { background:#fff; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
+  .nav-inner { display:flex; gap:0; overflow-x:auto; max-width:1200px; margin:0 auto; padding:0 24px; }
+  .nav a { padding:14px 20px; color:var(--text-light); text-decoration:none; font-size:.9rem;
+    font-weight:500; white-space:nowrap; border-bottom:2px solid transparent; transition:.2s; }
+  .nav a:hover, .nav a.active { color:var(--primary); border-bottom-color:var(--primary); }
+
+  section { padding:64px 0; }
+  section:nth-child(even) { background:#fff; }
+  .section-title { font-size:1.8rem; font-weight:700; margin-bottom:8px; color:var(--secondary); }
+  .section-desc { color:var(--text-light); margin-bottom:36px; font-size:1rem; }
+
+  .card-grid { display:grid; gap:24px; }
+  .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .card-grid.cols-5 { grid-template-columns: repeat(5, 1fr); }
+  .card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .card {
+    background:var(--card); border-radius:12px; padding:28px; box-shadow:var(--shadow);
+    border:1px solid var(--border); transition:.2s;
+  }
+  .card:hover { box-shadow:var(--shadow-lg); transform:translateY(-2px); }
+  .card .icon { width:48px; height:48px; border-radius:12px; display:flex; align-items:center;
+    justify-content:center; font-size:1.5rem; margin-bottom:16px; }
+  .card h3 { font-size:1.15rem; margin-bottom:8px; }
+  .card p { color:var(--text-light); font-size:.92rem; line-height:1.6; }
+
+  .edu { border-left:4px solid var(--primary); }
+  .school { border-left:4px solid var(--accent3); }
+  .teacher { border-left:4px solid var(--accent2); }
+  .club { border-left:4px solid var(--accent4); }
+  .parent-card { border-left:4px dashed #00acc1; background:#fafeff; }
+
+  .card-dashed {
+    border:2px dashed #00acc1; border-radius:12px; padding:28px; background:#fafeff;
+    position:relative;
+  }
+  .card-dashed::before {
+    content:'推测存在 · 未体验'; position:absolute; top:-12px; right:16px;
+    background:#00acc1; color:#fff; padding:2px 12px; border-radius:10px; font-size:.72rem; font-weight:600;
+  }
+  .card-dashed .icon { width:48px; height:48px; border-radius:12px; display:flex; align-items:center;
+    justify-content:center; font-size:1.5rem; margin-bottom:16px; background:#e0f7fa; }
+  .card-dashed h3 { font-size:1.15rem; margin-bottom:8px; color:#00838f; }
+  .card-dashed p { color:var(--text-light); font-size:.92rem; line-height:1.6; }
+
+  .matrix-wrap { overflow-x:auto; border-radius:12px; box-shadow:var(--shadow); border:1px solid var(--border); }
+  .matrix { width:100%; border-collapse:collapse; font-size:.88rem; min-width:800px; }
+  .matrix thead th {
+    background:var(--secondary); color:#fff; padding:14px 16px; text-align:center; font-weight:600;
+    position:sticky; top:0;
+  }
+  .matrix thead th:first-child { text-align:left; border-radius:12px 0 0 0; }
+  .matrix thead th:last-child { border-radius:0 12px 0 0; }
+  .matrix tbody td { padding:12px 16px; border-bottom:1px solid var(--border); }
+  .matrix tbody tr:last-child td:first-child { border-radius:0 0 0 12px; }
+  .matrix tbody tr:last-child td:last-child { border-radius:0 0 12px 0; }
+  .matrix tbody tr:hover { background:#f1f5f9; }
+  .matrix .cat { background:#f8fafc; font-weight:700; color:var(--secondary); }
+  .matrix .yes { color:var(--accent3); font-weight:600; }
+  .matrix .partial { color:var(--accent2); font-weight:600; }
+  .matrix .no { color:#cbd5e1; }
+
+  .tag { display:inline-block; padding:2px 10px; border-radius:20px; font-size:.78rem;
+    font-weight:600; margin:2px; }
+  .tag-edu { background:#e3f2fd; color:#1565c0; }
+  .tag-school { background:#e8f5e9; color:#2e7d32; }
+  .tag-teacher { background:#fff3e0; color:#e65100; }
+  .tag-club { background:#f3e5f5; color:#7b1fa2; }
+  .tag-parent { background:#e0f7fa; color:#00838f; }
+
+  .flow-container { background:#fff; border-radius:12px; padding:32px; box-shadow:var(--shadow);
+    border:1px solid var(--border); overflow-x:auto; }
+  .flow-container svg { max-width:100%; height:auto; }
+
+  .swot-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .swot-item { border-radius:12px; padding:24px; }
+  .swot-item h4 { font-size:1.1rem; margin-bottom:12px; }
+  .swot-item ul { padding-left:20px; }
+  .swot-item li { margin-bottom:6px; font-size:.92rem; line-height:1.6; }
+  .swot-s { background:#e8f5e9; border:1px solid #c8e6c9; }
+  .swot-s h4 { color:#2e7d32; }
+  .swot-w { background:#fff3e0; border:1px solid #ffe0b2; }
+  .swot-w h4 { color:#e65100; }
+  .swot-o { background:#e3f2fd; border:1px solid #bbdefb; }
+  .swot-o h4 { color:#1565c0; }
+  .swot-t { background:#fce4ec; border:1px solid #f8bbd0; }
+  .swot-t h4 { color:#c62828; }
+
+  .swot-sub { display:inline-block; padding:1px 8px; border-radius:8px; font-size:.72rem; font-weight:600; margin-right:6px; }
+  .swot-sub.overall { background:#e8eaf6; color:#3949ab; }
+  .swot-sub.functional { background:#fce4ec; color:#c62828; }
+
+  .strategy-card {
+    background:linear-gradient(135deg, #f8faff, #e8eaf6);
+    border-radius:12px; padding:28px; border:1px solid #c5cae9; margin-bottom:20px;
+  }
+  .strategy-card h4 { color:#1a237e; margin-bottom:6px; font-size:1.05rem; }
+
+  .insight-box {
+    background:linear-gradient(135deg, #e3f2fd, #e8eaf6);
+    border-radius:12px; padding:24px; border-left:4px solid var(--primary);
+    margin:16px 0;
+  }
+  .insight-box strong { color:var(--secondary); }
+
+  .health-item {
+    background:#f8fafc; border-radius:10px; padding:18px; border:1px solid var(--border);
+  }
+  .health-item h4 { font-size:.95rem; margin-bottom:6px; }
+  .health-item p { font-size:.84rem; color:var(--text-light); line-height:1.7; }
+
+  footer { background:var(--secondary); color:rgba(255,255,255,.7); text-align:center;
+    padding:32px 0; font-size:.85rem; }
+
+  @media (max-width: 900px) {
+    .card-grid.cols-4, .card-grid.cols-2, .card-grid.cols-5 { grid-template-columns:1fr; }
+    .swot-grid { grid-template-columns:1fr; }
+    .hero h1 { font-size:2rem; }
+    section { padding:40px 0; }
+  }
+  @media (max-width: 768px) {
+    .card-grid.cols-3 { grid-template-columns:1fr; }
+    .nav-inner { padding:0 12px; }
+    .nav a { padding:12px 12px; font-size:.82rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <h1>斯盛体育 · 竞品分析报告</h1>
+    <p class="subtitle">基于教育局端、学校端、教师端、俱乐部端功能体验的深度对比分析，
+      聚焦四端联动效率、数据流转完整度与用户体验一致性</p>
+    <div class="meta">
+      <span>2026年6月</span>
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#overview" class="active">产品概览</a>
+    <a href="#matrix">功能矩阵</a>
+    <a href="#flow">四端联动</a>
+    <a href="#swimlane">业务泳道</a>
+    <a href="#analysis">深度分析</a>
+    <a href="#swot">SWOT</a>
+    <a href="#strategy">战略启示</a>
+  </div>
+</nav>
+
+<!-- ====== 1. 产品概览 ====== -->
+<section id="overview">
+  <div class="container">
+    <h2 class="section-title">一、产品生态概览</h2>
+    <p class="section-desc">斯盛体育构建了覆盖「区级管理 → 校级执行 → 教师落地 → 家校互通 → 社会参与」的五端协同体系，
+      以校园体育数字化转型为目标，形成纵向穿透、横向联动的产品矩阵。</p>
+
+    <div class="card-grid cols-4">
+      <div class="card edu">
+        <div class="icon" style="background:#e3f2fd;">&#x1F3DB;</div>
+        <h3>教育局端</h3>
+        <p><strong>角色定位：</strong>全区体育管理的"指挥中心"</p>
+        <p style="margin-top:8px;">覆盖<strong>14个</strong>一级功能模块，包括政策下发、赛事全流程管理、"三零"大课间监控、教师/学生综合评价、智慧操场、校家社协同等。拥有最高权限的数据看板与统计分析能力。</p>
+        <div style="margin-top:12px;">
+          <span class="tag tag-edu">核心用户：区教育局管理者</span>
+        </div>
+      </div>
+      <div class="card school">
+        <div class="icon" style="background:#e8f5e9;">&#x1F3EB;</div>
+        <h3>学校端</h3>
+        <p><strong>角色定位：</strong>承上启下的"执行中枢"</p>
+        <p style="margin-top:8px;">覆盖<strong>9个</strong>一级功能模块，承接教育局政策与任务，管理本校教学、竞赛、数据。具备校级数据看板、教师/学生管理、赛事报名、机构准入等能力，是数据上传下达的关键节点。</p>
+        <div style="margin-top:12px;">
+          <span class="tag tag-school">核心用户：学校管理员</span>
+        </div>
+      </div>
+      <div class="card teacher">
+        <div class="icon" style="background:#fff3e0;">&#x1F468;&#x200D;&#x1F3EB;</div>
+        <h3>教师端</h3>
+        <p><strong>角色定位：</strong>一线教学的"操作终端"</p>
+        <p style="margin-top:8px;">覆盖<strong>12个</strong>一级功能模块，聚焦日常教学场景：课表管理、课堂记录、作业布置、分层教学、体质健康档案查看。是数据采集的源头，也是教学反馈的接收端。</p>
+        <div style="margin-top:12px;">
+          <span class="tag tag-teacher">核心用户：体育教师</span>
+        </div>
+      </div>
+      <div class="card club">
+        <div class="icon" style="background:#f3e5f5;">&#x26BD;</div>
+        <h3>俱乐部端</h3>
+        <p><strong>角色定位：</strong>社会力量的"准入窗口"</p>
+        <p style="margin-top:8px;">覆盖<strong>3个</strong>一级功能模块（含未完成功能），负责体育社会机构的准入审核、过程监管、评分管理。目前功能最单薄，首页课表展示尚未完成开发。</p>
+        <div style="margin-top:12px;">
+          <span class="tag tag-club">核心用户：俱乐部运营方</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-grid" style="margin-top:24px;">
+      <div class="card-dashed">
+        <div class="icon">&#x1F46A;</div>
+        <h3>家长端（推测存在 / 未体验）</h3>
+        <p><strong>角色定位：</strong>家校互通的"最后一公里"</p>
+        <p style="margin-top:8px;">本次体验未获得家长端账号，但根据教师端"作业布置"、学校端"家长管理"模块推断，斯盛体育必然存在家长端——否则学生无法接收作业通知与完成反馈。推测覆盖：<strong>作业查看、成绩通知、体质健康报告、家校沟通</strong>等基础功能。</p>
+        <div style="margin-top:12px;">
+          <span class="tag tag-parent">推测用户：家长</span>
+          <span class="tag tag-parent" style="margin-left:4px;">未体验</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 五端关系总览 -->
+    <div class="flow-container" style="margin-top:36px;">
+      <h3 style="margin-bottom:20px; color:var(--secondary);">五端生态关系总览</h3>
+      <svg viewBox="0 0 1100 820" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#1a73e8"/>
+          </marker>
+          <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#27ae60"/>
+          </marker>
+          <marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#f39c12"/>
+          </marker>
+          <marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#8e44ad"/>
+          </marker>
+          <marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#00acc1"/>
+          </marker>
+          <filter id="shadow"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.1"/></filter>
+        </defs>
+
+        <rect x="380" y="30" width="300" height="88" rx="14" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2" filter="url(#shadow)"/>
+        <text x="530" y="62" text-anchor="middle" font-size="18" font-weight="700" fill="#0d47a1">&#x1F3DB; 教育局端</text>
+        <text x="530" y="84" text-anchor="middle" font-size="12" fill="#1565c0">政策制定 · 数据监控 · 全局管理</text>
+        <text x="530" y="104" text-anchor="middle" font-size="11" fill="#64748b">14个模块 | 最高权限</text>
+
+        <rect x="150" y="140" width="200" height="28" rx="14" fill="#e3f2fd" stroke="#90caf9" stroke-width="1"/>
+        <text x="250" y="159" text-anchor="middle" font-size="11" fill="#1565c0">&#11015; 下行：指令 · 政策 · 标准</text>
+        <rect x="710" y="140" width="210" height="28" rx="14" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="1"/>
+        <text x="815" y="159" text-anchor="middle" font-size="11" fill="#2e7d32">&#11014; 上行：数据 · 报表 · 申请</text>
+
+        <rect x="380" y="195" width="300" height="88" rx="14" fill="#e8f5e9" stroke="#27ae60" stroke-width="2" filter="url(#shadow)"/>
+        <text x="530" y="227" text-anchor="middle" font-size="18" font-weight="700" fill="#2e7d32">&#x1F3EB; 学校端</text>
+        <text x="530" y="249" text-anchor="middle" font-size="12" fill="#388e3c">政策执行 · 校级管理 · 数据上报</text>
+        <text x="530" y="271" text-anchor="middle" font-size="11" fill="#64748b">9个模块 | 承上启下</text>
+
+        <line x1="530" y1="118" x2="530" y2="195" stroke="#1a73e8" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+        <line x1="555" y1="195" x2="555" y2="118" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow-green)" stroke-dasharray="5,3"/>
+
+        <rect x="110" y="310" width="240" height="28" rx="14" fill="#fff3e0" stroke="#ffcc80" stroke-width="1"/>
+        <text x="230" y="329" text-anchor="middle" font-size="11" fill="#e65100">&#8652; 双向：教学协同 · 数据采集</text>
+        <rect x="690" y="310" width="230" height="28" rx="14" fill="#f3e5f5" stroke="#ce93d8" stroke-width="1"/>
+        <text x="805" y="329" text-anchor="middle" font-size="11" fill="#7b1fa2">机构准入 · 白名单管理</text>
+
+        <rect x="100" y="370" width="300" height="88" rx="14" fill="#fff3e0" stroke="#f39c12" stroke-width="2" filter="url(#shadow)"/>
+        <text x="250" y="402" text-anchor="middle" font-size="18" font-weight="700" fill="#e65100">&#x1F468;&#x200D;&#x1F3EB; 教师端</text>
+        <text x="250" y="424" text-anchor="middle" font-size="12" fill="#ef6c00">教学执行 · 数据采集 · 作业管理</text>
+        <text x="250" y="446" text-anchor="middle" font-size="11" fill="#64748b">12个模块 | 数据源头</text>
+
+        <rect x="660" y="370" width="300" height="88" rx="14" fill="#f3e5f5" stroke="#8e44ad" stroke-width="2" filter="url(#shadow)"/>
+        <text x="810" y="402" text-anchor="middle" font-size="18" font-weight="700" fill="#7b1fa2">&#x26BD; 俱乐部端</text>
+        <text x="810" y="424" text-anchor="middle" font-size="12" fill="#9c27b0">机构准入 · 课程管理 · 质量监管</text>
+        <text x="810" y="446" text-anchor="middle" font-size="11" fill="#64748b">3个模块 | 建设中</text>
+
+        <path d="M450,283 C450,330 250,330 250,370" stroke="#27ae60" stroke-width="2.5" fill="none" marker-end="url(#arrow-green)"/>
+        <path d="M270,370 C270,340 470,340 470,283" stroke="#f39c12" stroke-width="2" fill="none" marker-end="url(#arrow-orange)" stroke-dasharray="5,3"/>
+        <path d="M610,283 C610,330 810,330 810,370" stroke="#8e44ad" stroke-width="2.5" fill="none" marker-end="url(#arrow-purple)"/>
+
+        <rect x="100" y="488" width="240" height="28" rx="14" fill="#e0f7fa" stroke="#80deea" stroke-width="1"/>
+        <text x="220" y="507" text-anchor="middle" font-size="11" fill="#00838f">&#8652; 作业 · 通知 · 报告（推测）</text>
+
+        <rect x="100" y="545" width="300" height="88" rx="14" fill="#fafeff" stroke="#00acc1" stroke-width="2" stroke-dasharray="8,4" filter="url(#shadow)"/>
+        <text x="250" y="577" text-anchor="middle" font-size="18" font-weight="700" fill="#00838f">&#x1F46A; 家长端</text>
+        <text x="250" y="599" text-anchor="middle" font-size="12" fill="#0097a7">作业接收 · 家校沟通 · 学生报告</text>
+        <text x="250" y="621" text-anchor="middle" font-size="11" fill="#64748b">推测存在 | 基于功能倒推</text>
+        <rect x="130" y="526" width="100" height="22" rx="11" fill="#00acc1"/>
+        <text x="180" y="541" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">推测 · 未体验</text>
+
+        <line x1="250" y1="458" x2="250" y2="545" stroke="#00acc1" stroke-width="2" marker-end="url(#arrow-teal)" stroke-dasharray="6,3"/>
+
+        <text x="530" y="700" text-anchor="middle" font-size="12" fill="#94a3b8">实线 = 已确认数据流 &nbsp;|&nbsp; 虚线 = 推测/回传链路 &nbsp;|&nbsp; 蓝色虚线 = 推测未体验端</text>
+        <text x="530" y="725" text-anchor="middle" font-size="11" fill="#64748b">&#x26A0; 俱乐部端与学校/教师端无直接数据互通，仅通过教育局端间接关联</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 2. 功能矩阵 ====== -->
+<section id="matrix" style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">二、四端功能对比矩阵</h2>
+    <p class="section-desc">横向对比各端在核心功能域的覆盖度：&#x1F7E2; 完整覆盖 &nbsp; &#x1F7E1; 部分覆盖/仅查看 &nbsp; &#x26AA; 未覆盖</p>
+    <div class="matrix-wrap">
+    <table class="matrix">
+      <thead>
+        <tr><th style="width:140px;">功能域</th><th style="width:200px;">&#x1F3DB; 教育局端</th><th style="width:200px;">&#x1F3EB; 学校端</th><th style="width:200px;">&#x1F468;&#x200D;&#x1F3EB; 教师端</th><th style="width:200px;">&#x26BD; 俱乐部端</th></tr>
+      </thead>
+      <tbody>
+        <tr class="cat"><td colspan="5">&#x1F4CA; 数据看板与决策</td></tr>
+        <tr><td>全局数据看板</td><td class="yes">&#x1F7E2; 区级看板（"三零"指标）</td><td class="yes">&#x1F7E2; 校级数据看板</td><td class="partial">&#x1F7E1; 仅个人授课数据</td><td class="partial">&#x1F7E1; 课程表展示（未完成）</td></tr>
+        <tr><td>综合评价体系</td><td class="yes">&#x1F7E2; 教师+学生双维度</td><td class="yes">&#x1F7E2; 教育决策/核心素质</td><td class="yes">&#x1F7E2; 素养模块（学生评价）</td><td class="no">&#x26AA; 无</td></tr>
+        <tr><td>体质健康档案</td><td class="yes">&#x1F7E2; 全区+单校+上链</td><td class="yes">&#x1F7E2; 校级体质健康档案</td><td class="partial">&#x1F7E1; 班级/学生个人查看</td><td class="no">&#x26AA; 无</td></tr>
+        <tr class="cat"><td colspan="5">&#x1F4CB; 政策与资源管理</td></tr>
+        <tr><td>政策文件管理</td><td class="yes">&#x1F7E2; 增删改+已读追踪</td><td class="partial">&#x1F7E1; 仅查看</td><td class="partial">&#x1F7E1; 仅查看</td><td class="no">&#x26AA; 无</td></tr>
+        <tr><td>教学资源库</td><td class="yes">&#x1F7E2; 增删改+分类+审核</td><td class="yes">&#x1F7E2; 上传+分类管理</td><td class="partial">&#x1F7E1; 查看公共+个人上传</td><td class="no">&#x26AA; 无</td></tr>
+        <tr><td>教案库</td><td class="yes">&#x1F7E2; 分类管理</td><td class="yes">&#x1F7E2; 教案库+外链资源</td><td class="partial">&#x1F7E1; 查看+个人上传</td><td class="no">&#x26AA; 无</td></tr>
+        <tr><td>题库管理</td><td class="yes">&#x1F7E2; 增删改+题型支持</td><td class="no">&#x26AA; 无</td><td class="no">&#x26AA; 无</td><td class="no">&#x26AA; 无</td></tr>
+        <tr class="cat"><td colspan="5">&#x1F3C6; 赛事与活动</td></tr>
+        <tr><td>赛事全流程管理</td><td class="yes">&#x1F7E2; 发布-报名-执行-公布</td><td class="partial">&#x1F7E1; 报名+查看</td><td class="partial">&#x1F7E1; 仅查看赛事信息</td><td class="no">&#x26AA; 无</td></tr>
+        <tr><td>荣誉登记</td><td class="yes">&#x1F7E2; 登记列表+审核</td><td class="yes">&#x1F7E2; 按赛事登记</td><td class="no">&#x26AA; 无</td><td class="no">&#x26AA; 无</td></tr>
+        <tr><td>活动风采</td><td class="yes">&#x1F7E2; 增删改活动+图片</td><td class="yes">&#x1F7E2; 查看+上传</td><td class="partial">&#x1F7E1; 仅查看</td><td class="no">&#x26AA; 无</td></tr>
+        <tr><td>挑战吉尼斯</td><td class="yes">&#x1F7E2; 全区多维排行榜</td><td class="no">&#x26AA; 无</td><td class="no">&#x26AA; 无</td><td class="no">&#x26AA; 无</td></tr>
+        <tr class="cat"><td colspan="5">&#x1F4F1; 教学与作业</td></tr>
+        <tr><td>课堂教学管理</td><td class="partial">&#x1F7E1; 精准学前分析查看</td><td class="partial">&#x1F7E1; 课堂数据查看</td><td class="yes">&#x1F7E2; 课表+备课+记录</td><td class="no">&#x26AA; 无</td></tr>
+        <tr><td>作业系统</td><td class="partial">&#x1F7E1; 完成情况汇总</td><td class="partial">&#x1F7E1; 作业统计看板</td><td class="yes">&#x1F7E2; 布置作业（计时/计数）</td><td class="no">&#x26AA; 无</td></tr>
+        <tr><td>分层教学</td><td class="no">&#x26AA; 无</td><td class="yes">&#x1F7E2; 分层教学模型</td><td class="yes">&#x1F7E2; 国标分类+趋势</td><td class="no">&#x26AA; 无</td></tr>
+        <tr class="cat"><td colspan="5">&#x1F91D; 校家社协同</td></tr>
+        <tr><td>体育社会机构管理</td><td class="yes">&#x1F7E2; 机构列表+审核+评星</td><td class="partial">&#x1F7E1; 白名单+入驻申请</td><td class="no">&#x26AA; 无</td><td class="partial">&#x1F7E1; 审核+管理（待完善）</td></tr>
+        <tr><td>体育后备人才</td><td class="yes">&#x1F7E2; 审核管理+教练详情</td><td class="partial">&#x1F7E1; 注册+补卡申请</td><td class="no">&#x26AA; 无</td><td class="no">&#x26AA; 无</td></tr>
+        <tr><td>制卡管理</td><td class="yes">&#x1F7E2; 审核+名单管理</td><td class="partial">&#x1F7E1; 制卡申请</td><td class="no">&#x26AA; 无</td><td class="no">&#x26AA; 无</td></tr>
+        <tr><td>智慧跑团</td><td class="yes">&#x1F7E2; 数据展示+风采</td><td class="yes">&#x1F7E2; 跑团+数据展示</td><td class="partial">&#x1F7E1; 仅查看活动</td><td class="no">&#x26AA; 无</td></tr>
+        <tr class="cat"><td colspan="5">&#x2699; 系统管理</td></tr>
+        <tr><td>账号管理</td><td class="yes">&#x1F7E2; 教师+学生+班级+学校</td><td class="partial">&#x1F7E1; 学生+教师+家长管理</td><td class="no">&#x26AA; 无</td><td class="partial">&#x1F7E1; 俱乐部用户管理</td></tr>
+        <tr><td>消息通知</td><td class="yes">&#x1F7E2; 增删通知（全部学校）</td><td class="partial">&#x1F7E1; 发布+接收（有BUG）</td><td class="partial">&#x1F7E1; 发布+接收（有BUG）</td><td class="no">&#x26AA; 无</td></tr>
+        <tr><td>学期设置</td><td class="yes">&#x1F7E2; 完整学期管理</td><td class="no">&#x26AA; 无</td><td class="no">&#x26AA; 无</td><td class="no">&#x26AA; 无</td></tr>
+        <tr><td>操作日志</td><td class="yes">&#x1F7E2; 请求日志</td><td class="yes">&#x1F7E2; 操作日志</td><td class="no">&#x26AA; 无</td><td class="no">&#x26AA; 无</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="insight-box" style="margin-top:24px;">
+      <strong>&#x1F50D; 关键发现：</strong>功能覆盖呈明显的"金字塔"分布 — 教育局端功能最全面（14模块），向下逐级递减。
+      教师端在教学场景中承担核心执行角色（12模块），但<strong>系统管理能力缺失</strong>；
+      俱乐部端处于早期阶段，与前三端的联动链路尚不完整；
+      家长端推测存在但本次未体验，从教师端"作业布置"和学校端"家长管理"可反推其存在。
+    </div>
+  </div>
+</section>
+
+<!-- ====== 3. 核心业务流转图 (v7: 根据1.png和2.png橙色标注精确修复) ====== -->
+<section id="flow">
+  <div class="container">
+    <h2 class="section-title">三、核心业务流转图</h2>
+    <p class="section-desc">以"赛事全流程"和"体质健康数据"两条核心业务线为例，展示数据在四端之间的流转路径</p>
+
+    <!-- 赛事全流程 (v7: viewBox 1400x680, 修复标注1-3) -->
+    <div class="flow-container" style="margin-bottom:32px;">
+      <h3 style="margin-bottom:20px; color:var(--accent1);">&#x1F3C6; 业务线一：赛事全流程（一月一赛）</h3>
+      <svg viewBox="0 0 1400 680" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr-red" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e74c3c"/></marker>
+          <marker id="arr-green2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#27ae60"/></marker>
+          <marker id="arr-blue2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1a73e8"/></marker>
+          <marker id="arr-purple2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#9b59b6"/></marker>
+        </defs>
+
+        <!-- 泳道1: 教育局端 -->
+        <rect x="55" y="45" width="1300" height="110" rx="8" fill="#e3f2fd" opacity="0.35"/>
+        <text x="75" y="33" font-size="14" font-weight="700" fill="#0d47a1">&#x1F3DB; 教育局端（赛事创建与管理）</text>
+
+        <!-- 泳道2: 学校端 (v7: y+8) -->
+        <rect x="55" y="180" width="1300" height="115" rx="8" fill="#e8f5e9" opacity="0.35"/>
+        <text x="75" y="168" font-size="14" font-weight="700" fill="#2e7d32">&#x1F3EB; 学校端（赛事响应与报名）</text>
+
+        <!-- 泳道3: 教师端 (v7: y+8) -->
+        <rect x="55" y="310" width="1300" height="115" rx="8" fill="#fff3e0" opacity="0.35"/>
+        <text x="75" y="298" font-size="14" font-weight="700" fill="#e65100">&#x1F468;&#x200D;&#x1F3EB; 教师端（赛事参与——仅查看）</text>
+
+        <!-- 泳道4: 数据回流 (v7: y+15) -->
+        <rect x="55" y="445" width="1300" height="175" rx="8" fill="#fce4ec" opacity="0.22"/>
+        <text x="75" y="433" font-size="14" font-weight="700" fill="#c62828">&#x1F4CA; 数据回流与成果沉淀</text>
+
+        <!-- ① 创建赛事 -->
+        <rect x="310" y="55" width="200" height="62" rx="10" fill="#1a73e8"/>
+        <text x="410" y="79" text-anchor="middle" font-size="14" font-weight="600" fill="#fff">&#x2460; 创建赛事</text>
+        <text x="410" y="99" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.85)">设置项目/组别/单项</text>
+
+        <!-- ①→② arrow -->
+        <line x1="510" y1="86" x2="550" y2="86" stroke="#1a73e8" stroke-width="2" marker-end="url(#arr-blue2)"/>
+
+        <!-- ② 赛事发布 -->
+        <rect x="560" y="55" width="200" height="62" rx="10" fill="#1565c0"/>
+        <text x="660" y="79" text-anchor="middle" font-size="14" font-weight="600" fill="#fff">&#x2461; 赛事发布</text>
+        <text x="660" y="99" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.85)">指定参赛学校范围</text>
+
+        <!-- ②→③ 跨区: 教育局→学校 (v7: 优化路径) -->
+        <path d="M760,86 C790,86 820,125 820,190" stroke="#1a73e8" stroke-width="2" fill="none" marker-end="url(#arr-blue2)" stroke-dasharray="6,3"/>
+        <rect x="830" y="135" width="145" height="28" rx="6" fill="#e3f2fd" stroke="#90caf9" stroke-width="1"/>
+        <text x="902" y="154" text-anchor="middle" font-size="11" fill="#1a73e8" font-weight="600">&#x2B07; 赛事下发至学校</text>
+
+        <!-- ③ 学校报名 (v7: y=190, 下移5px) -->
+        <rect x="560" y="190" width="230" height="62" rx="10" fill="#27ae60"/>
+        <text x="675" y="214" text-anchor="middle" font-size="14" font-weight="600" fill="#fff">&#x2462; 赛事报名</text>
+        <text x="675" y="234" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.85)">参赛名单 · 申请制卡 · 确认参赛</text>
+
+        <!-- ③→④: 报名完成→赛事执行, 曲线到数据回流区 (v7: 调整路径) -->
+        <path d="M675,252 C675,278 500,303 460,455" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#arr-green2)" stroke-dasharray="5,3"/>
+        <rect x="580" y="355" width="155" height="26" rx="6" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="1"/>
+        <text x="657" y="373" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="600">&#x2B07; 进入赛事执行阶段</text>
+
+        <!-- ④ 赛事执行 (v7: y=455) -->
+        <rect x="310" y="455" width="190" height="58" rx="10" fill="#c62828"/>
+        <text x="405" y="479" text-anchor="middle" font-size="14" font-weight="600" fill="#fff">&#x2463; 赛事执行</text>
+        <text x="405" y="499" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.88)">赛况与成绩录入</text>
+
+        <!-- ④→⑤ -->
+        <line x1="500" y1="484" x2="540" y2="484" stroke="#c62828" stroke-width="2" marker-end="url(#arr-red)"/>
+
+        <!-- ⑤ 成绩公布 -->
+        <rect x="550" y="455" width="190" height="58" rx="10" fill="#d32f2f"/>
+        <text x="645" y="479" text-anchor="middle" font-size="14" font-weight="600" fill="#fff">&#x2464; 成绩公布</text>
+        <text x="645" y="499" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.88)">单场排行 · 总排行 · 证书</text>
+
+        <!-- ⑤→⑥ -->
+        <line x1="740" y1="484" x2="780" y2="484" stroke="#c62828" stroke-width="2" marker-end="url(#arr-red)"/>
+
+        <!-- ⑥ 荣誉登记 -->
+        <rect x="790" y="455" width="190" height="58" rx="10" fill="#b71c1c"/>
+        <text x="885" y="479" text-anchor="middle" font-size="14" font-weight="600" fill="#fff">&#x2465; 荣誉登记</text>
+        <text x="885" y="499" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.88)">学校按赛事登记荣誉</text>
+
+        <!-- ⑥→回流教育局看板 (v7: 路径优化) -->
+        <path d="M885,513 C885,555 660,555 660,180" stroke="#9b59b6" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+        <rect x="750" y="545" width="175" height="24" rx="6" fill="#f3e5f5" stroke="#ce93d8" stroke-width="1"/>
+        <text x="837" y="562" text-anchor="middle" font-size="10" fill="#9b59b6" font-weight="600">&#x21A9; 数据汇总至教育局看板</text>
+
+        <!-- 教师端标注 (v7: y=330, 下移18px避免遮挡) -->
+        <rect x="560" y="330" width="255" height="52" rx="10" fill="#fff3e0" stroke="#f39c12" stroke-width="1.5"/>
+        <text x="687" y="352" text-anchor="middle" font-size="12" fill="#e65100">&#x1F440; 教师端：仅查看赛事信息</text>
+        <text x="687" y="372" text-anchor="middle" font-size="10" fill="#64748b">（由教育局端创建 · 教师无法参与）</text>
+
+        <!-- 底注 -->
+        <text x="700" y="660" text-anchor="middle" font-size="12" fill="#c62828" font-weight="600">&#x26A0; 教师端不参与赛事创建/报名/荣誉登记 — 赛事链路仅教育局&#x2194;学校双向</text>
+      </svg>
+    </div>
+
+    <!-- 体质健康数据流转 (v7: viewBox 1400x620, 修复箭头与卡片重叠) -->
+    <div class="flow-container">
+      <h3 style="margin-bottom:20px; color:var(--accent3);">&#x1F4AA; 业务线二：体质健康数据流转</h3>
+      <svg viewBox="0 0 1400 620" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr-g" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#27ae60"/></marker>
+          <marker id="arr-b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1a73e8"/></marker>
+          <marker id="arr-o" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#f39c12"/></marker>
+          <marker id="arr-gy" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#64748b"/></marker>
+        </defs>
+
+        <!-- 教师端泳道 -->
+        <rect x="40" y="45" width="1320" height="95" rx="8" fill="#fff3e0" opacity="0.3"/>
+        <text x="58" y="33" font-size="14" font-weight="700" fill="#e65100">&#x1F468;&#x200D;&#x1F3EB; 教师端（数据采集层）— 课堂记录 · 体测数据录入 · 作业完成数据</text>
+
+        <!-- 学校端泳道 (v7: y+10) -->
+        <rect x="40" y="170" width="1320" height="105" rx="8" fill="#e8f5e9" opacity="0.3"/>
+        <text x="58" y="158" font-size="14" font-weight="700" fill="#2e7d32">&#x1F3EB; 学校端（数据汇聚层）— 校级体质健康档案 · 分层教学模型 · 综合评价</text>
+
+        <!-- 教育局端泳道 (v7: y+15) -->
+        <rect x="40" y="290" width="1320" height="105" rx="8" fill="#e3f2fd" opacity="0.3"/>
+        <text x="58" y="278" font-size="14" font-weight="700" fill="#0d47a1">&#x1F3DB; 教育局端（数据分析层）— 区级体质健康看板 · 精准学前分析 · 上链存证</text>
+
+        <!-- 反馈闭环泳道 (v7: y+20) -->
+        <rect x="40" y="415" width="1320" height="80" rx="8" fill="#f1f5f9"/>
+        <text x="58" y="437" font-size="12" font-weight="600" fill="#64748b">&#x1F504; 数据反馈闭环 — 分层数据反哺教学指导</text>
+
+        <!-- 课堂记录 -->
+        <rect x="330" y="55" width="180" height="58" rx="10" fill="#f39c12"/>
+        <text x="420" y="77" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">课堂记录 → 心率数据</text>
+        <text x="420" y="97" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.82)">单节课运动数据采集</text>
+
+        <!-- 课堂→体测 arrow -->
+        <line x1="510" y1="84" x2="550" y2="84" stroke="#f39c12" stroke-width="2" marker-end="url(#arr-o)"/>
+
+        <!-- 体测数据录入 -->
+        <rect x="560" y="55" width="175" height="58" rx="10" fill="#ef6c00"/>
+        <text x="647" y="77" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">体测数据录入</text>
+        <text x="647" y="97" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.82)">班级 → 学生个体</text>
+
+        <!-- 课堂记录 → 校级档案 (v7: 路径绕到左侧, 避免被卡片覆盖) -->
+        <path d="M420,113 C420,140 497,140 497,180" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#arr-g)" stroke-dasharray="6,3"/>
+        <rect x="370" y="138" width="100" height="22" rx="6" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="1"/>
+        <text x="420" y="153" text-anchor="middle" font-size="10" fill="#2e7d32" font-weight="600">&#x2B07; 课堂数据</text>
+
+        <!-- 体测 → 校级档案 (v7: 路径绕到右侧, 避免被卡片覆盖) -->
+        <path d="M647,113 C647,140 673,140 673,180" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#arr-g)" stroke-dasharray="6,3"/>
+        <rect x="620" y="138" width="100" height="22" rx="6" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="1"/>
+        <text x="670" y="153" text-anchor="middle" font-size="10" fill="#2e7d32" font-weight="600">&#x2B07; 体测数据</text>
+
+        <!-- 校级体质健康档案 (v7: y=180) -->
+        <rect x="475" y="180" width="220" height="58" rx="10" fill="#27ae60"/>
+        <text x="585" y="202" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">校级体质健康档案</text>
+        <text x="585" y="222" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.82)">学校 → 年级 → 班级 → 学生</text>
+
+        <!-- 综合评价 (v7: y=180) -->
+        <rect x="960" y="180" width="280" height="58" rx="10" fill="#e8f5e9" stroke="#27ae60" stroke-width="1.5"/>
+        <text x="1100" y="202" text-anchor="middle" font-size="12" fill="#2e7d32">&#x1F4CB; 教师综合评价 & 学生综合评价</text>
+        <text x="1100" y="222" text-anchor="middle" font-size="10" fill="#388e3c">师德师风 · 工作能力 · 体质健康 · 素养模块</text>
+
+        <!-- 校级档案→综合评价 -->
+        <line x1="695" y1="209" x2="960" y2="209" stroke="#27ae60" stroke-width="1.5" fill="none" marker-end="url(#arr-g)" stroke-dasharray="4,3"/>
+
+        <!-- 综合数据上传教育局 (v7: 从校级档案中间→区级看板, 曲线绕行) -->
+        <path d="M585,238 C585,260 585,260 585,300" stroke="#1a73e8" stroke-width="2" fill="none" marker-end="url(#arr-b)" stroke-dasharray="6,3"/>
+        <rect x="525" y="265" width="120" height="22" rx="6" fill="#e3f2fd" stroke="#90caf9" stroke-width="1"/>
+        <text x="585" y="280" text-anchor="middle" font-size="10" fill="#1a73e8" font-weight="600">&#x2B07; 数据上报</text>
+
+        <!-- 评价→教育局 (v7: 路径调整避免重叠) -->
+        <path d="M1100,238 C1100,262 760,262 760,300" stroke="#27ae60" stroke-width="1.5" fill="none" marker-end="url(#arr-b)" stroke-dasharray="4,3"/>
+        <rect x="895" y="252" width="155" height="22" rx="6" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="1"/>
+        <text x="972" y="267" text-anchor="middle" font-size="10" fill="#27ae60" font-weight="600">评价数据上报教育局</text>
+
+        <!-- 区级体质健康看板 (v7: y=300) -->
+        <rect x="475" y="300" width="220" height="58" rx="10" fill="#1a73e8"/>
+        <text x="585" y="322" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">区级体质健康看板</text>
+        <text x="585" y="342" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.82)">全区对比 · 达标率 · 趋势分析</text>
+
+        <!-- 上链标注 (v7: 路径优化) -->
+        <path d="M585,358 L585,388" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arr-gy)" stroke-dasharray="4,3"/>
+        <rect x="510" y="395" width="150" height="24" rx="6" fill="#eceff1" stroke="#90a4ae" stroke-width="1"/>
+        <text x="585" y="412" text-anchor="middle" font-size="10" fill="#546e7a" font-weight="600">&#x1F517; 数据上链存证</text>
+
+        <!-- 精准学前分析 (v7: y=495) -->
+        <rect x="475" y="495" width="220" height="48" rx="10" fill="#e3f2fd" stroke="#1a73e8" stroke-width="1.5"/>
+        <text x="585" y="515" text-anchor="middle" font-size="12" fill="#0d47a1">&#x1F4CA; 精准学前分析</text>
+        <text x="585" y="533" text-anchor="middle" font-size="10" fill="#1565c0">按国测标准分层 → 指导分层教学</text>
+
+        <!-- 反馈闭环标注 -->
+        <rect x="620" y="475" width="105" height="22" rx="6" fill="#e3f2fd" stroke="#90caf9" stroke-width="1"/>
+        <text x="672" y="490" text-anchor="middle" font-size="10" fill="#1a73e8" font-weight="600">&#x2B06;分层反哺教学</text>
+
+        <text x="700" y="600" text-anchor="middle" font-size="12" fill="#64748b">&#x26A0; 教师综合评价与学生综合评价目前未与精准学前分析产生数据联动</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 4. 跨端业务泳道图 ====== -->
+<section id="swimlane" style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">四、跨端业务流程泳道图</h2>
+    <p class="section-desc" style="max-width:900px;">以「政策下发 → 学校执行 → 教师落地 → 数据回流」完整链路展示四端协同关系，聚焦当前信息流转中的断点与瓶颈</p>
+
+    <div class="flow-container">
+      <svg viewBox="0 0 1100 930" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="sw-arrow" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+            <polygon points="0 0, 7 2.5, 0 5" fill="#475569"/>
+          </marker>
+          <marker id="sw-arrow-red" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+            <polygon points="0 0, 7 2.5, 0 5" fill="#e74c3c"/>
+          </marker>
+          <marker id="sw-arrow-orange" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+            <polygon points="0 0, 7 2.5, 0 5" fill="#f39c12"/>
+          </marker>
+        </defs>
+
+        <!-- 泳道 -->
+        <rect x="140" y="45" width="940" height="185" rx="6" fill="#e3f2fd" stroke="#90caf9" stroke-width="1" opacity="0.4"/>
+        <rect x="140" y="245" width="940" height="195" rx="6" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="1" opacity="0.4"/>
+        <rect x="140" y="455" width="940" height="200" rx="6" fill="#fff3e0" stroke="#ffcc80" stroke-width="1" opacity="0.4"/>
+        <rect x="140" y="670" width="940" height="200" rx="6" fill="#f3e5f5" stroke="#ce93d8" stroke-width="1" opacity="0.4"/>
+
+        <!-- 泳道标签 -->
+        <rect x="10" y="45" width="120" height="185" rx="8" fill="#1a73e8"/>
+        <text x="70" y="125" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">&#x1F3DB;</text>
+        <text x="70" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">教育局端</text>
+
+        <rect x="10" y="245" width="120" height="195" rx="8" fill="#27ae60"/>
+        <text x="70" y="330" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">&#x1F3EB;</text>
+        <text x="70" y="355" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">学校端</text>
+
+        <rect x="10" y="455" width="120" height="200" rx="8" fill="#f39c12"/>
+        <text x="70" y="545" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">&#x1F468;&#x200D;&#x1F3EB;</text>
+        <text x="70" y="570" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">教师端</text>
+
+        <rect x="10" y="670" width="120" height="200" rx="8" fill="#8e44ad"/>
+        <text x="70" y="760" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">&#x26BD;</text>
+        <text x="70" y="785" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">俱乐部端</text>
+
+        <!-- 阶段标签 (v5: 字体加深, 加大, 去掉横线) -->
+        <text x="180" y="35" font-size="13" fill="#475569" font-weight="600">阶段一：政策制定</text>
+        <text x="350" y="35" font-size="13" fill="#475569" font-weight="600">阶段二：任务下发</text>
+        <text x="530" y="35" font-size="13" fill="#475569" font-weight="600">阶段三：执行与反馈</text>
+        <text x="730" y="35" font-size="13" fill="#475569" font-weight="600">阶段四：数据汇总</text>
+        <text x="910" y="35" font-size="13" fill="#475569" font-weight="600">阶段五：持续监控</text>
+
+        <!-- === 教育局端泳道 === -->
+        <rect x="160" y="68" width="160" height="60" rx="8" fill="#fff" stroke="#1a73e8" stroke-width="1.5"/>
+        <text x="240" y="92" text-anchor="middle" font-size="12" font-weight="600" fill="#0d47a1">制定政策文件</text>
+        <text x="240" y="112" text-anchor="middle" font-size="10" fill="#64748b">公文增删改 · 分级发布</text>
+        <line x1="320" y1="98" x2="380" y2="98" stroke="#475569" stroke-width="1.5" marker-end="url(#sw-arrow)"/>
+
+        <rect x="390" y="68" width="160" height="60" rx="8" fill="#fff" stroke="#1a73e8" stroke-width="1.5"/>
+        <text x="470" y="92" text-anchor="middle" font-size="12" font-weight="600" fill="#0d47a1">下发至学校端</text>
+        <text x="470" y="112" text-anchor="middle" font-size="10" fill="#64748b">消息通知 → 全部学校</text>
+
+        <!-- 教育局"下发至学校端"向下连接线至学校端 -->
+        <line x1="470" y1="128" x2="470" y2="268" stroke="#1a73e8" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#sw-arrow)"/>
+        <rect x="478" y="185" width="120" height="22" rx="6" fill="#e3f2fd" stroke="#90caf9" stroke-width="1"/>
+        <text x="538" y="200" text-anchor="middle" font-size="10" fill="#1565c0" font-weight="600">&#x2B07; 下发到校</text>
+
+        <line x1="550" y1="98" x2="610" y2="98" stroke="#475569" stroke-width="1.5" marker-end="url(#sw-arrow)"/>
+
+        <rect x="620" y="68" width="155" height="60" rx="8" fill="#fff" stroke="#1a73e8" stroke-width="1.5"/>
+        <text x="697" y="92" text-anchor="middle" font-size="12" font-weight="600" fill="#0d47a1">设定测评规范</text>
+        <text x="697" y="112" text-anchor="middle" font-size="10" fill="#64748b">运动项目 · 文件 · 视频</text>
+
+        <rect x="800" y="68" width="260" height="60" rx="8" fill="#fff" stroke="#1a73e8" stroke-width="1.5"/>
+        <text x="930" y="92" text-anchor="middle" font-size="12" font-weight="600" fill="#0d47a1">看板监控 & 数据汇总</text>
+        <text x="930" y="112" text-anchor="middle" font-size="10" fill="#64748b">区级看板 · 综合评价 · 体质健康趋势</text>
+
+        <!-- === 学校端泳道 === -->
+        <rect x="160" y="278" width="160" height="60" rx="8" fill="#fff" stroke="#27ae60" stroke-width="1.5"/>
+        <text x="240" y="302" text-anchor="middle" font-size="12" font-weight="600" fill="#2e7d32">接收政策 & 通知</text>
+        <text x="240" y="322" text-anchor="middle" font-size="10" fill="#64748b">已读追踪至教师</text>
+        <line x1="320" y1="308" x2="380" y2="308" stroke="#475569" stroke-width="1.5" marker-end="url(#sw-arrow)"/>
+
+        <rect x="390" y="278" width="160" height="60" rx="8" fill="#fff" stroke="#27ae60" stroke-width="1.5"/>
+        <text x="470" y="302" text-anchor="middle" font-size="12" font-weight="600" fill="#2e7d32">赛事报名 & 荣誉登记</text>
+        <text x="470" y="322" text-anchor="middle" font-size="10" fill="#64748b">一月一赛 · 全员运动会</text>
+        <line x1="550" y1="308" x2="610" y2="308" stroke="#475569" stroke-width="1.5" marker-end="url(#sw-arrow)"/>
+
+        <rect x="620" y="278" width="155" height="60" rx="8" fill="#fff" stroke="#27ae60" stroke-width="1.5"/>
+        <text x="697" y="302" text-anchor="middle" font-size="12" font-weight="600" fill="#2e7d32">教学资源管理</text>
+        <text x="697" y="322" text-anchor="middle" font-size="10" fill="#64748b">资源库 · 教案库 · 智能设备</text>
+
+        <rect x="800" y="278" width="260" height="60" rx="8" fill="#fff" stroke="#27ae60" stroke-width="1.5"/>
+        <text x="930" y="302" text-anchor="middle" font-size="12" font-weight="600" fill="#2e7d32">数据上报 & 校级看板</text>
+        <text x="930" y="322" text-anchor="middle" font-size="10" fill="#64748b">体质健康 · 出勤 · 综合评价</text>
+
+        <!-- 学校→教师 向下连接 -->
+        <line x1="470" y1="338" x2="470" y2="478" stroke="#27ae60" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#sw-arrow)"/>
+        <rect x="478" y="395" width="110" height="22" rx="6" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="1"/>
+        <text x="533" y="410" text-anchor="middle" font-size="10" fill="#2e7d32" font-weight="600">&#x2B07; 通知转发至教师</text>
+
+        <!-- === 教师端泳道 === -->
+        <rect x="160" y="478" width="160" height="60" rx="8" fill="#fff" stroke="#f39c12" stroke-width="1.5"/>
+        <text x="240" y="502" text-anchor="middle" font-size="12" font-weight="600" fill="#e65100">接收通知 & 资源</text>
+        <text x="240" y="522" text-anchor="middle" font-size="10" fill="#64748b">通知:存在文件丢失BUG</text>
+        <line x1="320" y1="508" x2="380" y2="508" stroke="#475569" stroke-width="1.5" marker-end="url(#sw-arrow)"/>
+
+        <rect x="390" y="478" width="160" height="60" rx="8" fill="#fff" stroke="#f39c12" stroke-width="1.5"/>
+        <text x="470" y="502" text-anchor="middle" font-size="12" font-weight="600" fill="#e65100">备课 & 课堂教学</text>
+        <text x="470" y="522" text-anchor="middle" font-size="10" fill="#64748b">课表 · 备课 · 课堂记录</text>
+        <line x1="550" y1="508" x2="610" y2="508" stroke="#475569" stroke-width="1.5" marker-end="url(#sw-arrow)"/>
+
+        <rect x="620" y="478" width="155" height="60" rx="8" fill="#fff" stroke="#f39c12" stroke-width="1.5"/>
+        <text x="697" y="502" text-anchor="middle" font-size="12" font-weight="600" fill="#e65100">作业布置 & 批改</text>
+        <text x="697" y="522" text-anchor="middle" font-size="10" fill="#64748b">计时/计数 · 多项目 · 多日期</text>
+
+        <!-- 作业数据回流线 -->
+        <line x1="697" y1="538" x2="697" y2="590" stroke="#f39c12" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#sw-arrow-orange)"/>
+        <rect x="585" y="566" width="230" height="28" rx="6" fill="#fff8e1" stroke="#f39c12" stroke-width="1"/>
+        <text x="700" y="585" text-anchor="middle" font-size="10" fill="#e65100" font-weight="600">→ 作业完成数据汇总至学校综合评价</text>
+
+        <!-- 学生素养评价卡片 -->
+        <rect x="800" y="478" width="260" height="60" rx="8" fill="#fff" stroke="#f39c12" stroke-width="1.5"/>
+        <text x="930" y="502" text-anchor="middle" font-size="12" font-weight="600" fill="#e65100">学生素养评价 & 分层教学</text>
+        <text x="930" y="522" text-anchor="middle" font-size="10" fill="#64748b">体质健康 · 出勤 · 体艺2+1 · 竞赛</text>
+
+        <!-- 评价数据回流标注 -->
+        <line x1="930" y1="538" x2="930" y2="572" stroke="#f39c12" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#sw-arrow-orange)"/>
+        <rect x="930" y="554" width="130" height="26" rx="6" fill="#fff8e1" stroke="#f39c12" stroke-width="1"/>
+        <text x="995" y="572" text-anchor="middle" font-size="10" fill="#e65100" font-weight="600">评价数据回流学校端</text>
+
+        <!-- === 俱乐部端泳道 === -->
+        <rect x="160" y="693" width="220" height="55" rx="8" fill="#fff" stroke="#8e44ad" stroke-width="1.5"/>
+        <text x="270" y="715" text-anchor="middle" font-size="12" font-weight="600" fill="#7b1fa2">俱乐部审核入驻</text>
+        <text x="270" y="737" text-anchor="middle" font-size="10" fill="#64748b">教育局端审核 · 资料上传路径不明</text>
+
+        <line x1="380" y1="720" x2="430" y2="720" stroke="#475569" stroke-width="1.5" marker-end="url(#sw-arrow)"/>
+
+        <rect x="440" y="693" width="180" height="55" rx="8" fill="#fff" stroke="#8e44ad" stroke-width="1.5"/>
+        <text x="530" y="715" text-anchor="middle" font-size="12" font-weight="600" fill="#7b1fa2">过程监管 & 评星</text>
+        <text x="530" y="737" text-anchor="middle" font-size="10" fill="#64748b">教育局端监管 · 学校端白名单</text>
+
+        <line x1="620" y1="720" x2="670" y2="720" stroke="#475569" stroke-width="1.5" marker-end="url(#sw-arrow)"/>
+
+        <rect x="680" y="693" width="180" height="55" rx="8" fill="#ffcdd2" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="770" y="715" text-anchor="middle" font-size="12" font-weight="600" fill="#c62828">&#x26A0; 课程展示（未完成）</text>
+        <text x="770" y="737" text-anchor="middle" font-size="10" fill="#c62828">首页课表功能待开发</text>
+
+        <!-- 断点标注 -->
+        <rect x="160" y="790" width="400" height="45" rx="8" fill="#fff3e0" stroke="#f39c12" stroke-width="1"/>
+        <text x="360" y="810" text-anchor="middle" font-size="11" fill="#e65100">&#x26A0; 断点：俱乐部端与学校端、教师端缺乏数据互通</text>
+        <text x="360" y="826" text-anchor="middle" font-size="10" fill="#64748b">学生报名俱乐部课程后，数据不回流至教师端综合评价</text>
+
+        <rect x="580" y="790" width="480" height="45" rx="8" fill="#fce4ec" stroke="#e74c3c" stroke-width="1"/>
+        <text x="820" y="810" text-anchor="middle" font-size="11" fill="#c62828">&#x26A0; 断点：学校→教师 通知链路存在文件丢失BUG</text>
+        <text x="820" y="826" text-anchor="middle" font-size="10" fill="#64748b">斯盛重视教育局端体验，学校/教师端作为附属端质量投入不足</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 5. 深度分析 ====== -->
+<section id="analysis">
+  <div class="container">
+    <h2 class="section-title">五、四端联动深度分析</h2>
+    <p class="section-desc">从数据一致性、权限合理性、用户体验三个维度分析四端协同质量</p>
+
+    <div class="card-grid cols-3">
+      <div class="card">
+        <div class="icon" style="background:#e3f2fd;">&#x1F504;</div>
+        <h3>数据一致性问题</h3>
+        <ul style="padding-left:18px; color:var(--text-light); font-size:.9rem; line-height:1.8;">
+          <li><strong>必填字段不一致：</strong>学校端「账号管理」新增学生/教师与「校园服务」信息查询的必填字段不同</li>
+          <li><strong>家长信息孤岛：</strong>学校端可填写监护人信息，但未同步至家长管理模块</li>
+          <li><strong>教师作息Bug：</strong>未考虑不同年级错峰作息时间差异</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="icon" style="background:#fff3e0;">&#x1F510;</div>
+        <h3>权限与角色问题</h3>
+        <ul style="padding-left:18px; color:var(--text-light); font-size:.9rem; line-height:1.8;">
+          <li><strong>教师权限过度：</strong>教师可删除学校下发的通知（应仅支持已读/未读）</li>
+          <li><strong>教师权限不足：</strong>赛事仅可查看，无法参与报名协管</li>
+          <li><strong>俱乐部角色模糊：</strong>关联俱乐部后页面内容未变化，角色定义不清晰</li>
+          <li><strong>资源下载限制：</strong>教师端公共资源仅可查看，不支持下载</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="icon" style="background:#e8f5e9;">&#x1F4A1;</div>
+        <h3>用户体验断层</h3>
+        <ul style="padding-left:18px; color:var(--text-light); font-size:.9rem; line-height:1.8;">
+          <li><strong>产品重心失衡：</strong>斯盛明显将资源集中在教育局端，学校/教师端作为附属端质量投入不足——通知文件丢失仅因前端少展示了一个字段，反映非核心端的QA优先级低</li>
+          <li><strong>俱乐部端开发滞后：</strong>首页课表功能未完成，功能无法使用</li>
+          <li><strong>教师端-体测跳绳模块：</strong>无法新增，功能定义不明确</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 联动健康度 -->
+    <div class="flow-container" style="margin-top:36px;">
+      <h3 style="margin-bottom:20px; color:var(--secondary);">四端联动健康度评估</h3>
+      <div class="card-grid cols-2" style="margin-bottom:20px;">
+        <div class="health-item" style="border-left:3px solid #27ae60;">
+          <h4 style="color:#2e7d32;">&#x2705; 教育局 &#x21C4; 学校：联通度较高</h4>
+          <p>政策下发、赛事管理、数据上报链路完整，已读追踪机制有效。<br/>
+          但测试环境账号未关联，真实环境数据回流待验证；通知仅支持"全部学校"群发，缺分组能力。</p>
+        </div>
+        <div class="health-item" style="border-left:3px solid #f39c12;">
+          <h4 style="color:#e65100;">&#x26A0; 学校 &#x21C4; 教师：联通度中等</h4>
+          <p>教学资源库、课堂出勤数据正常流转，作业系统可运作。<br/>
+          但通知文件丢失（前端少展示字段）、必填字段不一致影响信息可靠性；家长账号未开通阻断家校互通。</p>
+        </div>
+        <div class="health-item" style="border-left:3px solid #8e44ad;">
+          <h4 style="color:#7b1fa2;">&#x26A0; 俱乐部端联动：联通度低</h4>
+          <p>仅通过教育局端间接关联（白名单+审核），与学校端、教师端无直接数据互通。<br/>
+          学生报名俱乐部课程后数据不回流教师综合评价，首页功能未完成，无法独立运作。</p>
+        </div>
+        <div class="health-item" style="border-left:3px solid #e74c3c;">
+          <h4 style="color:#c62828;">&#x274C; 数据一致性：存在明显问题</h4>
+          <p>同一学生/教师在不同模块的必填字段不统一，家长信息孤岛未打通。<br/>
+          跨端数据流转缺乏统一的数据字典约束，新增数据时容易出现字段缺失或不匹配。</p>
+        </div>
+        <div class="health-item" style="border-left:3px solid #e74c3c;">
+          <h4 style="color:#c62828;">&#x274C; 用户体验一致性：断层明显</h4>
+          <p>俱乐部端功能严重滞后于其他四端——首页课表功能未完成即上线。审批流缺乏状态同步，各端UI/交互标准不统一。<br/>
+          核心原因是产品资源集中在教育局端，其他端作为附属端缺乏质量把控。</p>
+        </div>
+      </div>
+      <div class="insight-box" style="background:#fff3e0; border-left-color:#f39c12;">
+        <strong>&#x1F4A1; 总体判断：</strong>斯盛体育的产品质量呈"中心辐射"结构——教育局端为核心高投入区，功能深度和体验明显优于其他端；
+        距离核心越远的端（教师→俱乐部），功能完整度和质量越差。这与斯盛"以教育局项目切入、向下渗透"的商业模式一致，
+        但导致下层用户的体验断层成为规模化的隐性障碍。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 6. SWOT ====== -->
+<section id="swot" style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">六、SWOT 分析</h2>
+    <p class="section-desc">从产品生态视角对斯盛体育四端体系进行综合评估</p>
+
+    <div class="swot-grid">
+      <!-- 优势 -->
+      <div class="swot-item swot-s">
+        <h4>&#x1F4AA; 优势 (Strengths)</h4>
+        <ul>
+          <li><strong>业务闭环完整：</strong>教育局端覆盖「政策→执行→监控→评价」全流程，功能深度突出</li>
+          <li><strong>技术前瞻性：</strong>体质健康数据上链存证，解决数据造假和台账丢失痛点</li>
+          <li><strong>数据可视化强：</strong>多层级看板（区→校→年级→班级→学生）数据下钻体系成熟</li>
+          <li><strong>特定区域政策契合：</strong>紧密对接长沙湘江新区"三零""三长"等地方标准，在特定项目中具备强适配能力<br/><em style="color:#64748b;font-size:.82rem;">（注：此优势仅在湘江新区语境下成立，跨区域需重新适配）</em></li>
+        </ul>
+      </div>
+
+      <!-- 劣势 -->
+      <div class="swot-item swot-w">
+        <h4>&#x26A0; 劣势 (Weaknesses)</h4>
+        <p style="margin-bottom:8px;"><span class="swot-sub overall">整体性</span> <span style="font-size:.82rem;color:#64748b;">影响产品战略与可复制性</span></p>
+        <ul>
+          <li><strong>教育局端定制化过重：</strong>"三长""三零"等概念为长沙湘江新区特有定义，对其它区县教育局缺乏可复制性，带来两个深层问题：&#x2460;业务高度依赖能否拿下教育局项目；&#x2461;定制化需求拉长研发周期，难以产品化规模推广</li>
+          <li><strong>产品重心失衡：</strong>斯盛云将核心资源投入教育局端体验，其他端作为附属端质量投入不足——通知文件丢失仅因前端少展示一个字段，暴露非核心端QA优先级低的问题</li>
+          <li><strong>俱乐部端严重滞后：</strong>仅3个模块且核心功能未完成，与前四端脱节</li>
+          <li><strong>测试覆盖不足：</strong>教育局-学校账号未关联、家长账号未体验等基础功能未充分验证</li>
+        </ul>
+        <p style="margin-bottom:8px;margin-top:12px;"><span class="swot-sub functional">功能性</span> <span style="font-size:.82rem;color:#64748b;">影响用户体验与日常使用</span></p>
+        <ul>
+          <li><strong>教师端权限设计不合理：</strong>可删除学校通知、资源不可下载、赛事无法参与</li>
+          <li><strong>审批流不完整：</strong>俱乐部审核、制卡审核等缺少状态同步和流程追溯</li>
+          <li><strong>四端数据一致性差：</strong>必填字段不统一、家长信息孤岛、通知文件丢失等基础问题</li>
+        </ul>
+      </div>
+
+      <!-- 机会 -->
+      <div class="swot-item swot-o">
+        <h4>&#x1F680; 机会 (Opportunities)</h4>
+        <ul>
+          <li><strong>家长端待开通：</strong>学校端已设计家长管理模块，教师端有作业布置功能——推测家长端已规划但本次未体验，若完善后可打通"家校互通"闭环</li>
+          <li><strong>俱乐部生态闭环：</strong>完成俱乐部端后可形成「机构入驻→课程发布→学生报名→数据回流」完整链路</li>
+          <li><strong>标准化产品转型：</strong>将现有定制化模块（三长/三零等）提炼为可配置的标准产品参数，降低区域复制的定制成本</li>
+          <li><strong>多区域差异化适配：</strong>各地教育局考核指标和政策各有不同，产品若能支持灵活配置而非硬编码，可形成差异化竞争优势</li>
+          <li><strong>数据资产变现：</strong>上链数据可形成权威的校园体育数据报告</li>
+        </ul>
+      </div>
+
+      <!-- 威胁 -->
+      <div class="swot-item swot-t">
+        <h4>&#x1F534; 威胁 (Threats)</h4>
+        <ul>
+          <li><strong>竞品追赶：</strong>校园体育数字化赛道竞争加剧，同类产品可能在用户体验和标准化上超越</li>
+          <li><strong>政策变化风险：</strong>体育考核标准若调整，高度定制化的系统需大量改造</li>
+          <li><strong>数据安全合规：</strong>学生体质健康数据涉及未成年人隐私，需严格遵循个人信息保护法</li>
+          <li><strong>产品重心失衡的口碑风险：</strong>学校端和教师端用户体验差可能导致一线使用者的负面反馈，在教育局续约评审中形成阻力</li>
+          <li><strong>用户习惯培养：</strong>体育教师数字化素养参差不齐，系统复杂度可能阻碍落地</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 7. 战略启示与竞争策略 ====== -->
+<section id="strategy">
+  <div class="container">
+    <h2 class="section-title">七、战略启示与竞争策略</h2>
+    <p class="section-desc">基于斯盛体育的竞品分析，提炼设计自身产品的关键策略——扬其长、避其短、抓其漏</p>
+
+    <!-- 扬长 -->
+    <div class="card" style="border-left:4px solid #27ae60; margin-bottom:20px;">
+      <h3 style="color:#2e7d32;">&#x1F33F; 扬长 — 斯盛做得好的，我们应该借鉴</h3>
+      <div class="card-grid cols-2" style="margin-top:16px;">
+        <div class="strategy-card"><h4>1. 纵向穿透的多层级看板</h4><p style="color:var(--text-light); font-size:.88rem;">斯盛的「区→校→年级→班级→学生」数据下钻体系是其核心竞争力。我们的产品应<strong>从Day 1就设计统一的数据模型</strong>，确保各层级看板数据同源、口径一致，避免后期打补丁。</p></div>
+        <div class="strategy-card"><h4>2. 体质健康数据上链</h4><p style="color:var(--text-light); font-size:.88rem;">区块链存证解决数据造假和台账丢失是真实痛点。我们的产品应将<strong>上链作为标准能力而非增值功能</strong>，在设计初期就规划数据上链的最小闭环。</p></div>
+        <div class="strategy-card"><h4>3. 赛事全流程管理</h4><p style="color:var(--text-light); font-size:.88rem;">一月一赛的「创建→发布→报名→执行→公布→荣誉」闭环设计完整。我们可在此基础上<strong>增加教师端和俱乐部端在赛事中的参与角色</strong>，让赛事不只是教育局-学校双向。</p></div>
+        <div class="strategy-card"><h4>4. DeepSeek AI 的务实应用</h4><p style="color:var(--text-light); font-size:.88rem;">斯盛的DeepSeek集成当前仅为API窗口嵌入，实际能力薄弱。我们的产品应在<strong>教学辅助场景中做更深度的AI应用</strong>（如智能分层推荐、教案自动生成、学生体能趋势预测），而非仅仅挂一个聊天窗口。</p></div>
+      </div>
+    </div>
+
+    <!-- 避短 -->
+    <div class="card" style="border-left:4px solid #e74c3c; margin-bottom:20px;">
+      <h3 style="color:#c62828;">&#x1F6E1; 避短 — 斯盛踩过的坑，我们提前规避</h3>
+      <div class="card-grid cols-2" style="margin-top:16px;">
+        <div class="strategy-card" style="background:linear-gradient(135deg, #fff5f5, #fce4ec); border-color:#ef9a9a;"><h4 style="color:#c62828;">1. 产品标准化优先于项目定制</h4><p style="color:var(--text-light); font-size:.88rem;">斯盛教育局端的"三长""三零"是湘江新区特供概念，缺乏可复制性。我们的产品应<strong>将地方政策参数设计为可配置项</strong>（如考核指标名称、达标线、评分规则均由配置文件驱动），而不是硬编码到业务逻辑中。新区域接入应走配置而非二次开发。</p></div>
+        <div class="strategy-card" style="background:linear-gradient(135deg, #fff5f5, #fce4ec); border-color:#ef9a9a;"><h4 style="color:#c62828;">2. 权限模型从Day 1严格设计</h4><p style="color:var(--text-light); font-size:.88rem;">斯盛教师端可删除学校通知是典型的权限越界。我们的产品应<strong>采用RBAC模型，按角色严格定义CRUD权限</strong>：教师不可删除上级下发的通知、资源库支持下载但需记录操作日志、赛事增加「协管教师」角色。</p></div>
+        <div class="strategy-card" style="background:linear-gradient(135deg, #fff5f5, #fce4ec); border-color:#ef9a9a;"><h4 style="color:#c62828;">3. 数据一致性作为架构约束</h4><p style="color:var(--text-light); font-size:.88rem;">斯盛在必填字段不一致、家长信息孤岛上暴露了数据层设计问题。我们的产品应<strong>建立全局数据字典（学生/教师/家长实体在所有模块中字段定义唯一）</strong>，并通过端到端集成测试覆盖跨端数据流。</p></div>
+        <div class="strategy-card" style="background:linear-gradient(135deg, #fff5f5, #fce4ec); border-color:#ef9a9a;"><h4 style="color:#c62828;">4. 审批流与状态机显性化</h4><p style="color:var(--text-light); font-size:.88rem;">斯盛的俱乐部审核、制卡审核缺乏状态同步。我们的产品应<strong>将所有审批流设计为显性状态机（提交→初审→复审→通过/驳回）</strong>，并在各端展示当前节点和流转历史。</p></div>
+      </div>
+    </div>
+
+    <!-- 抓漏 -->
+    <div class="card" style="border-left:4px solid #1a73e8;">
+      <h3 style="color:#0d47a1;">&#x1F3AF; 抓漏 — 斯盛的空白地带，正是我们的市场切入点</h3>
+      <div class="card-grid cols-2" style="margin-top:16px;">
+        <div class="strategy-card" style="background:linear-gradient(135deg, #f0f4ff, #e3f2fd); border-color:#90caf9;"><h4 style="color:#0d47a1;">1. 家长端作为首发亮点</h4><p style="color:var(--text-light); font-size:.88rem;">斯盛已有家长管理模块但未体验/未完善，这是<strong>巨大的市场空白</strong>。我们的产品应将家长端作为<strong>核心差异化卖点</strong>：作业通知推送、体质健康报告、家校双向沟通、学生运动打卡——这能直接打动教育局采购决策中"家校共育"的考核要求。</p></div>
+        <div class="strategy-card" style="background:linear-gradient(135deg, #f0f4ff, #e3f2fd); border-color:#90caf9;"><h4 style="color:#0d47a1;">2. 俱乐部端从MVP直接做到完整</h4><p style="color:var(--text-light); font-size:.88rem;">斯盛俱乐部端仅3个模块且核心功能未完成。我们的产品应将俱乐部端作为<strong>第二条增长曲线</strong>：实现机构入驻→课程发布→学生选课→课堂数据→综合评价的完整闭环，让社会体育资源真正融入校园体育生态。</p></div>
+        <div class="strategy-card" style="background:linear-gradient(135deg, #f0f4ff, #e3f2fd); border-color:#90caf9;"><h4 style="color:#0d47a1;">3. 跨区域配置化架构</h4><p style="color:var(--text-light); font-size:.88rem;">斯盛的湘江新区定制模式不可规模化。我们的产品应从架构层面支持<strong>多租户+区域配置中心</strong>：不同教育局可自定义考核指标名称、评分规则、报表模板，一键切换区域策略，将部署周期从"月级定制开发"缩短为"天级参数配置"。</p></div>
+        <div class="strategy-card" style="background:linear-gradient(135deg, #f0f4ff, #e3f2fd); border-color:#90caf9;"><h4 style="color:#0d47a1;">4. 全端体验一致性作为质量底线</h4><p style="color:var(--text-light); font-size:.88rem;">斯盛的通知文件丢失本质不是重大技术缺陷，而是<strong>产品资源分配失衡</strong>的缩影——斯盛云将核心投入放在教育局端，教师端和学校端作为附属端未受同等重视，才会出现前端少展示一个字段这种低级缺陷。我们的产品应<strong>建立全端等权的质量门禁</strong>：每个端的每次发布必须通过相同的回归测试矩阵，通知系统设计为独立服务并具备送达确认、失败重试、已读追踪的完整能力。在政府项目中，一线教师和学校管理员的体验同样是续约决策的关键变量。</p></div>
+      </div>
+    </div>
+
+    <div class="insight-box" style="margin-top:24px; background:linear-gradient(135deg, #1a237e, #283593); color:#fff; border-left-color:#fff;">
+      <strong style="color:#fff;">&#x1F4A1; 核心竞争策略一句话：</strong>
+      参考斯盛的功能深度（看板、赛事、上链），避开其架构短板（定制化硬编码、权限混乱、数据不一致），
+      在其空白地带（家长端、俱乐部生态、跨区域配置化）建立差异化优势。
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>斯盛体育 · 竞品分析报告 v7 | 基于2026年6月功能体验整理</p>
+    <p style="margin-top:4px;">数据来源：教育局端、学校端、教师端、俱乐部端实际功能体验 · 分析工具：产品通</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.nav a').forEach(x => x.classList.remove('active'));
+    a.classList.add('active');
+  });
+});
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav a');
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+  });
+  navLinks.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
