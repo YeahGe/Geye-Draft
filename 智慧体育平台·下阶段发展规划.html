@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智慧体育平台 · 下一阶段发展规划</title>
+<style>
+:root {
+  --primary: #059669; --primary-light: #10b981; --primary-dark: #047857;
+  --accent: #ea580c; --accent-light: #f97316; --accent-dark: #c2410c;
+  --purple: #7c3aed;
+  --blue: #2563eb;
+  --bg: #f8fafc; --bg-card: #ffffff; --bg-soft: #f1f5f9;
+  --text: #1e293b; --text-secondary: #475569; --text-muted: #94a3b8;
+  --border: #e2e8f0;
+  --radius: 12px; --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,.08);
+  --max-width: 1100px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased; }
+
+/* ===== Hero ===== */
+.hero {
+  background: linear-gradient(135deg, #022c22 0%, #064e3b 30%, #059669 70%, #10b981 100%);
+  color: #fff; padding: 80px 24px 56px; position: relative; overflow: hidden;
+}
+.hero::after {
+  content:''; position:absolute; bottom:-40%; right:-15%; width:500px; height:500px;
+  background:radial-gradient(circle, rgba(16,185,129,.15) 0%, transparent 70%); border-radius:50%;
+}
+.hero .inner { max-width: var(--max-width); margin: 0 auto; position: relative; z-index: 1; }
+.hero h1 { font-size: clamp(26px, 4.5vw, 38px); font-weight: 800; letter-spacing: -0.5px; }
+.hero .subtitle { font-size: clamp(15px, 2vw, 18px); opacity: .82; margin-top: 14px; max-width: 740px; line-height: 1.7; }
+.hero .meta { display: flex; gap: 20px; margin-top: 24px; font-size: 13px; opacity: .65; flex-wrap: wrap; }
+.hero .meta span { display: inline-flex; align-items: center; gap: 6px; }
+.hero .badge {
+  display: inline-block; background: rgba(255,255,255,.15); backdrop-filter: blur(8px);
+  padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 20px;
+  border: 1px solid rgba(255,255,255,.2);
+}
+
+/* ===== Nav ===== */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,.92); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+nav .inner { max-width: var(--max-width); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 52px; }
+nav .logo { font-weight: 700; font-size: 15px; color: var(--primary); white-space: nowrap; }
+nav .links { display: flex; gap: 2px; overflow-x: auto; }
+nav .links a { text-decoration: none; font-size: 13px; color: var(--text-secondary); padding: 6px 12px; border-radius: 6px; white-space: nowrap; transition: .15s; }
+nav .links a:hover, nav .links a.active { background: var(--primary); color: #fff; }
+nav .menu-btn { display: none; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text); }
+
+/* ===== Layout ===== */
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
+.section { padding: 48px 0; }
+.section + .section { border-top: 1px solid var(--border); }
+.section-title { font-size: clamp(20px, 2.8vw, 26px); font-weight: 800; color: var(--primary-dark); margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+.section-title .num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #fff; font-size: 18px; font-weight: 800; flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(5,150,105,.3);
+}
+.section-subtitle { color: var(--text-secondary); margin-bottom: 32px; font-size: 14px; }
+
+/* ===== Cards ===== */
+.card { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; border: 1px solid var(--border); transition: .2s; }
+.card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.card p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.65; }
+.card .icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 14px; }
+
+.card-grid { display: grid; gap: 16px; }
+.card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* ===== Tables ===== */
+.tw { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 20px; }
+table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: 13.5px; }
+thead { background: var(--primary); color: #fff; }
+thead th { padding: 12px 14px; text-align: left; font-weight: 600; font-size: 13px; white-space: nowrap; }
+thead th:first-child { border-radius: var(--radius) 0 0 0; }
+thead th:last-child { border-radius: 0 var(--radius) 0 0; }
+tbody td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #ecfdf5; }
+
+/* ===== Tags ===== */
+.tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11.5px; font-weight: 600; margin: 2px; }
+.tag-green { background: #d1fae5; color: #065f46; }
+.tag-amber { background: #fef3c7; color: #92400e; }
+.tag-purple { background: #ede9fe; color: #5b21b6; }
+.tag-red { background: #fee2e2; color: #991b1b; }
+.tag-blue { background: #dbeafe; color: #1e40af; }
+.tag-teal { background: #ccfbf1; color: #115e59; }
+
+/* ===== Insight Box ===== */
+.insight {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border: 1px solid #a7f3d0; border-left: 4px solid var(--primary);
+  border-radius: 10px; padding: 18px 20px; margin: 20px 0;
+}
+.insight-l { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--primary-dark); margin-bottom: 6px; }
+.insight-t { font-size: 13.5px; color: var(--text); line-height: 1.75; }
+.insight-t strong { color: var(--primary-dark); }
+
+.insight-warn {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border: 1px solid #fcd34d; border-left-color: var(--accent);
+}
+.insight-warn .insight-l { color: var(--accent-dark); }
+.insight-warn .insight-t strong { color: var(--accent-dark); }
+
+.insight-danger {
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  border: 1px solid #fecaca; border-left-color: #ef4444;
+}
+.insight-danger .insight-l { color: #dc2626; }
+.insight-danger .insight-t strong { color: #dc2626; }
+
+/* ===== Competitive Insight Box (NEW) ===== */
+.comp-insight {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border: 1px solid #93c5fd; border-left: 4px solid var(--blue);
+  border-radius: 10px; padding: 18px 20px; margin: 20px 0;
+}
+.comp-insight .ci-header {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+}
+.comp-insight .ci-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: #1e40af; }
+.comp-insight .ci-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.comp-insight .ci-tag {
+  display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10.5px; font-weight: 700;
+}
+.ci-tag.avoid { background: #fee2e2; color: #991b1b; }
+.ci-tag.catch { background: #d1fae5; color: #065f46; }
+.ci-tag.expand { background: #dbeafe; color: #1e40af; }
+.ci-tag.leverage { background: #fef3c7; color: #92400e; }
+.comp-insight .ci-body { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+.comp-insight .ci-body strong { color: var(--text); }
+.comp-insight .ci-body .ci-co { font-weight: 700; }
+
+/* ===== MVP State ===== */
+.state-card {
+  background: var(--bg-card); border-radius: var(--radius); padding: 20px 22px;
+  box-shadow: var(--shadow); border: 1px solid var(--border); border-top: 4px solid var(--primary);
+}
+.state-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--primary-dark); }
+.state-card .state-items { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+
+/* ===== Org Design ===== */
+.design-option {
+  background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border);
+  padding: 24px; margin-bottom: 16px;
+}
+.design-option.selected {
+  border: 2px solid var(--primary); background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+  box-shadow: 0 0 0 4px rgba(5,150,105,.08);
+}
+.design-option .opt-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.design-option .opt-badge {
+  display: inline-block; padding: 4px 12px; border-radius: 8px; font-size: 13px; font-weight: 700;
+}
+.design-option .opt-badge.rec { background: var(--primary); color: #fff; }
+.design-option .opt-badge.alt { background: var(--bg-soft); color: var(--text-secondary); }
+.design-option .opt-title { font-size: 17px; font-weight: 700; }
+.design-option .opt-body { font-size: 13.5px; color: var(--text-secondary); line-height: 1.8; }
+.design-option .pro-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+.design-option .pro, .design-option .con { padding: 12px 14px; border-radius: 8px; font-size: 13px; line-height: 1.6; }
+.design-option .pro { background: #ecfdf5; border: 1px solid #a7f3d0; }
+.design-option .con { background: #fef2f2; border: 1px solid #fecaca; }
+.design-option .pro h5 { color: #065f46; font-size: 12px; margin-bottom: 4px; }
+.design-option .con h5 { color: #991b1b; font-size: 12px; margin-bottom: 4px; }
+
+/* ===== Feature Grid ===== */
+.feat-phase { margin-bottom: 32px; }
+.feat-phase h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+.feat-phase .phase-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+
+.feat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.feat-card { background: var(--bg-card); border-radius: 10px; padding: 20px; box-shadow: var(--shadow); border: 1px solid var(--border); border-left: 4px solid; }
+.feat-card.phase-a { border-left-color: #ef4444; }
+.feat-card.phase-b { border-left-color: #f59e0b; }
+.feat-card.phase-c { border-left-color: var(--primary); }
+.feat-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.feat-card p { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; }
+.feat-card .feat-meta { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--bg-soft); }
+.feat-card .feat-meta div { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
+.feat-card .feat-meta strong { color: var(--text-secondary); }
+.feat-card .feat-tags { margin-top: 8px; }
+
+/* ===== Architecture ===== */
+.arch-layer {
+  background: var(--bg-card); border-radius: 10px; padding: 18px 22px; box-shadow: var(--shadow);
+  border: 1px solid var(--border); margin-bottom: 12px; display: flex; align-items: center; gap: 16px;
+}
+.arch-layer .arch-tag {
+  width: 90px; flex-shrink: 0; text-align: center; padding: 8px 4px; border-radius: 8px;
+  font-size: 12px; font-weight: 700; color: #fff;
+}
+.arch-layer .arch-body { flex: 1; }
+.arch-layer .arch-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.arch-layer .arch-body p { font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; }
+.arch-layer .arch-body .arch-tags { margin-top: 6px; }
+
+/* ===== Timeline ===== */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before { content: ''; position: absolute; left: 11px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(to bottom, var(--primary), var(--primary-light), var(--border)); }
+.tl-item { position: relative; margin-bottom: 28px; }
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot { position: absolute; left: -32px; top: 4px; width: 24px; height: 24px; border-radius: 50%; background: #fff; border: 3px solid var(--primary); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--primary); }
+.tl-content { background: var(--bg-card); border-radius: 10px; padding: 18px 22px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+.tl-content h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.tl-content .tl-time { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+.tl-content p { font-size: 13px; color: var(--text-secondary); line-height: 1.65; margin-top: 4px; }
+.tl-content ul { margin-top: 8px; padding-left: 18px; }
+.tl-content ul li { font-size: 13px; color: var(--text-secondary); line-height: 1.75; }
+
+/* ===== Decision Record ===== */
+.decision-card {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border: 1px solid #fcd34d; border-radius: 12px; padding: 20px 24px; margin: 16px 0;
+}
+.decision-card .dc-num { display: inline-block; background: var(--accent); color: #fff; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; font-size: 12px; font-weight: 700; margin-right: 8px; }
+.decision-card .dc-title { font-weight: 700; font-size: 15px; display: inline; }
+.decision-card .dc-reason { font-size: 13px; color: #92400e; margin-top: 6px; padding-left: 34px; }
+
+/* ===== Risk Accordion ===== */
+.accordion { margin: 16px 0; }
+.acc-item { background: var(--bg-card); border-radius: 10px; box-shadow: var(--shadow); margin-bottom: 10px; overflow: hidden; border: 1px solid var(--border); }
+.acc-hdr { padding: 14px 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 14px; }
+.acc-hdr:hover { background: var(--bg-soft); }
+.acc-hdr::after { content: '▸'; font-size: 13px; color: var(--text-muted); transition: transform .2s; }
+.acc-item.open .acc-hdr::after { transform: rotate(90deg); }
+.acc-body { display: none; padding: 0 20px 20px; font-size: 13.5px; color: var(--text-secondary); line-height: 1.8; }
+.acc-item.open .acc-body { display: block; }
+
+/* ===== Highlight Box ===== */
+.highlight-box {
+  background: linear-gradient(135deg, #064e3b, #059669);
+  color: #fff; border-radius: var(--radius); padding: 28px; margin-top: 24px;
+}
+.highlight-box h3 { color: #fff; font-size: 18px; margin-bottom: 14px; }
+.highlight-box p { color: rgba(255,255,255,.88); font-size: 14px; line-height: 1.8; }
+.highlight-box p strong { color: #fbbf24; }
+
+/* ===== Summary ===== */
+.summary-box {
+  background: linear-gradient(135deg, #ecfdf5, #dbeafe);
+  border: 1px solid #a7f3d0; border-radius: 12px; padding: 24px;
+  margin-top: 24px;
+}
+
+/* ===== Panorama (NEW) ===== */
+.pano-section { background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%); padding: 48px 0 64px; }
+.pano-phase-card {
+  background: var(--bg-card); border-radius: 16px; padding: 28px; box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border); position: relative; overflow: hidden;
+}
+.pano-phase-card.ph-now { border-top: 4px solid #64748b; }
+.pano-phase-card.ph-next { border-top: 4px solid var(--accent); box-shadow: 0 0 0 6px rgba(234,88,12,.08); }
+.pano-phase-card.ph-later { border-top: 4px solid var(--purple); }
+.pano-phase-card .ph-badge {
+  display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 14px;
+}
+.pano-phase-card .ph-badge.now-badge { background: #e2e8f0; color: #475569; }
+.pano-phase-card .ph-badge.next-badge { background: #fef3c7; color: #92400e; }
+.pano-phase-card .ph-badge.later-badge { background: #ede9fe; color: #5b21b6; }
+.pano-phase-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+.pano-phase-card .ph-time { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+.pano-phase-card .ph-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px; }
+.pano-phase-card .ph-items { display: flex; flex-wrap: wrap; gap: 6px; }
+.pano-cap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 20px; }
+.pano-cap-item {
+  background: var(--bg-card); border-radius: 10px; padding: 18px; box-shadow: var(--shadow);
+  border: 1px solid var(--border); border-left: 3px solid var(--primary);
+}
+.pano-cap-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.pano-cap-item p { font-size: 12.5px; color: var(--text-secondary); line-height: 1.65; }
+.pano-cap-item .cap-status-bar {
+  height: 4px; border-radius: 2px; margin-top: 10px; background: var(--bg-soft); overflow: hidden;
+}
+.pano-cap-item .cap-fill { height: 100%; border-radius: 2px; }
+.cap-fill.now { background: #94a3b8; }
+.cap-fill.next { background: var(--accent); }
+.cap-fill.later { background: var(--purple); }
+
+.pano-evo-timeline {
+  display: flex; align-items: stretch; gap: 20px; flex-wrap: wrap; margin: 32px 0;
+}
+.pano-evo-node {
+  flex: 1; min-width: 200px; background: var(--bg-card); border-radius: 16px;
+  padding: 24px; box-shadow: var(--shadow); border: 2px solid var(--border); text-align: center;
+}
+.pano-evo-node.current { border-color: var(--accent); border-width: 3px; box-shadow: 0 0 0 4px rgba(234,88,12,.08); }
+.pano-evo-node .ev-year { font-size: 24px; font-weight: 800; color: var(--primary-dark); margin-bottom: 4px; }
+.pano-evo-node .ev-label { font-size: 13px; font-weight: 700; color: var(--text-secondary); margin-bottom: 12px; }
+.pano-evo-node .ev-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.65; }
+.pano-evo-arrow { display: flex; align-items: center; font-size: 28px; color: var(--text-muted); }
+
+/* ===== DB Schema ===== */
+.db-table { margin: 16px 0; }
+.db-table table { font-size: 13px; }
+.db-table thead { background: #1e293b; }
+
+footer { background: var(--text); color: var(--text-muted); text-align: center; padding: 32px 24px; font-size: 12px; }
+
+@media (max-width: 768px) {
+  nav .links { display: none; }
+  nav .links.open { display: flex; flex-direction: column; position: absolute; top: 52px; left: 0; right: 0; background: #fff; border-bottom: 1px solid var(--border); padding: 8px 20px; }
+  nav .links.open a { padding: 10px 0; border-bottom: 1px solid var(--border); border-radius: 0; }
+  nav .menu-btn { display: block; }
+  .card-grid.cols-2, .card-grid.cols-3, .card-grid.cols-4 { grid-template-columns: 1fr; }
+  .design-option .pro-cons { grid-template-columns: 1fr; }
+  .feat-grid { grid-template-columns: 1fr; }
+  .hero { padding: 48px 16px 36px; }
+  .arch-layer { flex-direction: column; align-items: flex-start; }
+  .arch-layer .arch-tag { width: auto; padding: 4px 12px; }
+  .pano-evo-timeline { flex-direction: column; }
+  .pano-evo-arrow { transform: rotate(90deg); justify-content: center; }
+}
+@media print { nav { position: static; } .acc-body { display: block !important; } }
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <div class="inner">
+    <span class="badge">基于 MVP 现状 + 8家竞品深度分析 + 产品规划交流会纪要 · 2026.06</span>
+    <h1>智慧体育平台 · 下一阶段发展规划</h1>
+    <p class="subtitle">从现有 MVP 底座出发，以竞品「扬长避短·抓漏·扩展」策略为牵引——聚焦在研阶段关键目标：半年完成自主产品体系建设，补齐行政区划、设备管理、数据大屏三大能力缺口，在竞品结构性短板处建立差异化优势。</p>
+    <div class="meta">
+      <span>📅 2026年6月</span>
+      <span>🎯 目标：半年平替 M 系列</span>
+      <span>🔬 板块：在研（Phase 2）</span>
+      <span>🏷️ 融入竞品策略 + 未来全景图</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Nav ===== -->
+<nav>
+  <div class="inner">
+    <div class="logo">下一阶段规划</div>
+    <button class="menu-btn" onclick="this.nextElementSibling.classList.toggle('open')">☰</button>
+    <div class="links">
+      <a href="#current-mvp" class="active">MVP 现状</a>
+      <a href="#meeting-strategy">会议策略</a>
+      <a href="#org-design">组织架构 ★</a>
+      <a href="#next-features">功能规划</a>
+      <a href="#architecture">架构演进</a>
+      <a href="#roadmap">里程碑</a>
+      <a href="#decisions">关键决策</a>
+      <a href="#risks">风险对策</a>
+      <a href="#panorama">未来全景图 🆕</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== 一、MVP 现状回顾 ===== -->
+<div class="container"><section class="section" id="current-mvp">
+  <h2 class="section-title"><span class="num">1</span>MVP 现状回顾：我们有什么</h2>
+  <p class="section-subtitle">不假设从零开始——先盘点已交付的 MVP 功能，明确"已有底座"和"待补能力"，并结合竞品格局判断我们的站位</p>
+
+  <div class="card-grid cols-3" style="margin-bottom: 24px;">
+    <div class="state-card" style="border-top-color: #7c3aed;">
+      <h4>运维端</h4>
+      <p>系统级基础设施，已建立学校和教育局的多级从属结构。</p>
+      <div class="state-items">
+        <span class="tag tag-purple">系统数据字典</span>
+        <span class="tag tag-purple">学校管理</span>
+        <span class="tag tag-purple">教育局管理</span>
+        <span class="tag tag-purple">多级结构</span>
+      </div>
+    </div>
+    <div class="state-card" style="border-top-color: #2563eb;">
+      <h4>学校端</h4>
+      <p>学校日常运营的基础管理模块，支持屏体数据回传。</p>
+      <div class="state-items">
+        <span class="tag tag-blue">教师管理</span>
+        <span class="tag tag-blue">班级管理</span>
+        <span class="tag tag-blue">学生管理</span>
+        <span class="tag tag-blue">运动明细（屏体数据回传）</span>
+      </div>
+    </div>
+    <div class="state-card" style="border-top-color: var(--accent);">
+      <h4>校园屏体端</h4>
+      <p>面向学生的运动终端，已覆盖基础运动项目。</p>
+      <div class="state-items">
+        <span class="tag tag-amber">7 个简单运动项目</span>
+        <span class="tag tag-amber">体测/体锻基础功能</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MVP 已有 vs 待补 -->
+  <h3 style="font-size:18px;font-weight:700;margin-bottom:14px;">MVP 能力评估：已有 vs 待补</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>能力维度</th><th>当前状态</th><th>完备度</th><th>下一阶段需要做什么</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>组织架构管理</strong></td>
+          <td>学校 + 教育局多级树形结构（已建）</td>
+          <td style="color:#f59e0b;font-weight:700;">60%</td>
+          <td>补集团学校关系、补行政区划维度、补数据权限模型</td>
+        </tr>
+        <tr>
+          <td><strong>基础数据管理</strong></td>
+          <td>系统数据字典 + 教师/班级/学生基础 CRUD</td>
+          <td style="color:#059669;font-weight:700;">70%</td>
+          <td>学生体质健康档案、数据一致性校验规则</td>
+        </tr>
+        <tr>
+          <td><strong>运动数据采集</strong></td>
+          <td>屏体端 7 个项目数据回传至运动明细</td>
+          <td style="color:#f59e0b;font-weight:700;">50%</td>
+          <td>补 M 系列数据接口对接、补更多运动项目、补 AI 算法识别</td>
+        </tr>
+        <tr>
+          <td><strong>设备管理</strong></td>
+          <td>基础设备注册（推测屏体端有设备信息）</td>
+          <td style="color:#ef4444;font-weight:700;">20%</td>
+          <td>设备生命周期、远程升级、状态监控、渠道追溯——全新建设</td>
+        </tr>
+        <tr>
+          <td><strong>数据看板</strong></td>
+          <td>无</td>
+          <td style="color:#ef4444;font-weight:700;">0%</td>
+          <td>校级数据看板 + 区域级数据大屏——全新建设</td>
+        </tr>
+        <tr>
+          <td><strong>教学内容</strong></td>
+          <td>无</td>
+          <td style="color:#ef4444;font-weight:700;">0%</td>
+          <td>教学课件管理、教案库——需启动建设</td>
+        </tr>
+        <tr>
+          <td><strong>赛事活动</strong></td>
+          <td>屏体端课间排行（推测）</td>
+          <td style="color:#ef4444;font-weight:700;">10%</td>
+          <td>正式赛事创建、管理、排行榜</td>
+        </tr>
+        <tr>
+          <td><strong>自研硬件</strong></td>
+          <td>无（当前依赖 M 系列外购）</td>
+          <td style="color:#ef4444;font-weight:700;">0%</td>
+          <td>RK3568/3588 核心板自研、边缘计算盒子、标准摄像头方案</td>
+        </tr>
+        <tr>
+          <td><strong>自研算法</strong></td>
+          <td>初期投入，已覆盖部分体测项目</td>
+          <td style="color:#f59e0b;font-weight:700;">30%</td>
+          <td>扩展运动项目覆盖、建立体育知识库、身心一体识别</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight">
+    <div class="insight-l">现状判断</div>
+    <div class="insight-t">
+      我们有一个 <strong>稳固的底座</strong>（多级组织架构 + 数据字典 + 基础人员管理），但 <strong>数据应用层和硬件自主层几乎是空白</strong>。下一阶段的核心逻辑是：<strong>上层补能力（看板/设备管理/教学内容），下层换底座（M 系列 → 自研硬件），中间打通数据流（M 接口对接 → 自研终端直连）</strong>。
+    </div>
+  </div>
+
+  <!-- 🆕 竞品洞察 -->
+  <div class="comp-insight">
+    <div class="ci-header">
+      <span class="ci-label">竞品站位判断</span>
+      <div class="ci-tags">
+        <span class="ci-tag catch">抓漏</span>
+        <span class="ci-tag leverage">扬长</span>
+      </div>
+    </div>
+    <div class="ci-body">
+      <strong>我们的 MVP 底座在8家竞品中有独特优势：</strong><br>
+      <span class="ci-co">融梦科技</span>——脑图中多处标注"未开发完成"，运维端APK离线更新暗示设备版本碎片化。其"全场景"方案完整度不足，<strong>我们应在数据字典和架构整洁度上建立优势，避免同样陷于"功能多但未完成"的泥潭</strong>。<br>
+      <span class="ci-co">斯盛体育</span>——虽然四端联动完整，但"换一个局改一套代码"，高度定制化导致跨区域复制成本高。我们已有的多级教育局树形结构如果能做成<strong>配置化</strong>，将构成产品化层面的优势。<br>
+      <span class="ci-co">行业空白：</span>8家竞品中无一在MVP阶段就建立完整的"集团学校"管理维度——<strong>这是我们方案B可以先行占位的结构空白</strong>。
+    </div>
+  </div>
+</section></div>
+
+<!-- ===== 二、会议纪要策略提炼 ===== -->
+<div class="container"><section class="section" id="meeting-strategy">
+  <h2 class="section-title"><span class="num">2</span>会议纪要核心策略提炼</h2>
+  <p class="section-subtitle">从 2026.06.18 产品规划交流会的关键决策和行动项中提炼下阶段工作重心，并与竞品策略对标</p>
+
+  <!-- 三大板块 -->
+  <div class="card-grid cols-3" style="margin-bottom: 24px;">
+    <div class="card" style="border-top:4px solid #059669;">
+      <div class="icon" style="background:#d1fae5;">🏃</div>
+      <h3>Phase 1：在售</h3>
+      <p>基于 M 系列硬件做差异化升级（4G 开关、前开盖、AES67 广播等），降本增效。在售产品维持市场竞争力。</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">平台侧关联度：低 → 主要由硬件团队驱动</p>
+    </div>
+    <div class="card" style="border-top:4px solid #ea580c; box-shadow: 0 0 0 4px rgba(234,88,12,.1);">
+      <div class="icon" style="background:#fef3c7;">🔬</div>
+      <h3>Phase 2：在研 ★ 当前重点</h3>
+      <p>完全自主可控产品体系。半年平替 M 系列。自研硬件 + 自研软件 + 自研算法三线并行。增加身心一体创新点。</p>
+      <p style="margin-top:8px;font-size:12px;color:#f59e0b;font-weight:600;">平台侧关联度：极高 → 本次规划核心</p>
+    </div>
+    <div class="card" style="border-top:4px solid #7c3aed;">
+      <div class="icon" style="background:#ede9fe;">🚀</div>
+      <h3>Phase 3：预研</h3>
+      <p>AI 原生体育产品——AI 体育教练、数字学伴、个性化训练。口袋机器人 + 利旧盒子双形态。C 端突破。</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">平台侧关联度：中 → Phase 2 完成后启动</p>
+    </div>
+  </div>
+
+  <!-- 会议关键策略 -->
+  <h3 style="font-size:18px;font-weight:700;margin-bottom:14px;">会议中明确的六大策略方向</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>策略</th><th>决策内容</th><th>对平台的直接要求</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag tag-amber">策略一</span></td>
+          <td><strong>MVP 平台先对接 M 系列数据接口</strong>，将体测/体锻数据提上来；待自研硬件到位后逐步替换</td>
+          <td>需要 M 系列数据接口适配层 + 自研终端直连接口预留</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-amber">策略二</span></td>
+          <td><strong>平台采用 "市-区-校" 三级 + 运维端架构</strong>，支持自上而下的区域统一建设</td>
+          <td>组织架构需支持完整行政区划 + 多层级管理</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-amber">策略三</span></td>
+          <td><strong>摄像头方案从"模组"转向"标准摄像头 + 边缘计算盒子"</strong></td>
+          <td>平台需抽象设备接入层，支持多种设备协议</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-amber">策略四</span></td>
+          <td><strong>身心一体（运动+心理监测）纳入 Phase 2C</strong>，作为差异化亮点</td>
+          <td>数据模型需预留心理健康数据字段和看板</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-amber">策略五</span></td>
+          <td><strong>国产化趋势</strong>——学校采购越来越多要求国产化（华为鸿蒙等）</td>
+          <td>技术选型需考虑国产化兼容（数据库、部署环境）</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-amber">策略六</span></td>
+          <td><strong>产品要以政策关键词为设计导向</strong>——"运动时长"而非"运动次数"</td>
+          <td>数据大屏和报表体系以"时长、强度、密度"为核心指标</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight insight-warn">
+    <div class="insight-l">一句话策略</div>
+    <div class="insight-t">
+      半年内，平台端完成 "组织架构 + 设备管理 + 数据大屏" 三大能力建设，同时预留 <strong>M 系列对接 → 自研硬件直连的平滑过渡架构</strong>。不是另起炉灶，而是在 MVP 底座上做增强。
+    </div>
+  </div>
+
+  <!-- 🆕 竞品洞察 -->
+  <div class="comp-insight">
+    <div class="ci-header">
+      <span class="ci-label">竞品对标：会议策略 vs 竞品已走/未走路</span>
+      <div class="ci-tags">
+        <span class="ci-tag avoid">避短</span>
+        <span class="ci-tag catch">抓漏</span>
+        <span class="ci-tag expand">扩展</span>
+      </div>
+    </div>
+    <div class="ci-body">
+      <strong>策略一（M 系列对接 → 自研替换）对标的是融梦的软硬一体路线。</strong>融梦的四端+6硬件全栈自研是标杆，但其Web平台功能"多处未完成"表明软件工程能力是软肋——<strong>我们在软件侧的架构整洁度和完成度上必须超越融梦</strong>。<br>
+      <strong>策略四（身心一体）是竞品盲区。</strong>恒鸿达虽然覆盖了体态仪和人体成分仪，但走的是"医疗器械化"路线（有监管风险）；其他竞品无一家将心理健康与运动数据做关联分析。<strong>这不只是"做不做"的问题，而是"用软件而非医疗器械"的差异化路线——风险更低、扩展性更强。</strong><br>
+      <strong>策略六（政策关键词）是斯盛的核心方法论，但斯盛将其做成了"强绑定"。</strong>我们要学习的是"以政策语言设计产品界面"，但要避免斯盛的定制化陷阱——<strong>政策指标做成可配置的规则引擎，而非硬编码</strong>。
+    </div>
+  </div>
+</section></div>
+
+<!-- ===== 三、组织架构设计（★ 核心框架问题）===== -->
+<div class="container"><section class="section" id="org-design">
+  <h2 class="section-title"><span class="num">3</span>组织架构设计：教育局 + 集团学校的框架解</h2>
+  <p class="section-subtitle">这是本阶段最核心的架构决策——一个学校既属于教育局，也可能是集团学校，怎么设计关系？竞品在此维度的缺席验证了方案B的领先性。</p>
+
+  <h3 style="font-size:18px;font-weight:700;margin-bottom:6px;">问题定义</h3>
+  <p style="margin-bottom:20px;color:var(--text-secondary);">
+    当前 MVP 已建立 "学校 → 教育局" 树形从属关系，但面临两个扩展需求：<br>
+    ① 学校可能属于一个<strong>教育集团</strong>（如人大附中教育集团、北京四中教育集团），集团需要跨校管理资源和数据；<br>
+    ② 教育局自身也有<strong>层级关系</strong>（市教育局 → 区教育局 → 学校），需要完整的行政区划维度。
+  </p>
+
+  <!-- 方案对比 -->
+  <h3 style="font-size:18px;font-weight:700;margin:28px 0 16px;">三种方案对比</h3>
+
+  <!-- 方案 A -->
+  <div class="design-option">
+    <div class="opt-header">
+      <span class="opt-badge alt">方案 A</span>
+      <span class="opt-title">把集团当成"教育局"，一个学校可以属于多个教育局</span>
+    </div>
+    <div class="opt-body">
+      新增一个教育局类型字段（行政教育局 / 教育集团）。学校可以关联多个"教育局"，通过类型区分。教育局之间的从属关系继续沿用现有树形结构。
+    </div>
+    <div class="pro-cons">
+      <div class="pro"><h5>✅ 优点</h5>• 复用现有代码，改动最小<br>• 教育局和集团用同一套管理界面</div>
+      <div class="con"><h5>❌ 缺点</h5>• 概念混淆——集团≠教育局，权限/职责完全不同<br>• 教育局下发政策文件、集团下发教学资源——同一张表承载两种语义<br>• 未来集团也有层级结构时（集团→分校），模型更混乱<br>• 多对多关系让权限管理复杂度指数增长</div>
+    </div>
+  </div>
+
+  <!-- 方案 B -->
+  <div class="design-option selected">
+    <div class="opt-header">
+      <span class="opt-badge rec">方案 B · 推荐</span>
+      <span class="opt-title">独立集团实体 + 学校单向可选归属</span>
+    </div>
+    <div class="opt-body">
+      在现有的 "教育局 → 学校" 树形结构之外，新增独立的<strong>集团（Group）实体</strong>。学校有且仅有一个行政归属教育局（必填），可以可选地归属一个教育集团（选填）。<br><br>
+      教育局负责行政管理（区域数据、政策下发、考核督导），集团负责教育管理（跨校资源共享、教学质量统一、集团数据汇总）。两个维度正交、互不干扰。
+    </div>
+    <div class="pro-cons">
+      <div class="pro"><h5>✅ 优点</h5>• 概念清晰——行政归属和管理归属分离<br>• 各自独立演进——教育局加字段不影响集团，反之亦然<br>• 权限模型简单——"教育局管理员"和"集团管理员"角色天然隔离<br>• 扩展性强——集团未来可以有自己的层级（总集团→子集团→分校）<br>• 符合教育行业实际情况</div>
+      <div class="con"><h5>⚠️ 注意点</h5>• 增加一个新实体和一套管理界面<br>• 学校数据在两个维度上的可见性需要明确规则<br>• 集团和教育局之间的数据共享边界需要定义</div>
+    </div>
+  </div>
+
+  <!-- 方案 C -->
+  <div class="design-option">
+    <div class="opt-header">
+      <span class="opt-badge alt">方案 C</span>
+      <span class="opt-title">统一组织树 + 标签化分类</span>
+    </div>
+    <div class="opt-body">
+      将所有组织（教育局、集团、学校、甚至未来可能的俱乐部等）统一为一个"组织"实体，通过标签区分类型，通过 parent_id 构建任意层级关系。一个学校可以有多个 parent。
+    </div>
+    <div class="pro-cons">
+      <div class="pro"><h5>✅ 优点</h5>• 极致灵活——支持任何组织形态<br>• 扩展新组织类型零成本</div>
+      <div class="con"><h5>❌ 缺点</h5>• 过度设计——智慧体育领域不需要这么复杂的组织模型<br>• 权限管理地狱——一个学校同时被教育局和集团管理，数据编辑权冲突<br>• 查询性能差——每次查"某个教育局下所有学校"需要递归遍历<br>• 团队理解成本高，容易出错</div>
+    </div>
+  </div>
+
+  <!-- 🆕 竞品洞察：这个框架决策在竞品中意味着什么 -->
+  <div class="comp-insight">
+    <div class="ci-header">
+      <span class="ci-label">竞品对比：集团管理维度的行业空白</span>
+      <div class="ci-tags">
+        <span class="ci-tag catch">抓漏</span>
+        <span class="ci-tag expand">扩展</span>
+      </div>
+    </div>
+    <div class="ci-body">
+      <strong>8家竞品中，无一在组织架构层面处理过"集团学校"这一维度：</strong><br>
+      <span class="ci-co">斯盛体育</span>——只有"局-校-师-俱乐部"四端，无集团维度。其跨区域定制化困境本质上是因为把"教育局"当作唯一管理维度，当集团需要跨校管理时就出现盲区。<br>
+      <span class="ci-co">融梦科技</span>——运维端只有学校管理和教育局管理的基础树形结构，同样未涉及集团维度。<br>
+      <span class="ci-co">讯飞/恒鸿达</span>——局端治理平台均以"教育局→学校"为唯一管理路径。<br><br>
+      <strong>这意味着方案B不仅是解决我们自己的框架问题，更是一个行业性的结构空白。</strong>未来当教育集团化趋势加速（北京/上海/深圳已全面推进集团化办学），拥有集团维度的平台将在跨校数据汇总和集团管理层面形成差异化优势。同时，<strong>这也能反向避免斯盛的陷阱</strong>——当某个区域的政策考核从"教育局→学校"转变为"集团→分校"时，我们不需要像斯盛那样"换一套代码"。
+    </div>
+  </div>
+
+  <!-- 推荐方案详解 -->
+  <h3 style="font-size:18px;font-weight:700;margin:28px 0 16px;">推荐方案 B 详细设计</h3>
+
+  <div class="card" style="margin-bottom:20px; border-left:4px solid var(--accent);">
+      <h3 style="color:var(--accent-dark);">数据可见性规则</h3>
+      <p>
+        <strong>教育局视角：</strong>可查看辖区所有学校数据（包括属于集团的学校），向下穿透到学生。<br><br>
+        <strong>集团视角：</strong>仅可查看归属本集团的学校数据，不能查看教育局维度的其他学校。<br><br>
+        <strong>学校视角：</strong>仅查看本校数据。<br><br>
+        <strong>关键原则：</strong>双维度数据不合并、不混淆——教育局看全量、集团看子集。
+      </p>
+    </div>
+
+  <!-- 行政区划设计 -->
+  <h4 style="font-weight:700;margin-bottom:10px;margin-top:20px;">行政区划 + 教育局层级设计</h4>
+  <div class="tw">
+    <table>
+      <thead><tr><th>层级</th><th>示例</th><th>对应实体</th><th>管理范围</th></tr></thead>
+      <tbody>
+        <tr><td>L1 省级</td><td>湖南省教育厅</td><td>education_bureau (level=1)</td><td>全省数据汇总</td></tr>
+        <tr><td>L2 市级</td><td>长沙市教育局</td><td>education_bureau (level=2, parent=L1)</td><td>全市学校 + 下辖区县</td></tr>
+        <tr><td>L3 区县级</td><td>湘江新区教育局</td><td>education_bureau (level=3, parent=L2)</td><td>辖区学校（日常管理核心层）</td></tr>
+        <tr><td>L4 学校</td><td>师大附中博才实验中学</td><td>school (edu_bureau_id=L3)</td><td>本校</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight">
+    <div class="insight-l">框架决策总结</div>
+    <div class="insight-t">
+      <strong>不允许一个学校属于多个教育局</strong>——这违反教育行政管理的层级逻辑（一个学校只有一个行政主管单位）。<br>
+      <strong>集团是独立的一维</strong>——不与教育局维度混淆，各自独立管理和授权。<br>
+      <strong>学校可选归属集团</strong>——不是所有学校都有集团归属，school_group_id 允许为 null。<br>
+      <strong>集团可自建层级</strong>——通过 parent_group_id 支持"总集团 → 分集团 → 分校"结构，但不强制。<br>
+      <strong>教育局层级通过 parent_id + level 实现</strong>——复用现有树形结构，增加 level 字段加速"查某教育局下所有学校"的递归查询。<br>
+      <strong>更关键的是——这个设计让跨区域拓展时不需要"改一套代码"</strong>，这与斯盛"三零/三长"的定制化路线形成产品化维度的根本差异。
+    </div>
+  </div>
+</section></div>
+
+<!-- ===== 四、下一阶段功能规划 ===== -->
+<div class="container"><section class="section" id="next-features">
+  <h2 class="section-title"><span class="num">4</span>下一阶段功能规划</h2>
+  <p class="section-subtitle">按"紧急性 × 战略价值 × 竞品格差"分为三个阶段——每个功能都对应竞品的明确短板或空白</p>
+
+  <!-- 🆕 竞品策略总览 -->
+  <div class="comp-insight" style="margin-bottom: 28px;">
+    <div class="ci-header">
+      <span class="ci-label">竞品「扬长避短·抓漏·扩展」策略地图</span>
+      <div class="ci-tags">
+        <span class="ci-tag leverage">扬长</span>
+        <span class="ci-tag avoid">避短</span>
+        <span class="ci-tag catch">抓漏</span>
+        <span class="ci-tag expand">扩展</span>
+      </div>
+    </div>
+    <div class="ci-body">
+      <strong>扬长（Leverage）</strong>——我们已有的 MVP 底座（数据字典+多级组织架构）是融梦/斯盛均不具备的整洁起点。在数据模型和架构层面持续领先。<br>
+      <strong>避短（Avoid）</strong>——避开斯盛的高度定制化陷阱（配置化而非硬编码）、恒鸿达的医疗器械合规风险（软件化身心一体而非硬件检测）、融梦的产品完整度泡沫（明确Non-goals，不做未完成的功能承诺）。<br>
+      <strong>抓漏（Catch）</strong>——集团学校管理（行业空白）、家长端（斯盛未完善/融梦无）、跨区域配置化（斯盛做不到的）、数据透明可解释（融梦AI黑箱的反面）。<br>
+      <strong>扩展（Expand）</strong>——从B2G学校场景向"局-校-集团-家"四维联动扩展，从运动数据向"身心一体"健康数据扩展。
+    </div>
+  </div>
+
+  <!-- Phase 2A: 立即启动（组织架构 + 设备管理 + M 对接） -->
+  <div class="feat-phase">
+    <h3>🔴 Phase 2A：立即启动（Week 1-6）<span class="tag tag-red" style="font-size:11px;">最高优先级</span></h3>
+    <p class="phase-sub">这是"在研"阶段的第一优先级——把 MVP 底座向自主产品方向推进的关键一步</p>
+    <div class="feat-grid">
+      <div class="feat-card phase-a">
+        <h4>⭐ 组织架构升级（集团 + 行政区划）</h4>
+        <p>按推荐方案 B 实现：新增 school_group 实体、教育局层级 level 字段、school 增加 school_group_id 字段。集团管理界面独立开发。</p>
+        <div class="feat-meta">
+          <div><strong>会议依据：</strong>补充"行政区划"短板（M 系列最大缺失）；支持市-区-校三级</div>
+          <div><strong>竞品策略：</strong>抓漏——8家竞品无集团维度，避短——斯盛"换局改代码"的反面教材</div>
+        </div>
+        <div class="feat-tags">
+          <span class="tag tag-red">框架级</span>
+          <span class="tag tag-red">阻塞其他功能</span>
+          <span class="tag tag-blue">行业空白</span>
+        </div>
+      </div>
+      <div class="feat-card phase-a">
+        <h4>⭐ 设备管理模块（全新建设）</h4>
+        <p>设备注册、状态监控、远程升级（OTA）、生命周期管理、渠道追溯。支持自研硬件 + M 系列设备双轨管理。</p>
+        <div class="feat-meta">
+          <div><strong>会议依据：</strong>运维平台功能简陋，设备状态不实时、不准确</div>
+          <div><strong>竞品策略：</strong>避短——融梦APK离线更新的运维碎片化教训，我们的OTA必须集中可控</div>
+        </div>
+        <div class="feat-tags">
+          <span class="tag tag-red">全新建设</span>
+          <span class="tag tag-red">运维刚需</span>
+        </div>
+      </div>
+      <div class="feat-card phase-a">
+        <h4>M 系列数据接口对接</h4>
+        <p>开发适配层，将 M 系列的体测/体锻数据接口化地接入 MVP 平台。设计为可替换的适配器模式——后续自研硬件只需更换适配器。</p>
+        <div class="feat-meta">
+          <div><strong>会议依据：</strong>先对接 M 系列数据，数据提上来丰富自身</div>
+          <div><strong>竞品策略：</strong>扩展——对标融梦软硬一体但避开其架构耦合；适配器模式为自研切换预留</div>
+        </div>
+        <div class="feat-tags">
+          <span class="tag tag-amber">过渡策略</span>
+          <span class="tag tag-amber">适配器模式</span>
+        </div>
+      </div>
+      <div class="feat-card phase-a">
+        <h4>数据模型增强（体质健康档案）</h4>
+        <p>建立学生体质健康档案数据模型：体测历史、运动画像、身心一体预留字段。统一数据字典确保跨端一致性。</p>
+        <div class="feat-meta">
+          <div><strong>会议依据：</strong>运动数据呈现方式生硬；M 系列数据库设计混乱</div>
+          <div><strong>竞品策略：</strong>扬长——融梦/斯盛都面临数据不一致问题（终端与平台状态不同步），我们从Day 1建立统一数据标准</div>
+        </div>
+        <div class="feat-tags">
+          <span class="tag tag-teal">数据基础</span>
+          <span class="tag tag-teal">长期价值</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 2B: 近期完成（看板 + 教学内容 + 赛事） -->
+  <div class="feat-phase">
+    <h3>🟡 Phase 2B：近期完成（Week 3-12）<span class="tag tag-amber" style="font-size:11px;">高优先级</span></h3>
+    <p class="phase-sub">在组织架构 + 设备管理底座完成后，上层数据应用和教学场景功能</p>
+    <div class="feat-grid">
+      <div class="feat-card phase-b">
+        <h4>⭐ 校级数据看板 + 区域数据大屏</h4>
+        <p>学校维度：体测达标率、运动时长趋势、班级对比、学生下钻。教育局维度：区域运动时长达标率、设备在线率、政策指标监控。</p>
+        <div class="feat-meta">
+          <div><strong>会议依据：</strong>数据大屏缺失——无法满足教育局/区域级需求</div>
+          <div><strong>竞品策略：</strong>抓漏+避短——对标讯飞双级驾驶舱的指标成熟度，但避开斯盛的政策硬编码（指标做成可配置规则引擎）；"运动时长"对标讯飞但用配置化超越斯盛</div>
+        </div>
+        <div class="feat-tags">
+          <span class="tag tag-amber">核心差异化</span>
+          <span class="tag tag-amber">招标刚需</span>
+        </div>
+      </div>
+      <div class="feat-card phase-b">
+        <h4>体测/体锻页面重构</h4>
+        <p>合并当前 6 个冗余页面为一个智能筛选页面。支持按班级/项目/时间等多维度灵活筛选和数据导出。</p>
+        <div class="feat-meta">
+          <div><strong>会议依据：</strong>6 个页面本质是 6 个筛选条件，一个页面即可承载</div>
+          <div><strong>竞品策略：</strong>扬长——融梦的教学/训练/测试页面分散且功能重复，我们一刀切做信息架构优化</div>
+        </div>
+        <div class="feat-tags">
+          <span class="tag tag-blue">体验优化</span>
+        </div>
+      </div>
+      <div class="feat-card phase-b">
+        <h4>教学内容管理</h4>
+        <p>教学课件上传/分类/管理。分层资源库（公共/本校/个人）。先保证核心教案可用，不追求数量。</p>
+        <div class="feat-meta">
+          <div><strong>会议依据：</strong>课件设计机械（动作拼盘），学校无法自主产内容</div>
+          <div><strong>竞品策略：</strong>避短——FITURE的3000课程+300人团队是重资产壁垒，我们不追求内容数量；融梦课件"黑屏/空库"是反面教材——先确保核心教案可用，再扩展</div>
+        </div>
+        <div class="feat-tags">
+          <span class="tag tag-teal">教学场景</span>
+        </div>
+      </div>
+      <div class="feat-card phase-b">
+        <h4>赛事活动管理</h4>
+        <p>校级/区域级赛事创建、报名管理、成绩录入、排行榜。从课间排行扩展到正式赛事体系。</p>
+        <div class="feat-meta">
+          <div><strong>会议依据：</strong>赛事活动仅限体锻屏课间排行，缺乏正式赛事管理</div>
+          <div><strong>竞品策略：</strong>抓漏——大沩虽有独立赛事业务线但"考后粘性真空"；斯盛的赛事管理偏教育局统筹而非学校自主——我们的赛事系统定位于"学校自主+教育局统筹"的双模式</div>
+        </div>
+        <div class="feat-tags">
+          <span class="tag tag-blue">运营驱动</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 2C: 中期储备 -->
+  <div class="feat-phase">
+    <h3>🟢 Phase 2C：中期储备（Week 8-24）<span class="tag tag-green" style="font-size:11px;">标准优先级</span></h3>
+    <p class="phase-sub">差异化创新功能和自研硬件集成——在底座稳固后逐步叠加</p>
+    <div class="feat-grid">
+      <div class="feat-card phase-c">
+        <h4>身心一体（运动+心理监测）</h4>
+        <p>预留心理健康数据字段。情绪监测摄像头数据接入。心理-运动关联分析看板。</p>
+        <div class="feat-meta">
+          <div><strong>会议依据：</strong>身心一体纳入 Phase 2C；学生心理问题严峻</div>
+          <div><strong>竞品策略：</strong>抓漏+避短——恒鸿达走了医疗器械路线（体态仪+人体成分仪→监管风险），我们走软件化路线（数据关联分析+情绪识别），风险更低；综合8家竞品，无一家做运动+心理的关联分析</div>
+        </div>
+        <div class="feat-tags">
+          <span class="tag tag-purple">差异化创新</span>
+          <span class="tag tag-purple">行业首创</span>
+        </div>
+      </div>
+      <div class="feat-card phase-c">
+        <h4>自研硬件终端直连</h4>
+        <p>自研 RK3568/3588 核心板 + 边缘计算盒子到位后，替换 M 系列适配器为自研终端直连接口。</p>
+        <div class="feat-meta">
+          <div><strong>会议依据：</strong>半年内平替 M 系列；摄像头方案转向标准+盒子</div>
+          <div><strong>竞品策略：</strong>扩展——对标一视科技的边缘计算终端策略（但一视没有自研软件平台，我们是软硬一体）；对标融梦的软硬一体但避开其6类硬件重资产（我们用标准摄像头+盒子，不做6类定制硬件）</div>
+        </div>
+        <div class="feat-tags">
+          <span class="tag tag-teal">自主可控</span>
+        </div>
+      </div>
+      <div class="feat-card phase-c">
+        <h4>手环/手表数据接入</h4>
+        <p>心率数据（≤1min 采集频率）+ 网关方案。运动课堂实时心率监控 + 运动安全预警。</p>
+        <div class="feat-meta">
+          <div><strong>会议依据：</strong>手环手表外采定制，心率采集频率 ≤1min</div>
+          <div><strong>竞品策略：</strong>避短——恒鸿达的运动腕表涉及儿童GPS定位+通话，有严重的未成年人隐私合规风险。我们只做心率+运动安全预警，不碰定位和通话</div>
+        </div>
+        <div class="feat-tags">
+          <span class="tag tag-blue">数据增强</span>
+        </div>
+      </div>
+      <div class="feat-card phase-c">
+        <h4>课后作业系统</h4>
+        <p>教师布置课后运动作业 → 学生完成 → 数据回传。打通课内课外数据闭环。</p>
+        <div class="feat-meta">
+          <div><strong>竞品策略：</strong>抓漏——斯盛作业系统中提及但未完善，融梦/大沩等均无课后作业系统；大沩"考后粘性真空"的核心解法就是日常训练+课后作业的持续使用</div>
+        </div>
+        <div class="feat-tags">
+          <span class="tag tag-teal">场景闭环</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Non-goals -->
+  <h3 style="font-size:18px;font-weight:700;margin-top:28px;margin-bottom:16px;">本阶段非目标（明确不做）</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;">
+    <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:8px 14px;font-size:13px;">🚫 不做家长端（Phase 3 启动）</div>
+    <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:8px 14px;font-size:13px;">🚫 不做 AI 教案生成（预研范畴）</div>
+    <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:8px 14px;font-size:13px;">🚫 不做数字学伴（预研范畴）</div>
+    <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:8px 14px;font-size:13px;">🚫 不做口袋机器人（硬件预研）</div>
+    <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:8px 14px;font-size:13px;">🚫 不做 C 端独立产品</div>
+  </div>
+
+  <!-- 🆕 Non-goals 竞品对照 -->
+  <div class="comp-insight" style="margin-top: 16px;">
+    <div class="ci-header">
+      <span class="ci-label">Non-goals 的竞品教训</span>
+      <div class="ci-tags">
+        <span class="ci-tag avoid">避短</span>
+      </div>
+    </div>
+    <div class="ci-body">
+      这些"不做"并非拍脑袋——每一个背后都有一个竞品的失败案例：<br>
+      <strong>不做 AI 教案生成</strong>——FITURE的AI教案生成建立在300人内容团队+3000课程之上，讯飞有星火大模型。我们没有这些基础时做AI教案，就是融梦"功能多于完整度"的重演。<br>
+      <strong>不做 C 端独立产品</strong>——一视科技8500万用户但ARPU持续走低，就是"有用户无平台、无二次付费场景"的困局。B2G闭环未完成前，C端是资源黑洞。<br>
+      <strong>不做家长端</strong>——虽然斯盛和融梦在此有明确空白（这是抓漏机会），但家长端的价值释放前提是学校端数据闭环完成。Phase 2先建数据底座，Phase 3家长端才能"有数据可展示"而非"空壳"。
+    </div>
+  </div>
+</section></div>
+
+<!-- ===== 五、技术架构演进 ===== -->
+<div class="container"><section class="section" id="architecture">
+  <h2 class="section-title"><span class="num">5</span>技术架构演进路径</h2>
+  <p class="section-subtitle">从当前"M 系列依赖"到"完全自主可控"——三步走架构演进，每一步都有竞品教训作为约束</p>
+
+  <!-- 当前架构 -->
+  <h3 style="font-size:17px;font-weight:700;margin-bottom:12px;">当前架构（MVP）</h3>
+  <div class="arch-layer">
+    <div class="arch-tag" style="background:#64748b;">接入层</div>
+    <div class="arch-body">
+      <h4>运维端 + 学校端 + 屏体端（M 系列）</h4>
+      <p>M 系列屏体端通过数据回传接口上报运动数据至学校端运动明细。</p>
+      <div class="arch-tags"><span class="tag">数据回传</span><span class="tag">运维端独立</span></div>
+    </div>
+  </div>
+  <div class="arch-layer">
+    <div class="arch-tag" style="background:#64748b;">业务层</div>
+    <div class="arch-body">
+      <h4>教师/班级/学生管理 + 运动明细查看</h4>
+      <p>基础 CRUD + 数据列表，无看板、无设备管理、无赛事。</p>
+      <div class="arch-tags"><span class="tag">基础业务</span></div>
+    </div>
+  </div>
+  <div class="arch-layer">
+    <div class="arch-tag" style="background:#64748b;">数据层</div>
+    <div class="arch-body">
+      <h4>系统数据字典 + 学校/教育局树形结构</h4>
+      <p>M 系列数据直接回传存储，无统一数据模型标准。</p>
+      <div class="arch-tags"><span class="tag">数据字典 v1</span></div>
+    </div>
+  </div>
+
+  <!-- 演进箭头 -->
+  <div style="text-align:center;font-size:32px;color:var(--primary);padding:16px 0;">⬇</div>
+
+  <!-- 下一阶段目标架构 -->
+  <h3 style="font-size:17px;font-weight:700;margin-bottom:12px;color:var(--primary-dark);">下一阶段目标架构（Phase 2 完成时）</h3>
+  <div class="arch-layer">
+    <div class="arch-tag" style="background:var(--primary);">接入层</div>
+    <div class="arch-body">
+      <h4>运维端 + 教育局端（新增）+ 学校端 + 屏体端（M + 自研双轨）</h4>
+      <p>新增教育局端（区县级），支持市-区-校三级登录。设备接入层采用 <strong>适配器模式</strong>——M 系列适配器和自研终端适配器可互换。</p>
+      <div class="arch-tags">
+        <span class="tag tag-green">教育局端新增</span>
+        <span class="tag tag-green">适配器模式</span>
+        <span class="tag tag-green">三级架构</span>
+      </div>
+    </div>
+  </div>
+  <div class="arch-layer">
+    <div class="arch-tag" style="background:var(--accent);">业务层</div>
+    <div class="arch-body">
+      <h4>教师/班级/学生管理 + 设备管理（新增）+ 赛事管理（新增）+ 教学内容管理（新增）+ 体质健康档案</h4>
+      <p>体测/体锻页面重构为统一智能筛选页。看板服务独立部署，支持高并发数据聚合查询。</p>
+      <div class="arch-tags">
+        <span class="tag tag-amber">设备管理</span>
+        <span class="tag tag-amber">赛事管理</span>
+        <span class="tag tag-amber">看板服务</span>
+      </div>
+    </div>
+  </div>
+  <div class="arch-layer">
+    <div class="arch-tag" style="background:var(--purple);">数据层</div>
+    <div class="arch-body">
+      <h4>统一数据字典 + 教育局/集团双维度组织模型 + 学生运动档案</h4>
+      <p>数据字典升级，统一 M 系列数据和自研终端数据的字段映射。预留心理健康数据字段（身心一体）。国产数据库兼容评估。</p>
+      <div class="arch-tags">
+        <span class="tag tag-purple">数据字典</span>
+        <span class="tag tag-purple">双维度组织模型</span>
+        <span class="tag tag-purple">国产化评估</span>
+      </div>
+    </div>
+  </div>
+  <div class="arch-layer">
+    <div class="arch-tag" style="background:var(--blue);">集成层</div>
+    <div class="arch-body">
+      <h4>M 系列适配器（过渡）+ 自研终端直连接口（目标）+ 标准摄像头/盒子协议</h4>
+      <p>集成层隔离硬件差异。平台不关心底层是 M 系列还是自研硬件，只关心统一的数据协议。</p>
+      <div class="arch-tags">
+        <span class="tag tag-blue">设备抽象层</span>
+        <span class="tag tag-blue">协议适配</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-l">架构演进核心原则</div>
+    <div class="insight-t">
+      <strong>① 适配器隔离硬件差异</strong>：M 系列对接 → 自研终端直连的切换对上层业务透明<br>
+      <strong>② 数据字典先行</strong>：先定义统一数据标准，再接入数据——避免 M 系列数据混乱污染自研体系<br>
+      <strong>③ 看板服务独立</strong>：数据看板独立部署、独立扩容，不耦合业务服务<br>
+      <strong>④ 国产化预留</strong>：数据库选型评估 PostgreSQL + 国产数据库（OceanBase/达梦），提前做兼容性验证
+    </div>
+  </div>
+
+  <!-- 🆕 竞品架构教训 -->
+  <div class="comp-insight" style="margin-top: 16px;">
+    <div class="ci-header">
+      <span class="ci-label">竞品架构教训驱动的约束</span>
+      <div class="ci-tags">
+        <span class="ci-tag avoid">避短</span>
+        <span class="ci-tag leverage">扬长</span>
+      </div>
+    </div>
+    <div class="ci-body">
+      <strong>融梦的架构教训：</strong>运维端"APK离线更新"意味着终端设备版本碎片化——OTA集中管理是我们设备管理模块的硬需求。<br>
+      <strong>斯盛的架构教训：</strong>"三零/三长"功能模块强绑定湘江新区政策语境——任何带有"政策指标"的功能都必须做成<strong>可配置规则引擎</strong>而非硬编码。<br>
+      <strong>恒鸿达的架构教训：</strong>全品类硬件（6+类）导致集成层极其复杂——我们保持标准摄像头+盒子双协议，不追求硬件品类数量。<br>
+      <strong>一视的架构教训：</strong>纯硬件无平台→"被集成"风险——我们软硬一体的集成层设计正是为了规避这个长期威胁。<br>
+      <strong>广东先知的架构教训：</strong>"数据不出校"本地化部署限制了SaaS化营收——我们优先做云端平台，在有合规需求时支持混合部署。
+    </div>
+  </div>
+</section></div>
+
+<!-- ===== 六、里程碑规划 ===== -->
+<div class="container"><section class="section" id="roadmap">
+  <h2 class="section-title"><span class="num">6</span>里程碑规划</h2>
+  <p class="section-subtitle">从框架奠基到数据闭环——三阶段 24 周交付计划，竞品教训注入每一阶段</p>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot">1</div>
+      <div class="tl-content">
+        <h4>阶段一：框架奠基 <span class="tl-time">Week 1-6</span></h4>
+        <p>完成组织架构升级 + 设备管理模块 + M 系列数据对接——这是后续所有功能的底座。<strong>竞品对标：融梦/斯盛均经历过的"先上车后补票"式架构重构，我们要一次性做对。</strong></p>
+        <ul>
+          <li><strong>Week 1-2：</strong>组织架构方案 B 数据库设计与 migration、集团管理界面 PRD</li>
+          <li><strong>Week 2-3：</strong>教育局层级 level 字段 + 行政区划维度落地</li>
+          <li><strong>Week 3-4：</strong>集团实体开发 + 学校 school_group_id 关联</li>
+          <li><strong>Week 4-5：</strong>设备管理模块（注册/监控/OTA/生命周期）——融梦"APK离线更新"的反面教材</li>
+          <li><strong>Week 5-6：</strong>M 系列数据接口适配器开发 + 对接联调</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot">2</div>
+      <div class="tl-content">
+        <h4>阶段二：数据应用层构建 <span class="tl-time">Week 3-12</span></h4>
+        <p>与阶段一有 3 周重叠（Week 3-6 并行）——数据层和展示层同步推进。<strong>竞品对标：对标讯飞双级驾驶舱的指标设计成熟度，但用配置化规避斯盛的定制化陷阱。</strong></p>
+        <ul>
+          <li><strong>Week 3-5：</strong>体质健康档案数据模型设计与开发</li>
+          <li><strong>Week 5-8：</strong>校级数据看板（达标率/趋势/班级对比/学生下钻）</li>
+          <li><strong>Week 6-8：</strong>体测/体锻页面重构为统一智能筛选页</li>
+          <li><strong>Week 8-10：</strong>教育局端区域数据大屏（运动时长/设备在线率/政策指标——可配置）</li>
+          <li><strong>Week 8-12：</strong>教学内容管理模块——FITURE内容重资产的反面：不求量、求可用</li>
+          <li><strong>Week 10-12：</strong>赛事活动管理模块</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot">3</div>
+      <div class="tl-content">
+        <h4>阶段三：自主闭环 + 创新叠加 <span class="tl-time">Week 8-24</span></h4>
+        <p>与阶段二有 4 周重叠——平台能力基本成型后，叠加自研硬件和差异化创新。<strong>竞品对标：恒鸿达"采集→分析→干预"闭环的对标，但避开其医疗器械合规风险。</strong></p>
+        <ul>
+          <li><strong>Week 8-16：</strong>自研终端直连接口开发（硬件团队提供协议文档）</li>
+          <li><strong>Week 12-18：</strong>身心一体数据字段预留 + 情绪监测摄像头数据接入——行业首创</li>
+          <li><strong>Week 14-20：</strong>手环/手表数据接入（心率 + 网关）——避开恒鸿达儿童GPS隐私地雷</li>
+          <li><strong>Week 16-22：</strong>课后作业系统——补充大沩"考后粘性真空"的解法</li>
+          <li><strong>Week 18-24：</strong>M 系列适配器 → 自研终端直连的平滑切换 + 全量回归测试</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 关键交付节点 -->
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 16px;">关键交付里程碑</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>时间节点</th><th>交付物</th><th>验收标准</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600;">Week 3 末</td>
+          <td>组织架构升级上线</td>
+          <td>集团管理可用、教育局层级完整、school 双维度关联正常</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">Week 6 末</td>
+          <td>设备管理 + M 系列对接上线</td>
+          <td>设备注册/监控/OTA 可用、M 系列体测数据可在平台查看</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">Week 10 末</td>
+          <td>数据看板上线（校 + 区）</td>
+          <td>学校看板数据准确、教育局大屏可演示、指标可配置</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">Week 12 末</td>
+          <td>Phase 2A + 2B 功能完整交付</td>
+          <td>13 项能力完备度从平均 30% 提升至平均 70%</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">Week 20 末</td>
+          <td>自研终端集成完成</td>
+          <td>自研终端数据可在平台完整闭环，M 系列可脱钩</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">Week 24 末</td>
+          <td>Phase 2 全功能 GA</td>
+          <td>自主产品体系完整，可独立支撑销售交付</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section></div>
+
+<!-- ===== 七、关键决策汇总 ===== -->
+<div class="container"><section class="section" id="decisions">
+  <h2 class="section-title"><span class="num">7</span>关键决策汇总</h2>
+  <p class="section-subtitle">本阶段需要团队对齐的核心框架决策——每个决策都有明确的理据、影响面和竞品参照</p>
+
+  <div class="decision-card">
+    <span class="dc-num">1</span><span class="dc-title">集团独立实体，不与教育局混淆</span>
+    <div class="dc-reason">教育局管行政、集团管教学——两个维度的职责完全不同。混淆会导致权限模型失控、数据边界模糊。单独建实体是投入最小、扩展性最强的选择。<strong>竞品参照：8家竞品无此维度，是行业结构空白。</strong></div>
+  </div>
+
+  <div class="decision-card">
+    <span class="dc-num">2</span><span class="dc-title">一个学校只能属于一个教育局（必填），可选属于一个集团</span>
+    <div class="dc-reason">教育行政管理是严格的树形结构——一个学校只有一个行政主管单位。多教育局归属违反体制逻辑。集团归属为可选，因为不是所有学校都隶属教育集团。<strong>竞品参照：斯盛的"局-校"单一维度已证明不足以支撑集团化办学趋势。</strong></div>
+  </div>
+
+  <div class="decision-card">
+    <span class="dc-num">3</span><span class="dc-title">先对接 M 系列数据，再逐步替换——适配器模式过渡</span>
+    <div class="dc-reason">过渡期必须有数据来源——M 系列是现有客户的数据源，不能断。适配器模式确保后续自研硬件接入时，对平台改动最小（只换适配器，不动业务层）。<strong>竞品参照：融梦的6类硬件紧耦合→换硬件就换软件。</strong></div>
+  </div>
+
+  <div class="decision-card">
+    <span class="dc-num">4</span><span class="dc-title">设备管理模块全新建设，不修修补补</span>
+    <div class="dc-reason">M 系列运维平台"功能简陋、设备状态不实时、不准确"——修补意义不大。自研硬件也需要全新的设备管理能力（OTA、协议适配、边缘盒子管理），新建更高效。<strong>竞品参照：融梦APK离线更新的版本碎片化问题必须从Day 1避免。</strong></div>
+  </div>
+
+  <div class="decision-card">
+    <span class="dc-num">5</span><span class="dc-title">数据大屏以"运动时长"为核心指标，且指标可配置</span>
+    <div class="dc-reason">会议明确：教育局关注的是"时长"维度（每天中等强度 ≥2 小时），而非次数。产品设计必须从政策关键词出发，同时将指标抽象为可配置规则引擎。<strong>竞品参照：学习斯盛的政策敏感度，但避开其"一个局一套代码"的定制化陷阱。</strong></div>
+  </div>
+
+  <div class="decision-card">
+    <span class="dc-num">6</span><span class="dc-title">Phase 2 不做家长端和 C 端功能，聚焦 B2G 闭环</span>
+    <div class="dc-reason">会议明确家长端在 Phase 3（预研）阶段启动。当前阶段首要目标是"半年平替 M 系列"，资源必须集中在 B2G 核心能力。<strong>竞品参照：一视科技"有用户无平台"的困局警示——B2G闭环未完成前，C端是资源黑洞。</strong></div>
+  </div>
+</section></div>
+
+<!-- ===== 八、风险与对策 ===== -->
+<div class="container"><section class="section" id="risks">
+  <h2 class="section-title"><span class="num">8</span>风险识别与对策</h2>
+  <p class="section-subtitle">基于竞品教训和会议讨论，前置识别关键风险——每条风险都关联至少一家竞品的真实遭遇</p>
+
+  <div class="accordion">
+
+    <div class="acc-item open" onclick="this.classList.toggle('open')">
+      <div class="acc-hdr">🔴 风险一：组织架构迁移导致数据异常</div>
+      <div class="acc-body">
+        <strong>触发条件：</strong>现有学校-教育局关系已有数据，增加 school_group_id 和教育局层级字段时，历史数据迁移可能出错。<br><br>
+        <strong>竞品教训：</strong>M 系列数据库设计混乱——大量冗余表和重复数据。<br><br>
+        <strong>对策：</strong><br>
+        ① 迁移脚本先在生产数据副本上执行并做完整性校验<br>
+        ② school_group_id 默认为 null，不强制回填历史数据<br>
+        ③ 教育局 level 字段根据 parent_id 链自动计算，不手动填写
+      </div>
+    </div>
+
+    <div class="acc-item" onclick="this.classList.toggle('open')">
+      <div class="acc-hdr">🟡 风险二：M 系列接口不开放或协议不透明</div>
+      <div class="acc-body">
+        <strong>触发条件：</strong>M 系列数据接口文档不完善、协议闭源、或对方不配合对接。<br><br>
+        <strong>竞品教训：</strong>融梦的"全栈自研"策略因为外部硬件协议不透明而被迫自研硬件——我们也可能面临同样困境。<br><br>
+        <strong>对策：</strong><br>
+        ① 优先走已有合作关系获取接口文档<br>
+        ② 如接口不可得，通过数据库直连反向工程数据表结构<br>
+        ③ 最坏情况：仅做自研终端直连，M 系列数据在过渡期通过 CSV 导入
+      </div>
+    </div>
+
+    <div class="acc-item" onclick="this.classList.toggle('open')">
+      <div class="acc-hdr">🟡 风险三：自研硬件进度延迟，拖累平台节奏</div>
+      <div class="acc-body">
+        <strong>触发条件：</strong>RK3568/3588 核心板自研、边缘计算盒子开发、摄像头方案切换等硬件工作进度不及预期。<br><br>
+        <strong>竞品教训：</strong>融梦"6大硬件+全栈自研"但多处标注未完成——硬件研发的不确定性是行业通病。<br><br>
+        <strong>对策：</strong><br>
+        ① 平台侧优先完成 M 系列对接，确保无自研硬件也能独立运行<br>
+        ② 设备接入层设计为适配器模式——自研硬件 delay 不影响平台功能<br>
+        ③ 设置双周同步会，平台和硬件团队互通进度和阻塞点
+      </div>
+    </div>
+
+    <div class="acc-item" onclick="this.classList.toggle('open')">
+      <div class="acc-hdr">🔵 风险四：跨区域政策差异 → 配置复杂化</div>
+      <div class="acc-body">
+        <strong>触发条件：</strong>不同城市的考核指标、达标线、数据上报格式存在差异，组织架构 + 看板设计可能被政策差异打乱。<br><br>
+        <strong>竞品教训：</strong>斯盛"三零/三长"强绑定湘江新区，换一个局改一套代码。这是本规划最核心要规避的陷阱。<br><br>
+        <strong>对策：</strong><br>
+        ① 教育局维度的考核指标设计为可配置规则引擎<br>
+        ② 看板模板支持区域级定制（指标名称、达标线、单位）<br>
+        ③ 新区域接入走配置而非开发——这是 Day 1 的架构约束<br>
+        ④ 定期review：每接入一个新区域，复盘"有多少是配置、有多少是开发"
+      </div>
+    </div>
+
+    <div class="acc-item" onclick="this.classList.toggle('open')">
+      <div class="acc-hdr">🔵 风险五：产品完整度 vs 交付质量的平衡</div>
+      <div class="acc-body">
+        <strong>触发条件：</strong>会议讨论范围广（在售/在研/预研三板块、硬件/软件/算法三线），容易导致"什么都在做、什么都没做好"。<br><br>
+        <strong>竞品教训：</strong>融梦的彩页呈现"全场景"方案但脑图中多处"未开发完成"——这是产品完整度泡沫的典型案例。客户签约后可能面临"说好的功能还没上线"的交付落差。<br><br>
+        <strong>对策：</strong><br>
+        ① 本规划明确 Non-goals，不做未完成功能的承诺<br>
+        ② 每个Phase交付时严格执行验收标准，未完成的功能不宣称"已上线"<br>
+        ③ 竞品已踩的"完整度泡沫"坑，我们一步到位避开
+      </div>
+    </div>
+
+  </div>
+
+  <div class="insight insight-warn" style="margin-top: 24px;">
+    <div class="insight-l">风险总结</div>
+    <div class="insight-t">
+      最大风险不是技术实现，而是 <strong>方向不聚焦</strong>——会议中同时讨论了在售/在研/预研三个板块、硬件/软件/算法三条线。本规划的核心价值是 <strong>把在研阶段的软件平台优先级明确化</strong>：先完成组织架构 + 设备管理 + 数据大屏三大底座，再叠加内容/赛事/创新功能。<br><br>
+      <strong>更深层的风险来自竞品已踩过的坑：</strong>斯盛的定制化不可复制、融梦的完整度泡沫、恒鸿达的合规地雷——我们的规划在每个关键决策点都设置了对应的规避机制。不是规避竞争，是规避他们犯过的错误。
+    </div>
+  </div>
+</section></div>
+
+<!-- ===== 🆕 九、未来全景图 ===== -->
+<div class="pano-section" id="panorama">
+<div class="container"><section class="section" style="border-top:none;">
+  <h2 class="section-title"><span class="num">9</span>未来全景图</h2>
+  <p class="section-subtitle">从在售（Now）→ 在研（Next）→ 预研（Later），以竞品格差为牵引的三阶段演进路线</p>
+
+  <!-- 三阶段总览 -->
+  <div class="pano-evo-timeline">
+    <div class="pano-evo-node">
+      <div class="ev-year">2026 H1</div>
+      <div class="ev-label">🔵 在售 · Now</div>
+      <div class="ev-desc">M 系列硬件差异化升级<br>降本增效、维持市场<br><br><strong>平台侧：</strong><br>MVP 底座维持</div>
+    </div>
+    <div class="pano-evo-arrow">→</div>
+    <div class="pano-evo-node current">
+      <div class="ev-year">2026 H2</div>
+      <div class="ev-label">🟠 在研 · Next ★</div>
+      <div class="ev-desc">自主产品体系建设<br>半年平替 M 系列<br><br><strong>平台侧：</strong><br>本次规划主体<br>组织架构+设备+看板</div>
+    </div>
+    <div class="pano-evo-arrow">→</div>
+    <div class="pano-evo-node">
+      <div class="ev-year">2027+</div>
+      <div class="ev-label">🟣 预研 · Later</div>
+      <div class="ev-desc">AI 原生体育产品<br>数字学伴+个性化训练<br><br><strong>平台侧：</strong><br>家长端+C端+AI教练</div>
+    </div>
+  </div>
+
+  <!-- Phase 详细信息 -->
+  <div class="card-grid cols-3" style="margin-bottom: 32px;">
+    <div class="pano-phase-card ph-now">
+      <span class="ph-badge now-badge">🔵 Phase 1 · 在售（Now）</span>
+      <h3>硬件升级维持市场</h3>
+      <div class="ph-time">2026 H1 · 进行中</div>
+      <div class="ph-desc">
+        <strong>策略：</strong>基于 M 系列外购硬件做差异化升级（4G开关、前开盖设计、AES67广播），降本增效。<br><br>
+        <strong>竞品站位：</strong>对标融梦的6类硬件路径，但我们选择"外购+差异化改造"而非重资产自研起步——避免融梦"6大硬件多处未完成"的交付泡沫。<br><br>
+        <strong>平台侧：</strong>MVP底座维护，为Phase 2的架构升级做数据准备。
+      </div>
+      <div class="ph-items">
+        <span class="tag" style="background:#e2e8f0;color:#475569;">M 系列硬件</span>
+        <span class="tag" style="background:#e2e8f0;color:#475569;">降本增效</span>
+        <span class="tag" style="background:#e2e8f0;color:#475569;">市场维持</span>
+      </div>
+    </div>
+
+    <div class="pano-phase-card ph-next">
+      <span class="ph-badge next-badge">🟠 Phase 2 · 在研（Next）★ 本规划</span>
+      <h3>自主产品体系完整闭环</h3>
+      <div class="ph-time">2026 H2 · 本次规划主体</div>
+      <div class="ph-desc">
+        <strong>策略：</strong>组织架构升级（集团+行政区划）+ 设备管理 + 数据看板 + 教学内容 + 赛事管理 + 自研硬件集成。<br><br>
+        <strong>竞品格差：</strong>集团维度（行业空白）、配置化规则引擎（斯盛做不到的）、身心一体软件化（恒鸿达医疗器械路线的反面）、统一数据字典（融梦数据不一致的反面）。<br><br>
+        <strong>完成后状态：</strong>平台能力完备度 70%，可独立支撑 B2G 销售交付。
+      </div>
+      <div class="ph-items">
+        <span class="tag tag-amber">集团管理</span>
+        <span class="tag tag-amber">设备管理</span>
+        <span class="tag tag-amber">数据大屏</span>
+        <span class="tag tag-amber">赛事管理</span>
+        <span class="tag tag-amber">教学内容</span>
+        <span class="tag tag-amber">身心一体</span>
+      </div>
+    </div>
+
+    <div class="pano-phase-card ph-later">
+      <span class="ph-badge later-badge">🟣 Phase 3 · 预研（Later）</span>
+      <h3>AI 原生 + C 端突破</h3>
+      <div class="ph-time">2027+ · Phase 2 完成后启动</div>
+      <div class="ph-desc">
+        <strong>策略：</strong>AI体育教练、数字学伴、个性化训练方案。家长端上线（差异化核心）。口袋机器人 + 利旧盒子双形态硬件。从B2G向B2G2C扩展。<br><br>
+        <strong>竞品格差：</strong>家长端（斯盛未完善/融梦无独立家长端，行业最大空白）、AI教练（讯飞星火和FITURE都在做但方向不同——我们从运动科学切入而非大模型生成）、利旧盒子（一视的边缘计算终端的平替方案）。
+      </div>
+      <div class="ph-items">
+        <span class="tag tag-purple">家长端</span>
+        <span class="tag tag-purple">AI 体育教练</span>
+        <span class="tag tag-purple">数字学伴</span>
+        <span class="tag tag-purple">口袋机器人</span>
+        <span class="tag tag-purple">利旧盒子</span>
+        <span class="tag tag-purple">C 端突破</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 能力演进全景图 -->
+  <h3 style="font-size:20px;font-weight:800;margin-bottom:6px;">核心能力演进全景</h3>
+  <p style="color:var(--text-secondary);font-size:14px;margin-bottom:24px;">从 MVP → Phase 2 → Phase 3，每条能力线的成长路径和竞品对标</p>
+
+  <div class="pano-cap-grid">
+    <div class="pano-cap-item">
+      <h4>🏛️ 组织架构管理</h4>
+      <p>MVP：教育局树形结构（60%）<br>→ Phase 2：+集团+行政区划（90%）<br>→ Phase 3：+俱乐部+跨区域联邦</p>
+      <div class="cap-status-bar"><div class="cap-fill now" style="width:60%;"></div></div>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:6px;">竞品格差：8家中唯一有集团维度的平台</p>
+    </div>
+    <div class="pano-cap-item">
+      <h4>📊 数据看板</h4>
+      <p>MVP：无（0%）<br>→ Phase 2：校/区双级+可配置（80%）<br>→ Phase 3：AI预测+个性化报告</p>
+      <div class="cap-status-bar"><div class="cap-fill next" style="width:0%;"></div></div>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:6px;">对标讯飞指标设计+超越斯盛配置化</p>
+    </div>
+    <div class="pano-cap-item">
+      <h4>🔌 设备管理</h4>
+      <p>MVP：基础注册（20%）<br>→ Phase 2：OTA+生命周期+双轨（85%）<br>→ Phase 3：AI预测性维护</p>
+      <div class="cap-status-bar"><div class="cap-fill next" style="width:20%;"></div></div>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:6px;">融梦APK离线更新的反面：OTA集中管控</p>
+    </div>
+    <div class="pano-cap-item">
+      <h4>🧠 AI 运动识别</h4>
+      <p>MVP：屏体端7项目（30%）<br>→ Phase 2：+自研算法更多项目（55%）<br>→ Phase 3：+AI教练+实时纠错</p>
+      <div class="cap-status-bar"><div class="cap-fill next" style="width:30%;"></div></div>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:6px;">对标融梦AI已备案+超越讯飞大模型</p>
+    </div>
+    <div class="pano-cap-item">
+      <h4>📚 教学内容</h4>
+      <p>MVP：无（0%）<br>→ Phase 2：分层资源库（40%）<br>→ Phase 3：AI教案+个性化推荐</p>
+      <div class="cap-status-bar"><div class="cap-fill next" style="width:0%;"></div></div>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:6px;">避FITURE重资产路线，先可用再丰富</p>
+    </div>
+    <div class="pano-cap-item">
+      <h4>❤️ 身心一体</h4>
+      <p>MVP：无（0%）<br>→ Phase 2：数据预留+基础接入（30%）<br>→ Phase 3：完整身心关联分析</p>
+      <div class="cap-status-bar"><div class="cap-fill later" style="width:0%;"></div></div>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:6px;">行业首创：软件化路线避医疗器械风险</p>
+    </div>
+  </div>
+
+  <!-- 竞品格差全览 -->
+  <h3 style="font-size:20px;font-weight:800;margin:36px 0 16px;">竞品格差：我们的差异化优势全景</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>差异化维度</th><th>我们的策略</th><th>竞品状态</th><th>格差</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>集团学校管理</strong></td>
+          <td>独立集团实体 + 双维度组织模型</td>
+          <td>斯盛/融梦/讯飞/恒鸿达均无此维度</td>
+          <td style="color:#059669;font-weight:700;">行业空白</td>
+        </tr>
+        <tr>
+          <td><strong>跨区域配置化</strong></td>
+          <td>政策指标规则引擎 + 看板模板定制</td>
+          <td>斯盛强定制不可复制（反面教材）</td>
+          <td style="color:#059669;font-weight:700;">产品化领先</td>
+        </tr>
+        <tr>
+          <td><strong>身心一体</strong></td>
+          <td>软件化数据关联分析（非医疗器械）</td>
+          <td>恒鸿达走医疗器械路线（有监管风险）；其他6家无</td>
+          <td style="color:#059669;font-weight:700;">行业首创</td>
+        </tr>
+        <tr>
+          <td><strong>设备管理</strong></td>
+          <td>OTA集中管控 + 适配器双轨模式</td>
+          <td>融梦APK离线更新→版本碎片化</td>
+          <td style="color:#f59e0b;font-weight:700;">运维优势</td>
+        </tr>
+        <tr>
+          <td><strong>家长端</strong></td>
+          <td>Phase 3 启动（有明确规划）</td>
+          <td>斯盛未完善/融梦无独立家长端/大沩无</td>
+          <td style="color:#f59e0b;font-weight:700;">预研领先</td>
+        </tr>
+        <tr>
+          <td><strong>硬件策略</strong></td>
+          <td>标准摄像头+盒子（轻量化）</td>
+          <td>融梦6类硬件（重资产）; 恒鸿达最广品类（合规风险）</td>
+          <td style="color:#059669;font-weight:700;">策略领先</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 终局愿景 -->
+  <div class="highlight-box" style="margin-top: 28px;">
+    <h3>🎯 终局愿景：智慧体育的「操作系统」</h3>
+    <p>
+      <strong>Phase 3 完成后的目标状态：</strong>我们的平台不是"又一个智慧体育工具"，而是<strong>连接教育局、学校、集团、教师、学生、家长的体育教育操作系统</strong>。<br><br>
+      <strong>与竞品的根本差异：</strong><br>
+      &nbsp;&nbsp;vs 斯盛——我们不只做"一个局的定制项目"，而是可跨区域配置的产品化平台<br>
+      &nbsp;&nbsp;vs 融梦——我们不追求"全场景"的PPT完整度，而是每个交付功能的真实可用<br>
+      &nbsp;&nbsp;vs 恒鸿达——我们不涉足医疗器械，用软件化路线实现身心一体<br>
+      &nbsp;&nbsp;vs 讯飞——我们不是大厂的"第N场景"，而是专注于体育教育的深耕平台<br>
+      &nbsp;&nbsp;vs 一视/大沩——我们不只是硬件供应商，而是软硬一体的完整方案<br>
+      &nbsp;&nbsp;vs FITURE——我们不做内容重资产，用AI降低内容生产和分发的边际成本<br>
+      &nbsp;&nbsp;vs 广东先知——我们不做单城市深度绑定，而是多区域可配置的标准化产品<br><br>
+      <strong>三阶段演进的核心逻辑：</strong>先在研（Phase 2）阶段建立不可替代的底座（组织架构+设备管理+数据看板）——这些能力一旦建成，后续无论是加家长端、加AI教练、加个性化训练，都是在同一底座上做加法，而非另起炉灶。<strong>竞品在Phase 2阶段能做的事，我们做；竞品做不到的（集团维度/配置化/身心一体软件化），我们也做——这就是从"追平"到"超越"的路径。</strong>
+    </p>
+  </div>
+</section></div>
+</div>
+
+<!-- ===== 总结 ===== -->
+<div class="container"><section class="section">
+  <div class="highlight-box" style="margin-top:0;">
+    <h3>📋 下一阶段规划总结</h3>
+    <p>
+      <strong>起点：</strong>已有 MVP 底座（多级组织架构 + 数据字典 + 人员管理 + 7 项目屏体端）<br><br>
+      <strong>核心框架决策：</strong>集团独立实体（方案 B），学校行政归属教育局（必填）+ 可选归属集团。教育局层级通过 parent_id + level 实现<br><br>
+      <strong>三大建设阶段：</strong><br>
+      &nbsp;&nbsp;🔴 Phase 2A（Week 1-6）：组织架构升级 + 设备管理 + M 系列对接 —— 框架奠基<br>
+      &nbsp;&nbsp;🟡 Phase 2B（Week 3-12）：数据看板 + 页面重构 + 教学内容 + 赛事管理 —— 上屋建瓴<br>
+      &nbsp;&nbsp;🟢 Phase 2C（Week 8-24）：自研终端集成 + 身心一体 + 手环 + 作业系统 —— 创新闭环<br><br>
+      <strong>竞品「扬长避短·抓漏·扩展」策略：</strong>以配置化避斯盛定制化之短、以集团维度/家长端/身心一体抓行业空白、从B2G向B2G2C扩展<br><br>
+    </p>
+  </div>
+
+  <div class="summary-box">
+    <h3 style="color:#065f46;margin-bottom:12px;">🎯 下一步行动建议</h3>
+    <ol style="padding-left:20px;line-height:2;font-size:14px;">
+      <li><strong>本文档团队评审（1 天内）：</strong>核心团队对齐组织架构方案 B、三阶段规划、非目标清单、竞品策略</li>
+      <li><strong>DBA + 后端技术评审（Week 1）：</strong>school_group 表设计、教育局 level 字段、数据迁移方案</li>
+      <li><strong>集团管理 PRD（Week 1-2）：</strong>集团管理界面、权限模型、跨校数据查看范围</li>
+      <li><strong>设备管理 PRD（Week 2-3）：</strong>设备注册、状态监控、OTA、生命周期、渠道追溯——融梦APK离线更新的反面教材</li>
+      <li><strong>M 系列接口调研（Week 1-2）：</strong>获取接口文档、评估对接工作量、识别协议盲区</li>
+      <li><strong>双周回顾机制启动（Week 2 起）：</strong>平台 + 硬件 + 算法三线同步进度和阻塞点</li>
+      <li><strong>竞品策略对照检查（每月）：</strong>回顾每个功能是否在"扬长避短·抓漏·扩展"框架下推进</li>
+    </ol>
+  </div>
+</section></div>
+
+<footer>
+  <p>智慧体育平台 · 下一阶段发展规划 &nbsp;|&nbsp; 2026年6月</p>
+</footer>
+
+<script>
+const secs = document.querySelectorAll('section[id]');
+const nls = document.querySelectorAll('nav .links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if(window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  nls.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#'+cur); });
+});
+nls.forEach(a => { a.addEventListener('click', () => { a.parentElement.classList.remove('open'); }); });
+</script>
+</body>
+</html>
