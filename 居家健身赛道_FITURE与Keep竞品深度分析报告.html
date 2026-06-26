@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="scroll-behavior: smooth;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>居家健身赛道 · FITURE与Keep竞品深度分析</title>
+<style>
+  :root {
+    --bg: #1F2937;
+    --card: #2D3543;
+    --text: #F8FAFC;
+    --muted: #94A3B8;
+    --orange: #F97316;
+    --green: #22C55E;
+    --red: #EF4444;
+    --purple: #A78BFA;
+    --blue: #3B82F6;
+    --cyan: #06B6D4;
+    --yellow: #EAB308;
+    --radius: 16px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+  }
+
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    height: 64px; padding: 0 48px;
+    background: rgba(31,41,55,0.95); border-bottom: 1px solid rgba(148,163,184,0.1);
+    backdrop-filter: blur(20px);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .nav-dot {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--orange); display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px; color: #fff;
+  }
+  .nav-title { font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+  .nav-tabs { display: flex; gap: 28px; }
+  .nav-tab { font-size: 13px; color: var(--muted); cursor: pointer; transition: .2s; text-decoration: none; }
+  .nav-tab:hover, .nav-tab.active { color: var(--orange); }
+  .nav-badge {
+    padding: 6px 14px; border-radius: 20px;
+    background: rgba(249,115,22,0.15); color: var(--orange); font-size: 12px;
+  }
+
+  section { padding: 64px 48px; scroll-margin-top: 72px; }
+  .section-label {
+    font-size: 12px; font-weight: 600; color: var(--orange); letter-spacing: 2.5px;
+    text-transform: uppercase; margin-bottom: 28px;
+  }
+  .section-intro {
+    font-size: 15px; color: var(--muted); margin-bottom: 32px; line-height: 1.8;
+  }
+  .section-intro strong { color: var(--text); }
+
+  .hero { text-align: center; padding: 20px 0 40px; }
+  .hero h1 { font-size: 52px; font-weight: 800; letter-spacing: -1px; }
+  .hero h1 span { color: var(--orange); }
+  .hero p { font-size: 16px; color: var(--muted); margin-top: 12px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+
+  .card {
+    padding: 28px; border-radius: var(--radius); background: var(--card);
+  }
+  .card-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+  }
+  .card-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .card-badge.xint { background: rgba(59,130,246,0.15); color: var(--blue); }
+  .card-badge.body { background: rgba(6,182,212,0.15); color: var(--cyan); }
+  .card-badge.fiture { background: rgba(249,115,22,0.15); color: var(--orange); }
+  .card-badge.keep { background: rgba(234,179,8,0.15); color: var(--yellow); }
+
+  .card-icon {
+    width: 48px; height: 48px; border-radius: 12px; display: flex;
+    align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;
+  }
+  .card-icon.xint { background: rgba(59,130,246,0.2); }
+  .card-icon.body { background: rgba(6,182,212,0.2); }
+  .card-icon.fiture { background: rgba(249,115,22,0.2); }
+  .card-icon.keep { background: rgba(234,179,8,0.2); }
+  .card-icon.ext { background: rgba(167,139,250,0.2); }
+
+  .card-title { font-size: 20px; font-weight: 700; }
+  .card-subtitle { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  .info-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; font-size: 13px;
+  }
+  .info-row:not(:last-child) { border-bottom: 1px solid rgba(148,163,184,0.08); }
+  .info-label { color: var(--muted); min-width: 90px; }
+  .info-value { text-align: right; font-weight: 600; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .tag {
+    padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 500;
+  }
+  .tag.blue { background: rgba(59,130,246,0.15); color: var(--blue); }
+  .tag.cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+  .tag.orange { background: rgba(249,115,22,0.15); color: var(--orange); }
+  .tag.green { background: rgba(34,197,94,0.15); color: var(--green); }
+  .tag.red { background: rgba(239,68,68,0.15); color: var(--red); }
+  .tag.purple { background: rgba(167,139,250,0.15); color: var(--purple); }
+  .tag.yellow { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .tag.muted { background: rgba(148,163,184,0.12); color: var(--muted); }
+
+  .highlight-box {
+    padding: 20px; border-radius: 12px; margin: 16px 0;
+    font-size: 13px; color: var(--muted); line-height: 1.8;
+  }
+  .highlight-box.blue { background: rgba(59,130,246,0.08); border-left: 3px solid var(--blue); }
+  .highlight-box.cyan { background: rgba(6,182,212,0.08); border-left: 3px solid var(--cyan); }
+  .highlight-box.orange { background: rgba(249,115,22,0.08); border-left: 3px solid var(--orange); }
+  .highlight-box.yellow { background: rgba(234,179,8,0.08); border-left: 3px solid var(--yellow); }
+  .highlight-box.red { background: rgba(239,68,68,0.08); border-left: 3px solid var(--red); }
+  .highlight-box.purple { background: rgba(167,139,250,0.08); border-left: 3px solid var(--purple); }
+
+  .table-wrap {
+    border-radius: var(--radius); background: var(--card); overflow-x: auto; margin-top: 12px;
+  }
+  .table-wrap table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 900px; }
+  .table-wrap th {
+    background: rgba(249,115,22,0.1); color: var(--orange);
+    padding: 14px 16px; text-align: left; font-weight: 600; font-size: 12px;
+    white-space: nowrap;
+  }
+  .table-wrap td {
+    padding: 12px 16px; border-bottom: 1px solid rgba(148,163,184,0.08);
+    color: var(--muted); vertical-align: top; line-height: 1.7; font-size: 12px;
+  }
+  .table-wrap .td-head { color: var(--text); font-weight: 600; white-space: nowrap; }
+  .table-wrap .td-green { color: var(--green); font-weight: 600; }
+  .table-wrap .td-orange { color: var(--orange); font-weight: 600; }
+  .table-wrap .td-blue { color: var(--blue); font-weight: 600; }
+  .table-wrap .td-cyan { color: var(--cyan); font-weight: 600; }
+  .table-wrap .td-yellow { color: var(--yellow); font-weight: 600; }
+  .table-wrap .td-red { color: var(--red); font-weight: 600; }
+  .table-wrap .td-purple { color: var(--purple); font-weight: 600; }
+
+  .strategy-card {
+    padding: 24px; border-radius: var(--radius); background: var(--card);
+  }
+  .strategy-badge {
+    display: inline-block; padding: 4px 12px; border-radius: 20px;
+    font-size: 11px; font-weight: 600; margin-bottom: 12px;
+  }
+  .strategy-badge.p0 { background: rgba(239,68,68,0.12); color: var(--red); }
+  .strategy-badge.p1 { background: rgba(249,115,22,0.12); color: var(--orange); }
+  .strategy-badge.p2 { background: rgba(34,197,94,0.12); color: var(--green); }
+  .strategy-badge.p3 { background: rgba(167,139,250,0.12); color: var(--purple); }
+  .strategy-title { font-size: 19px; font-weight: 700; margin-bottom: 10px; }
+  .strategy-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 14px; }
+  .strategy-metric {
+    padding: 12px 16px; border-radius: 10px; background: rgba(45,53,67,0.6);
+    font-size: 12px; font-weight: 700;
+  }
+
+  /* Group architecture diagram */
+  .arch-row {
+    display: flex; align-items: center; gap: 20px; justify-content: center;
+    flex-wrap: wrap; padding: 24px 0;
+  }
+  .arch-block {
+    padding: 20px 24px; border-radius: 12px; text-align: center; min-width: 130px;
+  }
+  .arch-block.parent {
+    background: rgba(249,115,22,0.12); border: 2px solid rgba(249,115,22,0.3);
+  }
+  .arch-block.child {
+    background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2);
+  }
+  .arch-block.sub {
+    background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.2);
+  }
+  .arch-name { font-size: 16px; font-weight: 700; }
+  .arch-desc { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .arch-arrow { font-size: 24px; color: var(--muted); }
+
+  .vs-col { flex: 1; min-width: 280px; }
+  .vs-divider {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: var(--orange);
+    width: 60px; flex-shrink: 0;
+  }
+
+  .evidence-box {
+    padding: 18px; border-radius: 10px; margin: 12px 0;
+    background: rgba(45,53,67,0.5); font-size: 12.5px; color: var(--muted); line-height: 1.7;
+  }
+  .evidence-box strong { color: var(--text); }
+  .evidence-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; border-radius: 6px; font-size: 11px; font-weight: 700;
+    margin-right: 8px; flex-shrink: 0;
+  }
+  .evidence-num.orange { background: rgba(249,115,22,0.2); color: var(--orange); }
+
+  .product-card-mini {
+    padding: 16px; border-radius: 10px; background: rgba(45,53,67,0.5);
+    border: 1px solid rgba(148,163,184,0.08);
+  }
+  .product-card-mini .pname { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .product-card-mini .pmeta { font-size: 11px; color: var(--muted); line-height: 1.6; }
+  .product-card-mini .pprice { font-size: 13px; font-weight: 700; margin-top: 8px; }
+  .product-card-mini .pprice.orange { color: var(--orange); }
+  .product-card-mini .pprice.cyan { color: var(--cyan); }
+  .product-card-mini .pprice.yellow { color: var(--yellow); }
+
+  /* 同赛道品牌卡片 */
+  .brand-card {
+    padding: 18px 20px; border-radius: 12px; background: rgba(45,53,67,0.5);
+    border: 1px solid rgba(148,163,184,0.08);
+  }
+  .brand-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .brand-tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin: 8px 0 6px; }
+  .brand-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* 扩展关注样式 */
+  .ext-section { border-top: 2px dashed rgba(167,139,250,0.2); }
+  .ext-label {
+    font-size: 12px; font-weight: 600; color: var(--purple); letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  hr { border: none; border-top: 1px solid rgba(148,163,184,0.08); margin: 0 48px; }
+  .footer {
+    text-align: center; padding: 32px 40px; color: var(--muted); font-size: 12px;
+    border-top: 1px solid rgba(148,163,184,0.1);
+  }
+
+  @media (max-width: 860px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    section { padding: 32px 20px; }
+    .nav { padding: 0 20px; }
+    .nav-tabs { display: none; }
+    .arch-row { flex-direction: column; }
+    .arch-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nav-dot">📊</div>
+    <span class="nav-title">居家健身赛道 · 竞品深度分析</span>
+  </div>
+  <div class="nav-tabs">
+    <a class="nav-tab active" href="#section-overview">总览</a>
+    <a class="nav-tab" href="#section-fiture">FITURE集团</a>
+    <a class="nav-tab" href="#section-keep">Keep Station</a>
+    <a class="nav-tab" href="#section-strategy">战略研判</a>
+    <a class="nav-tab" href="#section-xintlabs">扩展关注</a>
+  </div>
+  <span class="nav-badge">2026年6月26日</span>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="section-overview">
+  <div class="hero">
+    <h1>居家健身赛道<span> · 竞品深度分析</span></h1>
+    <p>FITURE集团全品牌矩阵（5款魔镜 + BodyPark双线）× Keep Station体感运动主机<br>两条路径、多款产品、一个赛道 — 谁在定义下一代居家健身？</p>
+  </div>
+
+  <!-- 快速定位导航 -->
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:32px">
+    <a href="#section-fiture" style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:24px;background:rgba(249,115,22,0.12);border:1px solid rgba(249,115,22,0.25);color:var(--orange);font-size:13px;font-weight:600;text-decoration:none;transition:.2s" onmouseover="this.style.background='rgba(249,115,22,0.2)'" onmouseout="this.style.background='rgba(249,115,22,0.12)'">
+      🪞 第一章 · FITURE 集团全面分析
+    </a>
+    <a href="#section-keep" style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:24px;background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.25);color:var(--yellow);font-size:13px;font-weight:600;text-decoration:none;transition:.2s" onmouseover="this.style.background='rgba(234,179,8,0.2)'" onmouseout="this.style.background='rgba(234,179,8,0.12)'">
+      📦 第二章 · Keep Station 分析
+    </a>
+    <a href="#section-strategy" style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:24px;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.25);color:var(--green);font-size:13px;font-weight:600;text-decoration:none;transition:.2s" onmouseover="this.style.background='rgba(34,197,94,0.2)'" onmouseout="this.style.background='rgba(34,197,94,0.12)'">
+      🎯 第三章 · PM 战略研判
+    </a>
+    <a href="#section-xintlabs" style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:24px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.25);color:var(--purple);font-size:13px;font-weight:600;text-decoration:none;transition:.2s" onmouseover="this.style.background='rgba(167,139,250,0.2)'" onmouseout="this.style.background='rgba(167,139,250,0.12)'">
+      ⛳ 扩展关注 · XintLabs
+    </a>
+  </div>
+
+  <!-- 快速索引卡片 -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon fiture">🪞</div>
+        <div>
+          <div class="card-title">FITURE 集团</div>
+          <div class="card-subtitle">5款魔镜 + BodyPark双线 · 行业龙头</div>
+        </div>
+      </div>
+      <span class="card-badge fiture">第一章 · 核心分析</span>
+      <div class="info-row"><span class="info-label">赛道定位</span><span class="info-value" style="color:var(--orange)">大屏居家健身 · 全场景</span></div>
+      <div class="info-row"><span class="info-label">核心能力</span><span class="info-value">大屏团课 + 真人私教</span></div>
+      <div class="info-row"><span class="info-label">产品阶段</span><span class="info-value" style="color:var(--green)">成熟运营 · 60%+市场份额</span></div>
+      <div class="info-row"><span class="info-label">价格带</span><span class="info-value">¥0 ~ ¥7,500</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon keep">📦</div>
+        <div>
+          <div class="card-title">Keep Station</div>
+          <div class="card-subtitle">Keep · 2023 · 体感运动主机</div>
+        </div>
+      </div>
+      <span class="card-badge keep">第二章 · 核心分析</span>
+      <div class="info-row"><span class="info-label">赛道定位</span><span class="info-value" style="color:var(--yellow)">客厅体感互动健身</span></div>
+      <div class="info-row"><span class="info-label">核心能力</span><span class="info-value">双目视觉 + K豆IMU融合</span></div>
+      <div class="info-row"><span class="info-label">产品阶段</span><span class="info-value" style="color:var(--red)">上市 · 销量未达预期</span></div>
+      <div class="info-row"><span class="info-label">价格带</span><span class="info-value">¥1,799 ~ ¥2,049</span></div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- ═══════════ 第一章：FITURE 集团全面分析 ═══════════ -->
+<section id="section-fiture">
+  <div class="section-label">第一章 · FITURE 集团全面分析 — 全品牌矩阵 × 收购战略 × 生态闭环</div>
+
+  <!-- 1.1 集团架构图 -->
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title" style="margin-bottom:18px;text-align:center">FITURE 集团品牌架构</div>
+    <div class="arch-row">
+      <div class="arch-block parent">
+        <div class="arch-name" style="color:var(--orange)">FITURE 集团</div>
+        <div class="arch-desc">2019 成立 · ~3.8亿美元融资</div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="arch-block child" style="width:100%">
+          <div class="arch-name" style="color:var(--blue)">FITURE 魔镜</div>
+          <div class="arch-desc">自有品牌 · 5款立式大屏硬件</div>
+        </div>
+        <div class="arch-block sub">
+          <div class="arch-name" style="color:var(--cyan)">BodyPark 型动公园</div>
+          <div class="arch-desc">2024 收购 · 独立运营子品牌</div>
+        </div>
+      </div>
+      <div class="arch-arrow">=</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;max-width:260px;justify-content:center">
+        <span class="tag orange">尊享版</span><span class="tag orange">旗舰版</span>
+        <span class="tag orange">Mini</span><span class="tag orange">SLiM</span>
+        <span class="tag orange">3PLUS</span>
+        <span class="tag cyan">BodyPark APP</span>
+        <span class="tag cyan">ATOM</span>
+      </div>
+    </div>
+    <div style="text-align:center;font-size:12px;color:var(--muted);margin-top:12px">
+      尊享、旗舰、Mini、SLiM、3PLUS 全部属于 FITURE 自有魔镜产品线 · BodyPark（APP+ATOM）是收购独立子品牌，不属于魔镜系列
+    </div>
+  </div>
+
+  <!-- 1.2 FITURE魔镜五款产品详解 -->
+  <div class="card" style="margin-bottom:20px">
+    <div class="card-title" style="margin-bottom:18px">FITURE 魔镜产品矩阵 — 5款大屏硬件全维度对比</div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:16px">全部产品均为纯单目视觉采集，无穿戴IMU传感器，只能做徒手通用健身。Motion Engine算法引擎，33点远距离全身骨骼识别。</p>
+    <div class="table-wrap" style="margin-top:0">
+      <table>
+        <thead>
+          <tr>
+            <th>维度</th>
+            <th>尊享版</th>
+            <th>初代旗舰</th>
+            <th>Mini</th>
+            <th>SLiM</th>
+            <th>3PLUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-head">发布时间</td>
+            <td>2020.10</td>
+            <td>2021.06</td>
+            <td>2021.11</td>
+            <td>初代2020底 / 新款2025</td>
+            <td>2022.06</td>
+          </tr>
+          <tr>
+            <td class="td-head">集团角色</td>
+            <td class="td-orange">高端顶配</td>
+            <td>主力走量标准款</td>
+            <td>入门低价</td>
+            <td>中端轻薄小户型</td>
+            <td class="td-orange">新一代旗舰</td>
+          </tr>
+          <tr>
+            <td class="td-head">屏幕</td>
+            <td>43寸 4K 超清</td>
+            <td>43寸 1080P</td>
+            <td>43寸缩小尺寸 1080P</td>
+            <td>43寸 仅34mm超薄 1080P防眩光</td>
+            <td>43寸 4K超清防眩光</td>
+          </tr>
+          <tr>
+            <td class="td-head">影音</td>
+            <td>大功率原生音响 64G存储</td>
+            <td>双声道AAC 32G存储</td>
+            <td>简化音响 32G存储</td>
+            <td>哈曼卡顿2.1音响 RGB氛围灯 原生K歌</td>
+            <td>哈曼卡顿专业音响 完整K歌+氛围灯</td>
+          </tr>
+          <tr>
+            <td class="td-head">AI引擎</td>
+            <td>Motion Engine 1.0</td>
+            <td>Motion Engine 1.0</td>
+            <td>Motion Engine 1.0</td>
+            <td>Motion Engine 2.0</td>
+            <td>Motion Engine 2.0</td>
+          </tr>
+          <tr>
+            <td class="td-head">识别精度</td>
+            <td>33点远距离，近距离一般</td>
+            <td>33点远距离，代偿识别弱</td>
+            <td>33点基础，广角偏小</td>
+            <td>33点优化骨盆/脚踝</td>
+            <td class="td-green">33点远近双优化，精度最高</td>
+          </tr>
+          <tr>
+            <td class="td-head">课程</td>
+            <td>5000+录播团课</td>
+            <td>5000+录播课</td>
+            <td>4000+基础课</td>
+            <td>6000+全品类+孕产/少儿+K歌</td>
+            <td>6000+全品类最全</td>
+          </tr>
+          <tr>
+            <td class="td-head">私教</td>
+            <td>需额外付费开通</td>
+            <td>增值付费，流程繁琐</td>
+            <td>可付费接入</td>
+            <td class="td-green">原生内置一键入口</td>
+            <td class="td-green">原生打通全套私教</td>
+          </tr>
+          <tr>
+            <td class="td-head">价格</td>
+            <td class="td-orange">¥7,000-7,500</td>
+            <td>¥3,699</td>
+            <td>¥2,599</td>
+            <td>¥3,000-3,800</td>
+            <td class="td-orange">¥5,999</td>
+          </tr>
+          <tr>
+            <td class="td-head">部署</td>
+            <td>固定居家 1㎡+ 搬运笨重</td>
+            <td>常规客厅 不可随身</td>
+            <td>小户型 落地摆放</td>
+            <td>租房友好 占地更小</td>
+            <td>居家固定 轻薄与影音兼顾</td>
+          </tr>
+          <tr>
+            <td class="td-head">核心优势</td>
+            <td>4K大屏 离线存储 有氧沉浸强</td>
+            <td>均衡性价比 线下售后完善</td>
+            <td>最低大屏门槛</td>
+            <td>超薄省空间 配色年轻 K歌影音</td>
+            <td>4K+哈曼卡顿顶级影音 训练最稳定</td>
+          </tr>
+          <tr>
+            <td class="td-head">核心短板</td>
+            <td>机身厚重 无K歌 强制年费</td>
+            <td>体态纠错弱 必须年年买会员</td>
+            <td>屏幕小 无娱乐</td>
+            <td>无4K 轻薄机身低音弱</td>
+            <td>单价偏高 一次性投入高</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 1.3 BodyPark 双线详解 -->
+  <div class="card" style="margin-bottom:20px">
+    <div class="card-title" style="margin-bottom:18px">BodyPark 型动公园 — 收购子品牌 · 双线产品</div>
+    <div class="grid-2">
+      <div class="product-card-mini" style="border-color:rgba(6,182,212,0.15)">
+        <div class="pname" style="color:var(--cyan)">📱 BodyPark APP（纯软件）</div>
+        <div class="pmeta">
+          2021年品牌创立时同步上线 · 独立免费下载 · 无硬件绑定<br>
+          调用手机普通单目摄像头 · DeepBody Engine · 34骨骼点<br>
+          核心变现：1v1真人私教 ¥39.9/节 · 月度畅练会员 ¥49-59<br>
+          <strong style="color:var(--green)">集团普惠型线上私教服务入口 · 零硬件零预算即可上课</strong>
+        </div>
+        <div class="pprice cyan">¥0 下载 · 私教 ¥39.9起/节</div>
+      </div>
+      <div class="product-card-mini" style="border-color:rgba(6,182,212,0.15)">
+        <div class="pname" style="color:var(--cyan)">🎥 ATOM 便携摄像盒（实体硬件）</div>
+        <div class="pmeta">
+          2025.11海外众筹 · 2026国内发售 · 仅155g · 口袋可携带<br>
+          160°超广角单目相机 · DeepBody Engine优化 · 34骨骼点<br>
+          独立OLED状态屏 · 磁吸/三脚架摆放 · 无大屏沉浸体验<br>
+          <strong style="color:var(--cyan)">私教配套高精度采集外设 · 体态代偿识别精度行业顶尖</strong>
+        </div>
+        <div class="pprice cyan">¥1,200-1,500 · ATOM会员 ¥479/年</div>
+      </div>
+    </div>
+    <div style="text-align:center;font-size:12px;color:var(--muted);margin-top:16px">
+      BodyPark全系技术统一共性：纯单目视觉，无穿戴IMU传感器，只能做徒手通用健身。算法独立自研，但可复用FITURE 6000+录播课程数据。
+    </div>
+  </div>
+
+  <!-- 1.4 FITURE收购BodyPark战略分析 -->
+  <div class="card" style="margin-bottom:20px">
+    <div class="card-title" style="margin-bottom:18px">FITURE 收购 BodyPark 战略分析 — 补齐集团「真人双向1v1私教」短板</div>
+    <div class="highlight-box orange" style="margin-bottom:20px">
+      <strong style="color:var(--orange)">核心结论：</strong>本次收购的核心战略诉求，是补齐FITURE原生业务缺失的实时双向1v1真人私教服务，完善居家健身「硬件大屏 + 标准化录播 + 一对一专业私教」三层商业闭环。以下为完整推导依据。
+    </div>
+
+    <div class="evidence-box">
+      <span class="evidence-num orange">1</span><strong>收购前FITURE存在明确短板：</strong>全系魔镜仅预制标准化录播跟练课，不存在用户与真人教练实时双向视频对话的服务能力。纯录播课程千人一面，用户倦怠流失率高，商业模式单一（仅硬件+录播年费），缺少可持续高毛利服务型收入。
+    </div>
+    <div class="evidence-box">
+      <span class="evidence-num orange">2</span><strong>BodyPark是国内唯一成熟规模化AI+真人私教平台：</strong>行业首创实时双向1v1私教模式，收购前累计150万+人次私教课、5000万+小时实时互动。自研低延迟DeepBody Engine，上万名持证私教签约调度，验证跑通按次付费商业模式（¥39.9/节），具备独立正向现金流。2024年2月29日中新社官方公告明确表述双方实现「硬件、内容、服务、AI优势互补」，重点突出BodyPark独有的双向互动真人私教能力。
+    </div>
+    <div class="evidence-box">
+      <span class="evidence-num orange">3</span><strong>收购后产品线落地动作验证战略：</strong>新款SLiM、3PLUS原生内置一键开启真人1v1私教通道；老款魔镜通过系统升级付费接入BodyPark私教。ATOM硬件收购后立项研发，定位为私教上课专用高精度采集外设。集团官方分工明确：FITURE魔镜负责标准化录播大屏硬件入口，BodyPark作为集团唯一真人私教服务中台。
+    </div>
+    <div class="evidence-box">
+      <span class="evidence-num orange">4</span><strong>商业逻辑佐证 — 解决两大行业痛点：</strong>①提升用户留存：真人私教具备督学+周期性体态复盘+动态定制能力，复购/留存率远高于标准化录播；②优化收入结构：收购前仅硬件+录播会员，收购后新增单次私教课+ATOM专属AI分析订阅持续性服务收入，构建三层盈利模型。
+    </div>
+  </div>
+
+  <!-- 1.5 ATOM国内水土不服风险 -->
+  <div class="card">
+    <div class="card-title" style="margin-bottom:18px">ATOM 国内市场风险研判 — 五大隐患 × 三大兜底条件</div>
+
+    <div class="grid-2" style="margin-bottom:20px">
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--red);margin-bottom:14px">⚠️ 五大核心隐患</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="highlight-box red" style="margin:0">
+            <strong>①中外付费习惯冲突：</strong>ATOM千元硬件+¥479/年AI会员+¥39.9/节私教三层付费，国内用户感知溢价过高。海量免费抖音/Keep内容零成本满足基础需求，ATOM高精度体态分析属进阶小众。
+          </div>
+          <div class="highlight-box red" style="margin:0">
+            <strong>②居住场景中外错位：</strong>海外小户型租房人群庞大，便携为刚需；国内主流居家首选大屏沉浸设备，ATOM无大屏有氧舞蹈氛围感弱。出租单间活动空间狭小，广角仍需1.5m活动区域。
+          </div>
+          <div class="highlight-box red" style="margin:0">
+            <strong>③产品海外导向，本土化适配不足：</strong>算法以欧美人体骨架为基础，对国人圆肩驼背、骨盆前倾等优化为后期补充。国内逆光/弱光环境纯单目视觉稳定性下降。
+          </div>
+          <div class="highlight-box red" style="margin:0">
+            <strong>④国内渠道与品牌认知断层：</strong>BodyPark国内品牌认知度极低。千元级小众硬件靠直播低价带货难起量，KS前车之鉴证明教育用户成本极高。
+          </div>
+          <div class="highlight-box red" style="margin:0">
+            <strong>⑤细分受众盘子小：</strong>ATOM核心优势为精细体态矫正、运动康复，属进阶小众需求。国内大众健身核心诉求为减脂、趣味有氧，对高精度代偿分析需求弱。
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--green);margin-bottom:14px">🛡️ 三大生态兜底条件</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="highlight-box" style="margin:0;background:rgba(34,197,94,0.08);border-left:3px solid var(--green)">
+            <strong>①独家真人私教护城河：</strong>KS仅标准化录播体感游戏，全网免费内容可平替。BodyPark国内独家规模化双向实时1v1私教无平价竞品，且纯手机APP零硬件即可独立完成私教变现 — 即便ATOM硬件销量不佳，核心现金流不受冲击。
+          </div>
+          <div class="highlight-box" style="margin:0;background:rgba(34,197,94,0.08);border-left:3px solid var(--green)">
+            <strong>②FITURE百万存量魔镜用户导流：</strong>魔镜覆盖全国95%+城市，可在系统内定向推送ATOM硬件与私教服务，无需从零教育用户。内容双向互通，ATOM直接复用FITURE 6000+全品类录播课。
+          </div>
+          <div class="highlight-box" style="margin:0;background:rgba(34,197,94,0.08);border-left:3px solid var(--green)">
+            <strong>③场景分层互补，无内部竞争：</strong>ATOM专门承接三类大屏无法覆盖人群 — 预算不足年轻租户、出差流动人群、体态矫正专业需求。与FITURE全系魔镜形成高低价位/固定流动场景互补，销量下限高于KS单一客厅场景。
+          </div>
+        </div>
+        <div style="padding:16px;border-radius:10px;background:rgba(249,115,22,0.08);margin-top:12px;font-size:12.5px;color:var(--muted);line-height:1.7">
+          <strong style="color:var(--orange)">最终判断：</strong>ATOM大众市场难以成为全民爆款，销量存在明显上限。但集团战略层面，ATOM不以单款爆卖为核心目标，核心价值为完善私教硬件生态、提升私教用户续课转化。战略价值成立，不会出现KS整条业务滞销废弃的局面。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- ═══════════ 第二章：Keep Station 分析 ═══════════ -->
+<section id="section-keep">
+  <div class="section-label">第二章 · Keep Station 运动盒子 — 产品解析 × ATOM对比 × 市场反思</div>
+
+  <!-- 2.1 Keep Station产品详解 -->
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title" style="margin-bottom:18px">Keep Station（KS）— 首款体感运动主机 · 全维度产品拆解</div>
+    <div class="grid-2">
+      <div>
+        <div class="highlight-box yellow">
+          <strong style="color:var(--yellow)">产品定位：</strong>Keep 独立自研家用体感运动主机，2023年3月27日发布。面向家庭运动场景的智能交互设备，需连接电视等大屏显示器使用。Keepkit硬件线体感类旗舰单品。
+        </div>
+        <div class="info-row"><span class="info-label">发布时间</span><span class="info-value" style="color:var(--yellow)">2023.03.27</span></div>
+        <div class="info-row"><span class="info-label">品牌归属</span><span class="info-value">Keep 独立自研</span></div>
+        <div class="info-row"><span class="info-label">硬件形态</span><span class="info-value">长条主机 + 2只K豆手环</span></div>
+        <div class="info-row"><span class="info-label">主机尺寸</span><span class="info-value">171.6×60×38.6mm / 244.5g</span></div>
+        <div class="info-row"><span class="info-label">芯片算力</span><span class="info-value">5 TOPS 本地计算</span></div>
+        <div class="info-row"><span class="info-label">摄像头</span><span class="info-value">120°超广角AI 0鱼眼畸变</span></div>
+        <div class="info-row"><span class="info-label">销售方式</span><span class="info-value">主机+K豆成套绑定 不可拆分</span></div>
+        <div class="info-row"><span class="info-label">定价</span><span class="info-value" style="color:var(--yellow)">¥1,799 / 跳舞毯套装¥2,049</span></div>
+        <div class="info-row"><span class="info-label">会员</span><span class="info-value">Keep通用年会员 ¥248</span></div>
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--yellow);margin-bottom:12px">核心技术：Keep Motion Tech 双融合算法</div>
+        <div class="highlight-box yellow">
+          <strong style="color:var(--yellow)">融合方案：</strong>双目视觉全身骨骼捕捉（23个骨骼关键点）+ 手环六轴IMU加速度/角速度传感双数据融合。左右K豆分别搭载六轴运动传感器，左K豆内置双通道心率监测+课程控制，右K豆具备RFID识别（可快速配对跳舞毯等配件）。
+        </div>
+        <div style="font-size:14px;font-weight:700;color:var(--yellow);margin:16px 0 8px">四大课程体系</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="padding:10px 14px;border-radius:8px;background:rgba(234,179,8,0.06);font-size:12px">
+            <strong>AI指导课：</strong>结构化训练（燃脂/塑形/腹肌/臀腿），摄像头追踪+动作比对
+          </div>
+          <div style="padding:10px 14px;border-radius:8px;background:rgba(234,179,8,0.06);font-size:12px">
+            <strong>AI评分课：</strong>帕梅拉/尊巴/燃脂派对，动作评分跟练
+          </div>
+          <div style="padding:10px 14px;border-radius:8px;background:rgba(234,179,8,0.06);font-size:12px">
+            <strong>节奏拳击课：</strong>拳皇97联名，直勾摆拳组合识别
+          </div>
+          <div style="padding:10px 14px;border-radius:8px;background:rgba(234,179,8,0.06);font-size:12px">
+            <strong>派对舞毯：</strong>需搭配跳舞毯（¥399），多首歌曲跟跳+双人模式
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.2 ATOM vs KS 四大维度对比 -->
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title" style="margin-bottom:18px">BodyPark ATOM vs Keep Station — 两款体感盒子核心差异对比</div>
+
+    <div style="font-size:14px;font-weight:700;color:var(--orange);margin-bottom:12px">维度一：品牌定位与战略差异</div>
+    <div class="table-wrap" style="margin-bottom:24px">
+      <table>
+        <thead><tr><th>对比维度</th><th style="color:var(--yellow)">Keep Station KS</th><th style="color:var(--cyan)">BodyPark ATOM</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-head">品牌战略定位</td>
+            <td>Keep独立体感娱乐硬件，仅服务标准化录播体感课程，无真人私教业务</td>
+            <td class="td-cyan">FITURE集团私教生态配套硬件，核心作用提升1v1真人私教上课精度</td>
+          </tr>
+          <tr>
+            <td class="td-head">发布背景</td>
+            <td>2023年上市，依托Keep千万级APP流量，主打家庭体感游戏、拳击互动</td>
+            <td>2025海外众筹、2026国内发售，收购后FITURE集团统筹研发，配套成熟私教服务体系</td>
+          </tr>
+          <tr>
+            <td class="td-head">自有生态关系</td>
+            <td class="td-red">与Keep跑步机、动感单车场景重叠，造成内部用户分流</td>
+            <td class="td-green">与FITURE全系大屏魔镜场景互补，覆盖流动碎片化空白人群，无内部竞争</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="font-size:14px;font-weight:700;color:var(--orange);margin-bottom:12px">维度二：硬件形态、采集技术与使用门槛</div>
+    <div class="table-wrap" style="margin-bottom:24px">
+      <table>
+        <thead><tr><th>对比维度</th><th style="color:var(--yellow)">Keep Station KS</th><th style="color:var(--cyan)">BodyPark ATOM</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-head">硬件销售规则</td>
+            <td>主机+K豆手环成套强制绑定销售，不可拆分单独购买；跳舞毯额外加价</td>
+            <td class="td-green">硬件单独独立售卖，与APP、私教会员完全解耦；可不买硬件只用APP上课</td>
+          </tr>
+          <tr>
+            <td class="td-head">便携性与屏幕</td>
+            <td>无自带屏幕，必须外接电视/投屏；主机体积大、完全无法随身带出家门</td>
+            <td class="td-green">巴掌球形单机155g，自带OLED状态屏，磁吸支架，口袋随身携带</td>
+          </tr>
+          <tr>
+            <td class="td-head">识别采集方案</td>
+            <td>双目视觉 + 穿戴手环IMU双融合；拳击手部发力识别优势明显，徒手瑜伽手环冗余，存在80-120ms无线延迟</td>
+            <td class="td-green">160°超广角单目纯视觉，无任何穿戴配件；近距离骨盆/腰椎体态代偿识别精度行业顶尖，无信号延迟</td>
+          </tr>
+          <tr>
+            <td class="td-head">入门硬件成本</td>
+            <td>套装首发¥1,799，跳舞毯套装¥2,049；手环丢失需自费补购</td>
+            <td class="td-green">¥1,000-1,500，无强制附加配件，一次性硬件投入更低</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="font-size:14px;font-weight:700;color:var(--orange);margin-bottom:12px">维度三：付费模式、内容体系与盈利逻辑</div>
+    <div class="table-wrap" style="margin-bottom:24px">
+      <table>
+        <thead><tr><th>对比维度</th><th style="color:var(--yellow)">Keep Station KS</th><th style="color:var(--cyan)">BodyPark ATOM</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-head">会员付费体系</td>
+            <td>统一Keep通用年会员¥248，硬件与会员分开收费；无真人私教付费体系</td>
+            <td class="td-cyan">双层独立付费互不互通：①APP私教¥39.9/节 ②ATOM专属AI分析¥479/年</td>
+          </tr>
+          <tr>
+            <td class="td-head">核心内容矩阵</td>
+            <td>海量减脂、拳击体感互动游戏录播课，无实时一对一真人教练服务</td>
+            <td class="td-cyan">继承APP全部双向真人1v1私教课程 + ATOM专属高精度体态报告 + 复用FITURE 6000+录播课</td>
+          </tr>
+          <tr>
+            <td class="td-head">核心盈利逻辑</td>
+            <td>硬件套装销售收入 + 年度录播会员订阅，无高增值私教服务收入</td>
+            <td class="td-cyan">硬件销售为辅，核心盈利来自持续复购的真人私教课时费，硬件仅作为转化外设</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="font-size:14px;font-weight:700;color:var(--orange);margin-bottom:12px">维度四：核心优势、短板与目标人群</div>
+    <div class="table-wrap" style="margin-bottom:16px">
+      <table>
+        <thead><tr><th>对比维度</th><th style="color:var(--yellow)">Keep Station KS</th><th style="color:var(--cyan)">BodyPark ATOM</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-head">核心优势</td>
+            <td class="td-yellow">双融合识别适配拳击搏击手部发力；体感游戏趣味性强；适合全家客厅互动</td>
+            <td class="td-green">全场景便携零场地限制；独家真人实时私教无平价平替；细微体态/旧伤代偿识别精度远超手机</td>
+          </tr>
+          <tr>
+            <td class="td-head">核心短板</td>
+            <td class="td-red">场景高度受限、手环佩戴繁琐、识别延迟高、内容同质化严重；硬件滞销直接拖累整条业务</td>
+            <td>无大屏沉浸式有氧舞蹈体验；大幅度跳跃动作识别范围有限；无影音投屏娱乐功能</td>
+          </tr>
+          <tr>
+            <td class="td-head">核心目标用户</td>
+            <td>固定居家客厅、拳击搏击爱好者、喜欢体感互动游戏的亲子家庭</td>
+            <td class="td-cyan">租房上班族、经常出差流动人群、产后康复/体态矫正、运动旧伤、预算有限想上私教的新手</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2.3 KS市场表现反思 & BodyPark坚持ATOM的底层逻辑 -->
+  <div class="card">
+    <div class="card-title" style="margin-bottom:18px">Keep Station 市场遇冷 × BodyPark 坚持 ATOM 的底层逻辑</div>
+
+    <div class="grid-2">
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--red);margin-bottom:14px">📉 KS市场表现不及预期</div>
+        <div class="highlight-box red" style="margin-bottom:12px">
+          <strong>销量数据：</strong>2023年上市后全网电商累计销量仅千余台，未达爆款预期，行业定性为小众鸡肋硬件。
+        </div>
+        <div class="highlight-box red" style="margin-bottom:12px">
+          <strong>用户痛点集中：</strong>使用场景高度受限（必须固定客厅+外接电视）、硬件成套绑定购买成本高、无线手环存在识别延迟、内容无差异化壁垒 — 大量用户认为可被免费手机APP平替。
+        </div>
+        <div class="highlight-box red">
+          <strong>战略副作用：</strong>KS与Keep自有跑步机、动感单车场景高度重叠，内部用户分流，未形成生态互补。
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--green);margin-bottom:14px">🚀 BodyPark坚持ATOM的五大原因</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="padding:12px;border-radius:8px;background:rgba(34,197,94,0.06);font-size:12px;line-height:1.6">
+            <strong style="color:var(--green)">①场景错位避坑：</strong>ATOM覆盖全碎片化流动场景（办公室/差旅/出租屋），机身仅155g口袋携带，覆盖KS完全触达不到的海量流动人群。
+          </div>
+          <div style="padding:12px;border-radius:8px;background:rgba(34,197,94,0.06);font-size:12px;line-height:1.6">
+            <strong style="color:var(--green)">②商业模式容错：</strong>ATOM定位为私教配套外设，BodyPark私教APP可完全独立变现。用户不买硬件仅靠手机即可上私教课，硬件销量差不影响核心现金流。
+          </div>
+          <div style="padding:12px;border-radius:8px;background:rgba(34,197,94,0.06);font-size:12px;line-height:1.6">
+            <strong style="color:var(--green)">③填补集团空白：</strong>承接预算不足¥3,000+无力买魔镜、经常出差无固定空间的两类人群，与全系魔镜形成价格/场景互补。
+          </div>
+          <div style="padding:12px;border-radius:8px;background:rgba(34,197,94,0.06);font-size:12px;line-height:1.6">
+            <strong style="color:var(--green)">④技术简化：</strong>单台球形摄像单机，纯视觉采集无穿戴配件，磁吸即用；解决KS双硬件组合佩戴繁琐+80-120ms延迟的原生缺陷。
+          </div>
+          <div style="padding:12px;border-radius:8px;background:rgba(34,197,94,0.06);font-size:12px;line-height:1.6">
+            <strong style="color:var(--green)">⑤海外验证：</strong>2025年底Kickstarter众筹金额近百万美元，超2500名海外支持者，2026红点设计奖。证明赛道非伪需求，KS失败是定位/场景设计失误。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- ═══════════ 第三章：PM战略研判 ═══════════ -->
+<section id="section-strategy">
+  <div class="section-label">第三章 · PM 视角战略研判 — FITURE vs Keep 竞争格局</div>
+
+  <div class="grid-2" style="margin-bottom:24px">
+    <!-- FITURE集团 -->
+    <div class="strategy-card">
+      <span class="strategy-badge p1">FITURE集团 · 核心关注</span>
+      <div class="strategy-title">全场景覆盖已成，须打通「低门槛→高客单」漏斗</div>
+      <div class="strategy-desc">
+        <strong style="color:var(--orange)">优势面：</strong>60%+市场份额已是品类领导者。5款魔镜+BodyPark双线覆盖¥0-7,500全价格带。收购BodyPark后拥有了「大屏团课+私教服务」全场景能力。<br><br>
+        <strong style="color:var(--red)">风险面：</strong>品类整体渗透率仍低，硬件定价整体偏高。Mirror停售已发警告 — 单一硬件模式有天花板。ATOM国内市场存在水土不服风险，三层付费模式国内接受度存疑。
+      </div>
+      <div class="strategy-metric">⚡ 关键指标: 会员转化率 &amp; BodyPark→魔镜交叉用户占比</div>
+    </div>
+
+    <!-- Keep Station -->
+    <div class="strategy-card">
+      <span class="strategy-badge p2">Keep Station · 核心关注</span>
+      <div class="strategy-title">产品定位失误的典范，但Keep不会放弃硬件线</div>
+      <div class="strategy-desc">
+        <strong style="color:var(--yellow)">借鉴价值：</strong>KS失败的核心不是「体感盒子没市场」，而是场景单一（仅客厅）、内容可替代（免费APP可平替）、绑定销售门槛高。BodyPark ATOM恰好解决了这三个问题。<br><br>
+        <strong style="color:var(--red)">Keep困境：</strong>KS销量惨淡但Keep不会退出硬件。作为上市公司，运动硬件线是估值叙事关键板块。KS失败后Keep更可能在跑步机/动感单车等成熟品类加码，而非继续押注体感盒子。
+      </div>
+      <div class="strategy-metric">⚡ 关键指标: Keep硬件线收入占比变化 &amp; 下一代硬件方向</div>
+    </div>
+  </div>
+
+  <!-- 战略建议 -->
+  <div class="grid-2" style="margin-bottom:20px">
+    <div class="card">
+      <span class="strategy-badge p0">建议 1 · 紧迫</span>
+      <div class="strategy-title">FITURE：用BodyPark做漏斗，魔镜做利润池</div>
+      <p class="strategy-desc">
+        让BodyPark承担引流角色，用手机/ATOM的零/低门槛体验捕获大量用户；在用户建立信任后，向FITURE魔镜转化。设计联合会员套餐（BodyPark私教 + FITURE魔镜年度会员），用交叉销售提升ARPU。参考Apple"iPhone → Mac"生态转化逻辑。
+      </p>
+      <div class="strategy-metric">🎯 目标指标: BodyPark→FITURE魔镜转化率 &gt;8%</div>
+    </div>
+
+    <div class="card">
+      <span class="strategy-badge p1">建议 2 · 高价值</span>
+      <div class="strategy-title">Keep：KS失败后应回归内容护城河，而非硬件赌注</div>
+      <p class="strategy-desc">
+        Keep的真正壁垒在于1亿+用户基盘和免费内容生态。KS失败证明硬件是弱势侧，接下来应加码与硬件无关的内容变现：直播跟练、名师付费课、社群会员等纯内容订阅，避免再用稀缺资源押注高风险硬件品类。
+      </p>
+      <div class="strategy-metric">🎯 目标指标: Keep内容订阅收入占比提升 &gt;35%</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px">
+    <span class="strategy-badge p2">建议 3 · 长期布局</span>
+    <div class="strategy-title">FITURE vs Keep — 差异化竞争是最优解，正面对抗损耗大</div>
+    <p class="strategy-desc" style="margin-bottom:0">
+      FITURE 和 Keep 目前已形成事实上的市场错位：FITURE 守高客单价居家大屏场景，Keep 守高频低客单价纯APP流量场景。两者若保持差异化竞争（FITURE不做低价纯内容APP、Keep不再押注高价体感硬件），均有稳定生存空间。若FITURE想渗透Keep的流量池，最有效路径是通过BodyPark APP作为低门槛触点，而非降价魔镜。<strong>XintLabs 此阶段尚无量产产品，作为参考信号保持关注即可，暂不纳入竞争博弈推演。</strong>
+    </p>
+  </div>
+
+  <!-- 竞争格局总览表 -->
+  <div class="card" style="margin-bottom:28px">
+    <div class="card-title" style="margin-bottom:14px">FITURE vs Keep Station — 竞争格局速览</div>
+    <div class="table-wrap" style="margin-top:0">
+      <table>
+        <thead>
+          <tr><th>维度</th><th style="color:var(--orange)">FITURE集团</th><th style="color:var(--yellow)">Keep Station</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-head">赛道定位</td>
+            <td class="td-orange">大屏硬件 + 真人私教 · 全场景</td>
+            <td class="td-yellow">客厅体感游戏 · 标准化录播</td>
+          </tr>
+          <tr>
+            <td class="td-head">产品数</td>
+            <td class="td-green">7款硬件 + 1个APP · 最全</td>
+            <td>1款（含跳舞毯配件）</td>
+          </tr>
+          <tr>
+            <td class="td-head">价格带</td>
+            <td class="td-green">¥0 ~ ¥7,500 · 全覆盖</td>
+            <td>¥1,799 ~ ¥2,049</td>
+          </tr>
+          <tr>
+            <td class="td-head">AI方案</td>
+            <td>纯单目视觉 · Motion/DeepBody双引擎</td>
+            <td class="td-yellow">双目视觉+手环IMU · 双融合</td>
+          </tr>
+          <tr>
+            <td class="td-head">骨骼点</td>
+            <td>33点（魔镜）/ 34点（BodyPark）</td>
+            <td>23点 + 手部发力数据</td>
+          </tr>
+          <tr>
+            <td class="td-head">真人私教</td>
+            <td class="td-green">有 · 国内独家规模化</td>
+            <td class="td-red">无</td>
+          </tr>
+          <tr>
+            <td class="td-head">便携性</td>
+            <td class="td-cyan">ATOM口袋级 / 魔镜固定</td>
+            <td>固定客厅 · 依赖电视</td>
+          </tr>
+          <tr>
+            <td class="td-head">内容生态</td>
+            <td class="td-green">6000+录播 + 真人私教 · 最丰富</td>
+            <td>AI指导/评分/拳击/舞毯四类</td>
+          </tr>
+          <tr>
+            <td class="td-head">商业化阶段</td>
+            <td class="td-green">成熟运营 · 60%+市场份额</td>
+            <td class="td-red">上市后销量不佳 · 未达预期</td>
+          </tr>
+          <tr>
+            <td class="td-head">长期威胁</td>
+            <td>品类渗透天花板 + 硬件定价偏高</td>
+            <td>内容可替代性强 · 生态内部分流</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 国内同赛道品牌扫描 -->
+  <div class="card">
+    <div class="card-title" style="margin-bottom:6px">国内同赛道品牌扫描 — FITURE 与 Keep 之外，还有哪些玩家？</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7">居家智能健身镜/互动健身赛道在经历2024年泡沫收缩后，2025-2026年正以"AI教练+内容生态"模式回暖。以下为目前仍在活跃的主要国内玩家，按竞争强度排序。</p>
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:20px">
+      <!-- 小度添添 -->
+      <div class="brand-card">
+        <div class="brand-name" style="color:var(--blue)">🔵 小度添添健身镜</div>
+        <div class="brand-tag-row">
+          <span class="tag blue">百度旗下</span>
+          <span class="tag green">¥1,999起</span>
+          <span class="tag orange">全家场景</span>
+        </div>
+        <div class="brand-desc">
+          <strong>定位：</strong>智能家庭屏幕 × 健身镜二合一，健身之外可视频通话、控制智能家居、看剧。32寸1080P，AI识别精度弱于FITURE，但碎片化短课（5-10分钟）适合上班族。<br>
+          <strong>优势：</strong>定价最低（¥1,999）、非健身时段全家复用率高、百度AI生态背书。<br>
+          <strong>弱点：</strong>AI动作纠正能力弱，复杂动作识别率低，健身专业深度不如FITURE。<br>
+          <strong>竞争判断：</strong>与FITURE争的是"家庭第一面屏"定位，而非专业健身用户。威胁在于<strong style="color:var(--blue)">品类教育期</strong>抢占低价入门心智。
+        </div>
+      </div>
+
+      <!-- AEKE力量镜 -->
+      <div class="brand-card">
+        <div class="brand-name" style="color:var(--green)">🟢 AEKE 力量镜 A1</div>
+        <div class="brand-tag-row">
+          <span class="tag green">力量训练专注</span>
+          <span class="tag orange">¥2,000-3,000区间</span>
+          <span class="tag purple">新兴品牌</span>
+        </div>
+        <div class="brand-desc">
+          <strong>定位：</strong>专注力量训练赛道（非有氧舞蹈），主打"数据驱动力量训练"，适配哑铃、弹力带等器械训练动作识别。<br>
+          <strong>优势：</strong>力量训练课程体系深度强于FITURE；硬件+软件+课程+服务一体化。<br>
+          <strong>弱点：</strong>品牌认知度低，力量训练用户群体规模相对有限。<br>
+          <strong>竞争判断：</strong>细分赛道差异化竞争，暂时不与FITURE正面冲突；若力量训练大众化后有较大威胁。
+        </div>
+      </div>
+
+      <!-- IM-BODY -->
+      <div class="brand-card">
+        <div class="brand-name" style="color:var(--cyan)">🔷 IM-BODY 智能健身镜</div>
+        <div class="brand-tag-row">
+          <span class="tag cyan">1000+动作库</span>
+          <span class="tag muted">中端定价</span>
+          <span class="tag orange">科技感强</span>
+        </div>
+        <div class="brand-desc">
+          <strong>定位：</strong>居家健身镜，强调AI动作识别与纠正，1000+课程和动作库，设计风格偏科技感。<br>
+          <strong>优势：</strong>课程内容丰富度中等偏上，产品外观设计差异化。<br>
+          <strong>弱点：</strong>缺乏真人私教体系，品牌影响力有限，与FITURE在核心功能上有重叠但深度不足。<br>
+          <strong>竞争判断：</strong>目前属第二梯队，主要靠性价比和外观设计抢份额，整体威胁有限。
+        </div>
+      </div>
+
+      <!-- Keep 健身镜（独立镜子产品） -->
+      <div class="brand-card">
+        <div class="brand-name" style="color:var(--yellow)">🟡 Keep 健身镜（独立镜面产品）</div>
+        <div class="brand-tag-row">
+          <span class="tag yellow">5000+课程</span>
+          <span class="tag green">¥3,499</span>
+          <span class="tag orange">社区生态</span>
+        </div>
+        <div class="brand-desc">
+          <strong>定位：</strong>与Keep Station不同，这是Keep单独推出的智能健身镜产品（大屏镜面形态），主打4亿用户社区+5000+课程内容库+社群PK。<br>
+          <strong>优势：</strong>课程最丰富（5000+节），社区激励效果显著（PK模式延长日均训练时间），背靠Keep庞大用户基盘。<br>
+          <strong>弱点：</strong>AI动作识别精度弱于FITURE（偶有0.5-1秒延迟），无真人私教，课程深度不如FITURE。<br>
+          <strong>竞争判断：</strong><strong style="color:var(--yellow)">FITURE最主要的直接竞争者</strong>，价格带（¥3,499 vs FITURE ¥3,699-5,999）高度重叠，课程数量优势明显，但AI精度与私教体系存在差距。
+        </div>
+      </div>
+    </div>
+
+    <!-- 赛道全景小结 -->
+    <div style="padding:20px;border-radius:12px;background:rgba(249,115,22,0.06);border:1px solid rgba(249,115,22,0.12)">
+      <div style="font-size:14px;font-weight:700;color:var(--orange);margin-bottom:12px">🗺️ 赛道格局小结</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;font-size:12px">
+        <div style="padding:12px;border-radius:8px;background:rgba(45,53,67,0.5)">
+          <div style="font-weight:700;color:var(--orange);margin-bottom:6px">第一梯队（市场主导）</div>
+          <div style="color:var(--muted)">FITURE集团（60%+份额，全场景覆盖）<br>Keep健身镜（最大内容库，社区生态）</div>
+        </div>
+        <div style="padding:12px;border-radius:8px;background:rgba(45,53,67,0.5)">
+          <div style="font-weight:700;color:var(--blue);margin-bottom:6px">第二梯队（差异化切入）</div>
+          <div style="color:var(--muted)">小度添添（低价+全家场景）<br>AEKE（力量训练细分）<br>IM-BODY（科技感中端）</div>
+        </div>
+        <div style="padding:12px;border-radius:8px;background:rgba(45,53,67,0.5)">
+          <div style="font-weight:700;color:var(--muted);margin-bottom:6px">已退出或收缩</div>
+          <div style="color:var(--muted)">Mirror（被Lululemon剥离）<br>Bhout（融资后低调）<br>亿健/咕咚FITMORE（边缘化）</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;font-size:12px;color:var(--muted);line-height:1.7">
+        <strong style="color:var(--text)">PM视角核心判断：</strong>赛道正在从"硬件卖点驱动"转向"AI教练+内容生态"双核心竞争。FITURE最大护城河是<strong style="color:var(--orange)">真人私教体系（唯一规模化玩家）</strong>，Keep最大护城河是<strong style="color:var(--yellow)">内容数量与社区黏性</strong>，其他玩家均在价格或细分场景寻找差异化生存空间。品类整体渗透率仍低，市场尚未饱和，2026年的核心战役是<strong style="color:var(--green)">教育大众用户认知「AI健身教练」的价值</strong>，而非存量用户争夺。
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- ═══════════ 扩展关注：XintLabs ═══════════ -->
+<section id="section-xintlabs" class="ext-section">
+  <div class="ext-label">⛳ 扩展关注 · XintLabs — 物理 AI 平台（天使轮 · 持续观察中）</div>
+  <p class="section-intro" style="margin-bottom:20px">
+    <strong>XintLabs（深圳形拓科技）</strong>于2025年10月成立，2026年6月获高瓴创投天使轮。团队来自大疆、比亚迪、港科大。目前尚无上市量产产品，<strong>此处仅作关注信号记录，暂不纳入主赛道竞争推演。</strong>
+  </p>
+
+  <div class="grid-2" style="margin-bottom:16px">
+    <div class="card" style="border:1px solid rgba(167,139,250,0.15)">
+      <div class="card-title" style="margin-bottom:10px;color:var(--purple)">核心差异化方向</div>
+      <div class="highlight-box purple" style="margin:0 0 14px">
+        不满足于表面动作记录，而是通过<strong style="color:var(--purple)">物理 AI 识别人体力量、平衡、肌肉代偿、疲劳状态</strong>，输出个性化训练方案。核心差异化在于「从数据到诊断」— 不只告诉你"哪里不对"，还能定位身体根源（如挥杆幅度窄 = 髋关节内旋活动度不足）。
+      </div>
+      <div class="tag-row">
+        <span class="tag blue">已具备: AI算法模型 + MVP样机</span>
+        <span class="tag blue">已具备: 生物力学+视觉捕捉自研</span>
+        <span class="tag red">尚无: 量产上市的消费成品</span>
+        <span class="tag purple">高瓴创投天使轮</span>
+      </div>
+    </div>
+    <div class="card" style="border:1px solid rgba(167,139,250,0.15)">
+      <div class="card-title" style="margin-bottom:10px;color:var(--purple)">采集方案：双融合壁垒</div>
+      <div class="highlight-box purple" style="margin:0 0 14px">
+        <strong style="color:var(--purple)">「球杆 IMU 传感器 + 双目高速摄像头」双融合采集</strong>，覆盖杆头物理数据（加速度、杆面角度、击球冲击力）和人体生物力学数据（全身33处骨骼三维坐标、重心轨迹、关节角度、发力时序）。
+      </div>
+      <div style="font-size:13px;color:var(--muted)">首发赛道：高尔夫智能训练（B端场馆 + C端高端球友）<br>长期空间：跑步/瑜伽/力量训练 · 康复医疗 · 校园体育</div>
+    </div>
+  </div>
+
+  <div class="card" style="border:1px solid rgba(167,139,250,0.15)">
+    <div class="card-title" style="margin-bottom:14px">四个典型高尔夫场景 — 从"动作现象"到"身体根源"</div>
+    <div class="table-wrap" style="margin-top:0">
+      <table>
+        <thead>
+          <tr><th>动作现象</th><th>根源身体短板</th><th>个性化训练方案</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-head">挥杆幅度窄、转身不充分、爆发力弱</td>
+            <td>髋关节内旋活动度不足、臀中肌稳定性差</td>
+            <td>单腿旋转稳定训练、髋部弹力带拉伸、无球分段转体练习</td>
+          </tr>
+          <tr>
+            <td class="td-head">手臂提前发力、击球打厚/打薄</td>
+            <td>核心躯干旋转发力延迟、腹斜肌协同发力不足</td>
+            <td>药球旋转抛投、节奏分解慢挥杆、核心抗旋静态维持</td>
+          </tr>
+          <tr>
+            <td class="td-head">重心偏移过大、收杆站不稳</td>
+            <td>脚踝背屈受限、下肢支撑力量弱</td>
+            <td>平衡垫站姿训练、单侧股四头肌等长收缩、单腿挥杆练习</td>
+          </tr>
+          <tr>
+            <td class="td-head">上半身晃动、肩颈酸痛、一致性差</td>
+            <td>核心稳定不足、肩膀代偿弥补骨盆旋转缺失</td>
+            <td>静态平板支撑、分段无球慢挥杆、肩袖力量强化</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:14px;padding:12px 16px;border-radius:8px;background:rgba(167,139,250,0.06);font-size:12px;color:var(--muted)">
+      <strong style="color:var(--purple)">持续关注触发条件：</strong>当 XintLabs 完成从高尔夫到大众健身场景的迁移、或推出消费端量产产品时，可考虑纳入与 FITURE/Keep 的竞争对比矩阵。
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  2026年6月26日
+</footer>
+
+</body>
+
+<script>
+  // 平滑滚动 + 顶部导航高亮
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // 滚动时高亮当前章节导航tab
+  const sections = ['section-overview','section-fiture','section-keep','section-strategy','section-xintlabs'];
+  const tabs = document.querySelectorAll('.nav-tab');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 100) current = id;
+    });
+    tabs.forEach((tab, i) => {
+      tab.classList.toggle('active', sections[i] === current || (current === '' && i === 0));
+    });
+  });
+</script>
+
+</html>
